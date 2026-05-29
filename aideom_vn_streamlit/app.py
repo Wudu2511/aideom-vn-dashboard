@@ -87,239 +87,368 @@ def show_df(df, title=None):
 # DISCUSSIONS
 # =========================
 DISCUSSIONS = {
-    "bai1": """
-### a) TFP của Việt Nam có xu hướng tăng hay giảm trong giai đoạn 2020-2025? Điều đó nói lên gì về chất lượng tăng trưởng?
-Dựa trên output mô hình, TFP A_t tăng liên tục từ 27,75 năm 2020 lên 34,91 năm 2025. Điều này cho thấy phần tăng trưởng không được giải thích trực tiếp bởi vốn vật chất K, lao động L, số hóa D, năng lực AI và nhân lực số H có xu hướng tăng. Nói cách khác, chất lượng tăng trưởng trong mô hình có cải thiện, vì GDP không chỉ tăng nhờ mở rộng đầu vào mà còn nhờ hiệu quả tổng hợp cao hơn.
+    "bai1": r"""# Bài 1. Hàm sản xuất Cobb-Douglas mở rộng với AI và số hóa
 
-Dẫn chứng rõ hơn là trong bảng phân rã tăng trưởng, TFP đóng góp 49,08% vào tăng trưởng bình quân, cao hơn cả vốn vật chất K với 31,78%. Điều này phù hợp với bối cảnh Việt Nam đang chuyển từ mô hình tăng trưởng dựa nhiều vào vốn và lao động sang mô hình dựa nhiều hơn vào năng suất, khoa học công nghệ, đổi mới sáng tạo và chuyển đổi số. Năm 2024, NSO/GSO công bố GDP Việt Nam tăng 7,09%, trong đó công nghiệp - xây dựng và dịch vụ đóng góp lớn vào tăng trưởng, phản ánh xu hướng phục hồi và nâng cao năng lực sản xuất của nền kinh tế.
+## a) TFP của Việt Nam có xu hướng tăng hay giảm trong giai đoạn 2020-2025? Điều đó nói lên gì về chất lượng tăng trưởng?
 
-Tuy nhiên, cần lưu ý rằng TFP ở đây được tính ngược từ hàm sản xuất với hệ số giả định. Vì vậy, kết quả này nên được hiểu là chỉ báo định lượng hỗ trợ phân tích, không phải bằng chứng nhân quả tuyệt đối.
-### b) Trong các yếu tố mới D, AI, H, yếu tố nào đóng góp nhiều nhất cho tăng trưởng giai đoạn vừa qua? Vì sao?
-Trong ba yếu tố mới, D - mức độ số hóa đóng góp lớn nhất, đạt 10,37% tăng trưởng bình quân. Tiếp theo là AI với 6,24%, và H - nhân lực số với 2,87%.
+Theo output Bài 1, TFP của Việt Nam có xu hướng **tăng** trong giai đoạn 2020-2025. Cụ thể, TFP A\_t tăng từ khoảng **27,75 năm 2020** lên khoảng **34,91 năm 2025**. Điều này cho thấy tăng trưởng GDP không chỉ đến từ việc tăng vốn vật chất K và lao động L, mà còn đến từ việc nền kinh tế sử dụng các nguồn lực hiệu quả hơn.
 
-Kết quả này hợp lý vì trong giai đoạn 2020-2025, tỷ trọng kinh tế số/GDP trong dữ liệu tăng từ 12,0% năm 2020 lên 19,5% năm 2025. Mức tăng của D rõ ràng hơn so với H, trong khi AI vẫn đang ở giai đoạn tích lũy nền tảng. Điều này phù hợp với định hướng của Quyết định 749/QĐ-TTg về Chương trình Chuyển đổi số quốc gia và Quyết định 411/QĐ-TTg về phát triển kinh tế số, xã hội số đến năm 2025, định hướng 2030.
+Về mặt chất lượng tăng trưởng, xu hướng TFP tăng là tín hiệu tích cực. Nó cho thấy Việt Nam đang dần chuyển từ mô hình tăng trưởng dựa vào mở rộng đầu vào sang mô hình tăng trưởng dựa vào năng suất, công nghệ, số hóa và năng lực tổ chức sản xuất. Điều này phù hợp với thực tiễn khi năm 2024 GDP Việt Nam tăng **7,09%**, trong đó khu vực công nghiệp - xây dựng và dịch vụ tiếp tục đóng góp lớn vào tăng trưởng. ()
 
-Hàm ý chính sách là Việt Nam không nên chỉ đầu tư vào công nghệ AI riêng lẻ, mà cần đầu tư đồng bộ vào số hóa nền kinh tế, dữ liệu, hạ tầng số và nhân lực số. Nếu nhân lực số tăng chậm, AI sẽ khó phát huy đầy đủ tác động năng suất.
-### c) Mục tiêu Việt Nam đạt 30% kinh tế số/GDP vào 2030 có khả thi không nếu dựa trên mô hình này? Cần ràng buộc gì?
-Output mô phỏng cho thấy nếu đến năm 2030, D đạt 30%, AI đạt 100 nghìn doanh nghiệp số, H đạt 35%, K tăng 6%/năm và TFP tăng 1,2%/năm, GDP dự báo năm 2030 đạt khoảng 16.362,93 nghìn tỷ VND. So với mức GDP năm 2025 là 12.847,6 nghìn tỷ VND, đây là kịch bản tăng trưởng tích cực.
+Tuy nhiên, cần lưu ý TFP trong bài là kết quả tính ngược từ hàm Cobb-Douglas với hệ số giả định. Vì vậy, đây là chỉ báo phân tích mô hình, không phải bằng chứng nhân quả tuyệt đối.
 
-Vì vậy, mục tiêu kinh tế số đạt 30% GDP vào năm 2030 có thể xem là khả thi về mặt mô hình. Tuy nhiên, để mục tiêu này không chỉ là con số kỹ thuật, cần các ràng buộc chính sách: đầu tư hạ tầng số, mở rộng dữ liệu mở, bảo đảm an ninh mạng, đào tạo nhân lực số, hỗ trợ doanh nghiệp nhỏ và vừa chuyển đổi số, đồng thời thu hẹp khoảng cách số giữa các vùng. Nghị quyết 57-NQ/TW cũng nhấn mạnh khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số là yếu tố quyết định phát triển, đồng thời chỉ ra các hạn chế hiện nay như hạ tầng số chưa đồng bộ, nhân lực chất lượng cao còn thiếu và an toàn dữ liệu còn nhiều thách thức.""",
-    "bai2": """
-### a) Khi ngân sách tổng tăng thêm 1 nghìn tỷ VND, GDP kỳ vọng tăng thêm bao nhiêu? Đây có phải là cận trên hợp lý của chi phí cơ hội vốn công?
+## b) Trong các yếu tố mới D, AI, H, yếu tố nào đóng góp nhiều nhất cho tăng trưởng giai đoạn vừa qua? Vì sao?
 
-Output mô hình cho thấy nghiệm tối ưu ban đầu là: hạ tầng số **25**, AI và dữ liệu **15**, nhân lực số **20**, R&D **40** nghìn tỷ VND. Giá trị mục tiêu đạt **Z* = 112,25**.
+Theo output phân rã tăng trưởng, trong ba yếu tố mới **D, AI, H**, yếu tố **D - mức độ số hóa** đóng góp lớn nhất. D đóng góp khoảng **10,37%** vào tăng trưởng bình quân, cao hơn AI khoảng **6,24%** và H khoảng **2,87%**.
 
-Dẫn chứng quan trọng là shadow price của ràng buộc ngân sách tổng bằng **1,35**. Nghĩa là trong vùng nghiệm tối ưu hiện tại, nếu tăng thêm **1 nghìn tỷ VND** ngân sách, GDP kỳ vọng tăng thêm khoảng **1,35 nghìn tỷ VND**. Phân tích độ nhạy xác nhận điều này: ngân sách tăng từ **100** lên **120** làm **Z*** tăng từ **112,25** lên **139,25**; ngân sách tăng lên **140** làm **Z*** tăng lên **166,25**. Mỗi 20 nghìn tỷ tăng thêm tạo thêm 27 nghìn tỷ GDP kỳ vọng, tương ứng hệ số **1,35**.
+Điều này hợp lý vì trong giai đoạn 2020-2025, quá trình chuyển đổi số ở Việt Nam diễn ra rộng hơn so với việc ứng dụng AI chuyên sâu. Tỷ trọng kinh tế số/GDP trong dữ liệu tăng từ **12,0% năm 2020** lên **19,5% năm 2025**, trong khi AI và nhân lực số vẫn đang ở giai đoạn hình thành năng lực. Quyết định 749/QĐ-TTg cũng xác định chuyển đổi số quốc gia là định hướng lớn đến năm 2025, định hướng 2030; Quyết định 411/QĐ-TTg tiếp tục đặt mục tiêu phát triển kinh tế số và xã hội số. ()
 
-Tuy nhiên, trong thực tiễn Việt Nam, đây chỉ là cận trên kỹ thuật của mô hình. Hiệu quả vốn công còn phụ thuộc vào năng lực giải ngân, chất lượng dự án, năng lực hấp thụ của địa phương và khả năng phối hợp giữa các cơ quan. Vì vậy, shadow price có giá trị tham khảo cho phân tích chi phí cơ hội, nhưng không nên hiểu là cứ tăng ngân sách thì GDP thực tế chắc chắn tăng tương ứng.
+Vì vậy, kết quả mô hình cho thấy: muốn AI tạo tác động lớn hơn, Việt Nam cần đầu tư đồng thời vào hạ tầng số, dữ liệu, kỹ năng số và nhân lực số.
 
-### b) Vì sao R&D có hệ số tác động cao nhất nhưng lại có ràng buộc tối thiểu thấp nhất?
+## c) Mục tiêu Việt Nam đạt 30% kinh tế số/GDP vào 2030 có khả thi không nếu dựa trên mô hình này? Cần ràng buộc gì?
 
-Trong nghiệm tối ưu, R&D nhận **40 nghìn tỷ VND**, cao hơn nhiều so với mức tối thiểu **10 nghìn tỷ VND**. Nguyên nhân là R&D có hệ số tác động cao nhất, **1,35**, nên sau khi các ràng buộc tối thiểu của hạ tầng, AI và nhân lực số được đáp ứng, mô hình dồn phần ngân sách còn lại vào R&D để tối đa hóa GDP kỳ vọng.
+Theo output dự báo Bài 1, nếu đến năm 2030 D đạt **30%**, AI đạt **100 nghìn doanh nghiệp số**, H đạt **35%**, K tăng **6%/năm** và TFP tăng **1,2%/năm**, GDP dự báo năm 2030 đạt khoảng **16.362,93 nghìn tỷ VND**. Như vậy, xét riêng theo mô hình, mục tiêu kinh tế số đạt 30% GDP vào năm 2030 là **có khả thi**.
 
-Việc đặt sàn R&D thấp vẫn hợp lý vì R&D có độ trễ dài, rủi ro cao và phụ thuộc mạnh vào năng lực hấp thụ công nghệ của doanh nghiệp, viện nghiên cứu, trường đại học và thị trường. Trong bối cảnh Nghị quyết 57-NQ/TW nhấn mạnh đột phá khoa học công nghệ, đổi mới sáng tạo và chuyển đổi số, R&D cần được ưu tiên nhưng phải đi kèm cơ chế thương mại hóa kết quả nghiên cứu và liên kết doanh nghiệp.
+Tuy nhiên, mục tiêu này chỉ khả thi nếu có các ràng buộc đi kèm. Thứ nhất là ràng buộc về hạ tầng số, vì không thể tăng tỷ trọng kinh tế số nếu kết nối, dữ liệu và nền tảng số chưa đủ mạnh. Thứ hai là ràng buộc về nhân lực số, vì AI và số hóa không thể vận hành nếu thiếu kỹ sư, chuyên gia dữ liệu, chuyên gia an ninh mạng và lao động có kỹ năng số. Thứ ba là ràng buộc về công bằng vùng, để chuyển đổi số không chỉ tập trung ở Hà Nội, TP.HCM, Đông Nam Bộ và Đồng bằng sông Hồng. Nghị quyết 57-NQ/TW cũng nhấn mạnh khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số là đột phá phát triển quốc gia. ()
 
-### c) Giả sử Chính phủ muốn ưu tiên nhân lực số với x_H ≥ 30. Bài toán có còn khả thi không? Z* thay đổi như thế nào?
+---""",
 
-Khi tăng ràng buộc nhân lực số từ **x_H ≥ 20** lên **x_H ≥ 30**, output bổ sung cho thấy bài toán **vẫn khả thi**. Nghiệm mới là: hạ tầng số **25**, AI và dữ liệu **15**, nhân lực số **30**, R&D **30**. Giá trị mục tiêu giảm từ **112,25** xuống **108,25**, tức giảm **4,00 nghìn tỷ GDP kỳ vọng**.
+    "bai2": r"""# Bài 2. Phân bổ ngân sách đơn giản theo 4 hạng mục đầu tư số
 
-Kết quả này cho thấy ưu tiên nhân lực số có chi phí cơ hội ngắn hạn, vì mô hình phải chuyển **10 nghìn tỷ** từ R&D, nơi có hệ số tác động **1,35**, sang nhân lực số, nơi có hệ số tác động **0,95**. Tuy nhiên, về dài hạn, ưu tiên nhân lực số là hợp lý vì đây là điều kiện để hấp thụ AI, vận hành hạ tầng số và triển khai R&D. Điều này phù hợp với tinh thần của Quyết định 749/QĐ-TTg và Quyết định 411/QĐ-TTg, vì chuyển đổi số không chỉ là đầu tư công nghệ mà còn là phát triển năng lực con người, doanh nghiệp và xã hội số.
+## a) Khi ngân sách tổng tăng thêm 1 tỷ VND, GDP kỳ vọng tăng thêm bao nhiêu? Đây có phải là cận trên hợp lý của chi phí cơ hội của vốn công?
 
-### d) Tỷ lệ 35% công nghệ chiến lược AI + R&D có khả thi không?
+Trong mô hình Bài 2, đơn vị ngân sách là **nghìn tỷ VND**. Output cho thấy shadow price của ràng buộc ngân sách tổng là **1,35**. Nghĩa là nếu ngân sách tăng thêm **1 nghìn tỷ VND**, GDP kỳ vọng tăng thêm khoảng **1,35 nghìn tỷ VND**, trong vùng nghiệm tối ưu hiện tại.
 
-Trong nghiệm tối ưu ban đầu, AI nhận **15** và R&D nhận **40**, tổng cộng **55 nghìn tỷ VND**, chiếm **55% tổng ngân sách**. Như vậy, ràng buộc tối thiểu **35%** cho AI + R&D không phải ràng buộc chặt, vì mô hình tự chọn mức cao hơn 35%.
+Nếu quy đổi theo câu hỏi “1 tỷ VND”, thì về mặt tỷ lệ, GDP kỳ vọng tăng khoảng **1,35 tỷ VND**. Kết quả này cũng được xác nhận bởi phân tích độ nhạy: khi ngân sách tăng từ 100 lên 120, Z tăng từ **112,25** lên **139,25**; tức tăng 20 đơn vị ngân sách làm Z tăng 27, tương ứng hệ số **1,35**.
 
-Tuy nhiên, trong thực tế, ngân sách Việt Nam còn phải cân đối với hạ tầng giao thông, y tế, giáo dục, an sinh xã hội, quốc phòng, phòng chống thiên tai và chuyển đổi xanh. Vì vậy, tỷ lệ 35% cho AI + R&D nên được hiểu là định hướng chiến lược, không phải tỷ lệ cứng áp dụng máy móc.
-""",
- "bai3": """
-### a) Theo kết quả, ba ngành nào nên ưu tiên chuyển đổi số và AI trước? Kết quả có phù hợp với định hướng hiện nay không?
+Tuy nhiên, đây chỉ là cận trên trong mô hình toán học. Trong thực tế, hiệu quả vốn công phụ thuộc vào năng lực giải ngân, chất lượng dự án, khả năng phối hợp liên ngành và năng lực hấp thụ của doanh nghiệp. Vì vậy, shadow price có ý nghĩa tham khảo cho chi phí cơ hội vốn công, nhưng không nên hiểu là cứ tăng ngân sách thì GDP thực tế chắc chắn tăng đúng 1,35 lần.
 
-Output xếp hạng Priority cho thấy ba ngành đứng đầu là: **Thông tin - Truyền thông - CNTT** với điểm **0,730**, **Công nghiệp chế biến chế tạo** với điểm **0,652**, và **Tài chính - Ngân hàng - Bảo hiểm** với điểm **0,533**.
+## b) Vì sao R&D có hệ số tác động cao nhất nhưng lại có ràng buộc tối thiểu thấp nhất?
 
-Kết quả này hợp lý vì CNTT là ngành nền tảng cho chuyển đổi số; công nghiệp chế biến chế tạo có quy mô xuất khẩu, việc làm và chuỗi cung ứng lớn; còn tài chính - ngân hàng có dữ liệu lớn, khả năng tự động hóa cao và nhiều ứng dụng AI trong phân tích rủi ro, tín dụng, thanh toán và chống gian lận.
+Trong mô hình, R&D có hệ số tác động cao nhất là **1,35**, nhưng ràng buộc tối thiểu chỉ là **10**. Output cho thấy nghiệm tối ưu vẫn tự động phân bổ **40 nghìn tỷ VND** cho R&D, cao hơn rất nhiều mức tối thiểu. Điều này chứng tỏ ràng buộc tối thiểu thấp không có nghĩa là R&D không quan trọng; ngược lại, do hệ số tác động cao nên mô hình tự chọn đầu tư nhiều vào R&D sau khi đáp ứng các mức sàn của hạ tầng số, AI và nhân lực số.
 
-Kết quả cũng phù hợp với định hướng của Quyết định 127/QĐ-TTg về Chiến lược AI đến năm 2030 và Nghị quyết 57-NQ/TW về phát triển khoa học công nghệ, đổi mới sáng tạo và chuyển đổi số quốc gia.
+Trong thực tiễn, R&D thường có độ trễ dài, rủi ro cao và khó đo lường kết quả ngay. Vì vậy, Nhà nước có thể đặt sàn thấp để bảo đảm tính khả thi ngân sách, nhưng vẫn cần cơ chế khuyến khích R&D qua quỹ đổi mới sáng tạo, đặt hàng nghiên cứu, hợp tác viện - trường - doanh nghiệp. Nghị quyết 57-NQ/TW cũng nhấn mạnh khoa học, công nghệ và đổi mới sáng tạo là động lực then chốt của phát triển. ()
 
-### b) Tại sao ngành Khai khoáng có năng suất cao nhưng không nằm trong nhóm ưu tiên?
+## c) Trong thực tiễn quản lý, tỷ lệ 35% công nghệ chiến lược AI + R&D có khả thi không khi ngân sách nhà nước Việt Nam 2025 ưu tiên hạ tầng giao thông và an sinh xã hội?
 
-Output cho thấy **Khai khoáng xếp cuối**, với Priority chỉ **0,178**. Điều này chứng minh rằng năng suất cao không đủ để trở thành ngành ưu tiên nếu các tiêu chí khác yếu.
+Theo output, nghiệm tối ưu ban đầu phân bổ AI = **15** và R&D = **40**, tổng cộng **55 nghìn tỷ VND**, tương đương **55% tổng ngân sách**. Như vậy, trong mô hình, tỷ lệ tối thiểu 35% cho AI + R&D là khả thi và không phải ràng buộc chặt.
 
-Khai khoáng có quy mô việc làm nhỏ, lan tỏa hạn chế, rủi ro tự động hóa cao và không phải ngành dẫn dắt chuyển đổi số toàn nền kinh tế. Trong khi đó, các ngành như CNTT, chế biến chế tạo và tài chính có khả năng lan tỏa công nghệ rộng hơn. Vì vậy, về chính sách, khai khoáng có thể cần số hóa để nâng cao an toàn, giám sát tài nguyên và giảm tác động môi trường, nhưng không nên là ngành ưu tiên hàng đầu nếu mục tiêu là lan tỏa AI và chuyển đổi số trên diện rộng.
+Nhưng trong thực tiễn quản lý ngân sách, tỷ lệ này cần được hiểu linh hoạt. Ngân sách nhà nước còn phải ưu tiên hạ tầng giao thông, y tế, giáo dục, an sinh xã hội, quốc phòng, phòng chống thiên tai và chuyển đổi xanh. Do đó, 35% cho AI + R&D có thể khả thi trong một chương trình chuyên biệt về kinh tế số, nhưng khó áp dụng cứng cho toàn bộ ngân sách nhà nước.
 
-### c) Bộ trọng số nên do ai quyết định?
+Cách hợp lý là coi 35% là **định hướng chiến lược**, không phải con số máy móc. Việt Nam nên ưu tiên AI và R&D, nhưng phải bảo đảm không làm suy giảm các nhiệm vụ xã hội thiết yếu.
 
-Output độ nhạy cho thấy khi trọng số AI Readiness thay đổi từ **0,05** đến **0,40**, Top 3 ngành vẫn ổn định: **CNTT, chế biến chế tạo và tài chính - ngân hàng**. Tuy nhiên, khi đổi từ bộ trọng số “tăng trưởng” sang “bao trùm”, thứ hạng thay đổi mạnh: **Nông - Lâm - Thủy sản** từ hạng **10** trong định hướng tăng trưởng lên hạng **3** trong định hướng bao trùm.
+---""",
 
-Điều này chứng minh trọng số không chỉ là vấn đề kỹ thuật mà còn phản ánh lựa chọn giá trị chính sách. Nếu ưu tiên tăng trưởng, ngành công nghệ và công nghiệp sẽ dẫn đầu. Nếu ưu tiên bao trùm, ngành có nhiều lao động như nông nghiệp sẽ quan trọng hơn.
+    "bai3": r"""# Bài 3. Tính chỉ số ưu tiên ngành Priorityᵢ
 
-Vì vậy, bộ trọng số nên được quyết định thông qua kết hợp giữa chuyên gia kỹ thuật, hội đồng chính sách, doanh nghiệp, địa phương và đối thoại công khai. Cách này giúp bảo đảm tính minh bạch và tính chính danh của chính sách.
-""",
+## a) Theo kết quả, ba ngành nào nên được ưu tiên đẩy mạnh chuyển đổi số và AI trước? Kết quả này có phù hợp với Nghị quyết 57-NQ/TW không?
 
-    "bai4": """
-### a) Nếu bỏ ràng buộc công bằng, vốn sẽ chảy về vùng nào? Vì sao? Hậu quả xã hội dài hạn ra sao?
+Theo output Bài 3, ba ngành có điểm Priority cao nhất là **Thông tin - Truyền thông - CNTT**, **Công nghiệp chế biến chế tạo**, và **Tài chính - Ngân hàng - Bảo hiểm**. Cụ thể, CNTT-Truyền thông đạt khoảng **0,730**, Công nghiệp chế biến chế tạo đạt khoảng **0,652**, và Tài chính - Ngân hàng đạt khoảng **0,533**.
 
-Output không có ràng buộc công bằng cho thấy vốn tập trung mạnh vào các vùng có hệ số tác động cao. Cụ thể, **Đồng bằng sông Hồng** nhận **12.000 tỷ cho AI**, **Đông Nam Bộ** nhận **12.000 tỷ cho AI**, còn các vùng khác chủ yếu nhận mức sàn hoặc tập trung vào nhân lực số.
+Kết quả này phù hợp với thực tiễn. CNTT-Truyền thông là ngành nền tảng của chuyển đổi số; công nghiệp chế biến chế tạo có quy mô xuất khẩu và lao động lớn; tài chính - ngân hàng có dữ liệu lớn và khả năng ứng dụng AI cao trong tín dụng, thanh toán, quản trị rủi ro và chống gian lận.
 
-Điều này xảy ra vì Đồng bằng sông Hồng và Đông Nam Bộ có nền tảng kinh tế, hạ tầng số, FDI, doanh nghiệp và nhân lực tốt hơn. Về hiệu quả ngắn hạn, vốn chảy vào vùng mạnh giúp tối đa hóa GDP gain. Tuy nhiên, về dài hạn, điều này có thể làm gia tăng khoảng cách số giữa vùng phát triển và vùng yếu.
+Kết quả cũng phù hợp với Nghị quyết 57-NQ/TW, vì Nghị quyết xem khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số là đột phá quan trọng để phát triển lực lượng sản xuất hiện đại. ()
 
-Đây chính là lý do Quyết định 411/QĐ-TTg không chỉ nói về kinh tế số mà còn nhấn mạnh xã hội số, tức là chuyển đổi số cần bao trùm người dân, doanh nghiệp và địa phương, không chỉ tập trung ở các trung tâm phát triển.
+## b) Tại sao ngành Khai khoáng có năng suất rất cao nhưng vẫn không nằm trong nhóm ưu tiên?
 
-### b) Ràng buộc công bằng vùng làm giảm Z* bao nhiêu? Mức giảm này có chấp nhận được không?
+Ngành Khai khoáng có năng suất lao động cao, nhưng trong output lại không nằm trong nhóm ưu tiên. Nguyên nhân là chỉ số Priority không chỉ xét năng suất, mà còn xét tăng trưởng, lan tỏa, xuất khẩu, việc làm, AI readiness và rủi ro tự động hóa.
 
-Khi có ràng buộc công bằng, **Z*** đạt khoảng **52.485**. Khi bỏ ràng buộc công bằng, **Z*** đạt khoảng **68.750**. Như vậy, chi phí kinh tế của công bằng vùng là **16.265**, tương đương giảm khoảng **23,66%**.
+Khai khoáng có năng suất cao nhưng quy mô việc làm nhỏ, mức lan tỏa công nghệ thấp, rủi ro môi trường cao và không phải ngành dẫn dắt chuyển đổi số toàn nền kinh tế. Trong khi đó, CNTT, chế biến chế tạo và tài chính có khả năng lan tỏa công nghệ rộng hơn, tác động đến nhiều doanh nghiệp và chuỗi giá trị hơn.
 
-Nếu chỉ xét hiệu quả GDP ngắn hạn, mức giảm này khá lớn. Tuy nhiên, nếu xét mục tiêu phát triển bao trùm, mức giảm có thể chấp nhận được. Chính sách công không chỉ tối đa hóa tăng trưởng, mà còn phải tránh tình trạng vùng yếu bị bỏ lại phía sau. Nghị quyết 57-NQ/TW cũng chỉ ra rằng hạ tầng số còn hạn chế và chuyển đổi số chưa đồng đều là những vấn đề cần khắc phục.
+Vì vậy, khai khoáng vẫn cần số hóa để quản lý tài nguyên, an toàn lao động và giảm tác động môi trường, nhưng không nên là ngành ưu tiên hàng đầu nếu mục tiêu là lan tỏa AI và chuyển đổi số trên diện rộng.
 
-### c) Tây Nguyên nên đầu tư AI hay tập trung H và I trước?
+## c) Bộ trọng số nên do ai quyết định: chuyên gia kỹ thuật, hội đồng chính sách, hay quy trình đối thoại công khai?
 
-Output có ràng buộc công bằng cho thấy **Tây Nguyên nhận 12.000 tỷ cho D - chuyển đổi số**, không nhận vốn AI. Output không có ràng buộc công bằng cũng cho thấy Tây Nguyên nhận **11.000 tỷ cho H - nhân lực số**, không nhận AI.
+Bộ trọng số không nên chỉ do chuyên gia kỹ thuật quyết định. Output Bài 3 cho thấy khi thay đổi trọng số theo định hướng “tăng trưởng” hoặc “bao trùm”, thứ hạng ngành có thể thay đổi rõ. Ví dụ, nếu ưu tiên bao trùm và việc làm, các ngành có nhiều lao động như nông nghiệp có thể được xếp cao hơn; nếu ưu tiên tăng trưởng và xuất khẩu, công nghiệp và CNTT sẽ nổi bật hơn.
 
-Kết quả này cho thấy mô hình không khuyến nghị đầu tư AI trực tiếp vào Tây Nguyên ở giai đoạn đầu. Thay vào đó, vùng này nên ưu tiên chuyển đổi số doanh nghiệp, hạ tầng số và nhân lực số. Đây là cách tiếp cận hợp lý vì AI chỉ phát huy hiệu quả khi đã có dữ liệu, kỹ năng số, kết nối số và năng lực vận hành.
-""",
+Vì vậy, bộ trọng số nên được quyết định bằng cách kết hợp ba nhóm: chuyên gia kỹ thuật, hội đồng chính sách và đối thoại công khai. Chuyên gia giúp bảo đảm tính đúng đắn của phương pháp. Hội đồng chính sách giúp gắn trọng số với mục tiêu phát triển quốc gia. Đối thoại công khai giúp tăng tính minh bạch và tính chính danh.
 
-    "bai5": """
-### a) Vì sao mô hình chọn P15 Open Data dù quy mô nhỏ? Đây có phải kết quả mong muốn về chính sách?
+Nói ngắn gọn, trọng số là lựa chọn chính sách, không chỉ là bài toán kỹ thuật.
 
-Trong nghiệm cơ sở ngân sách **80.000 tỷ**, mô hình chọn **9 dự án**, tổng chi phí **59.700 tỷ** và tổng lợi ích NPV **115.400 tỷ**. **P15 Open Data** được chọn dù chi phí chỉ **1.500 tỷ** và lợi ích **3.800 tỷ**.
+---""",
 
-Điều này hợp lý vì P15 có tỷ suất lợi ích/chi phí cao, chi phí thấp và không làm căng ràng buộc ngân sách năm 1-2. Về chính sách, đây là kết quả mong muốn vì dữ liệu mở là nền tảng cho chính phủ số, AI, đổi mới sáng tạo và minh bạch hóa quản trị. Nếu thiếu dữ liệu mở, các dự án AI lớn như trung tâm AI quốc gia có thể thiếu dữ liệu đầu vào để huấn luyện, đánh giá và triển khai.
+    "bai4": r"""# Bài 4. Quy hoạch tuyến tính phân bổ ngân sách số theo ngành - vùng
 
-### b) Ràng buộc bắt buộc P14 an ninh mạng có làm giảm Z* không? Việc bắt buộc này có hợp lý không?
+## a) Nếu bỏ ràng buộc công bằng, vốn sẽ chảy về vùng nào? Tại sao? Hậu quả xã hội dài hạn ra sao?
 
-Output bổ sung cho thấy khi giữ ràng buộc bắt buộc P14, tổng lợi ích NPV của danh mục cơ sở là **115.400 tỷ**. Khi bỏ ràng buộc bắt buộc P14, tổng lợi ích tăng lên **116.300 tỷ**. Như vậy, bắt buộc P14 làm giảm khoảng **900 tỷ VND** lợi ích NPV.
+Theo output Bài 4, khi bỏ ràng buộc công bằng, vốn có xu hướng chảy mạnh về **Đồng bằng sông Hồng** và **Đông Nam Bộ**, đặc biệt vào các hạng mục có hệ số tác động cao như AI và chuyển đổi số doanh nghiệp. Đây là các vùng có nền tảng kinh tế, FDI, hạ tầng, doanh nghiệp và nhân lực tốt hơn.
 
-Tuy nhiên, mức giảm này tương đối nhỏ so với tổng lợi ích của danh mục. Về chính sách, bắt buộc P14 vẫn hợp lý vì an ninh mạng là điều kiện nền tảng của chuyển đổi số. Khi Việt Nam triển khai định danh điện tử, dịch vụ công trực tuyến, dữ liệu mở, trung tâm dữ liệu và AI, rủi ro an toàn dữ liệu tăng lên. Nghị quyết 57-NQ/TW cũng nhấn mạnh an ninh, an toàn thông tin và bảo vệ dữ liệu còn nhiều thách thức.
+Lý do là mô hình tối đa hóa GDP gain, nên vốn sẽ tự động đi đến nơi có hiệu quả biên cao nhất. Đông Nam Bộ và Đồng bằng sông Hồng có digital index và AI readiness cao hơn, vì vậy đầu tư vào đây tạo hiệu quả ngắn hạn lớn hơn.
 
-### c) Giả sử Quốc hội yêu cầu phải có cả P1 và P2, bài toán còn khả thi không? Z* thay đổi ra sao?
+Tuy nhiên, hậu quả xã hội dài hạn là khoảng cách số giữa vùng mạnh và vùng yếu có thể bị nới rộng. Các vùng như Tây Nguyên, Trung du miền núi phía Bắc và Đồng bằng sông Cửu Long có thể bị bỏ lại phía sau. Điều này đi ngược tinh thần phát triển xã hội số bao trùm trong Quyết định 411/QĐ-TTg. ()
 
-Output bổ sung cho thấy khi bắt buộc chọn cả **P1 Trung tâm dữ liệu quốc gia Hòa Lạc** và **P2 Trung tâm dữ liệu quốc gia phía Nam**, bài toán vẫn **khả thi**. Danh mục chọn 8 dự án: **P1, P2, P4, P8, P9, P12, P14 và P15**. Tổng chi phí là **59.300 tỷ**, tổng lợi ích NPV là **113.300 tỷ**.
+## b) Ràng buộc trần ngân sách mỗi vùng C3 có thể coi như một “chính sách phân quyền”. Nó làm giảm Z\* bao nhiêu phần trăm? Mức giảm này có chấp nhận được không?
 
-So với nghiệm cơ sở có lợi ích **115.400 tỷ**, phương án bắt buộc P1 và P2 làm giảm **2.100 tỷ** NPV. Đây là chi phí cơ hội của yêu cầu dự phòng hạ tầng dữ liệu. Tuy nhiên, việc có hai trung tâm dữ liệu có thể hợp lý nếu mục tiêu không chỉ là tối đa hóa NPV mà còn là bảo đảm dự phòng, an toàn hệ thống, khả năng phục hồi và chủ quyền dữ liệu.
+Theo output, khi có ràng buộc công bằng, Z\* đạt khoảng **52.485**. Khi bỏ ràng buộc công bằng, Z\* đạt khoảng **68.750**. Như vậy, ràng buộc công bằng làm giảm khoảng **16.265**, tương đương khoảng **23,66%** GDP gain.
 
-### d) Khi nới ngân sách lên 100.000 tỷ, tập dự án có thay đổi không?
+Nếu chỉ xét hiệu quả kinh tế ngắn hạn, mức giảm này là lớn. Nhưng nếu xét mục tiêu phát triển bao trùm, mức giảm này có thể chấp nhận được. Chính sách công không chỉ tối đa hóa GDP, mà còn phải bảo đảm cơ hội phát triển giữa các vùng.
 
-Output cho thấy khi tăng ngân sách từ **80.000** lên **100.000 tỷ**, danh mục dự án **không thay đổi**. Điều này chứng tỏ ngân sách tổng không phải ràng buộc duy nhất. Các ràng buộc khác như ngân sách năm 1-2, loại trừ P1/P2, yêu cầu tiên quyết đào tạo nhân lực, yêu cầu an ninh mạng và giới hạn số lượng dự án mới là các yếu tố giới hạn danh mục.
+Có thể xem C3 là một chính sách phân quyền vì nó ngăn việc ngân sách bị hút hết vào một vài vùng mạnh. Nhờ đó, các vùng yếu vẫn có nguồn lực tối thiểu để phát triển hạ tầng số, nhân lực số và năng lực hấp thụ công nghệ.
 
-Hàm ý chính sách là tăng tiền chưa chắc làm tăng hiệu quả nếu năng lực triển khai, nhân lực, quản trị dự án và phối hợp thể chế chưa được cải thiện.
+## c) Tây Nguyên có sàn 5.000 tỷ nhưng hệ số AI rất thấp 0,45. Nên đầu tư AI hay tập trung H và I trước? Mô hình trả lời như thế nào?
 
-### e) Khi xét rủi ro hoàn thành, danh mục thay đổi thế nào?
+Theo output, Tây Nguyên không nên ưu tiên AI ngay từ đầu. Khi có ràng buộc công bằng, mô hình chủ yếu phân bổ cho Tây Nguyên vào **D - chuyển đổi số** hoặc **H - nhân lực số**, thay vì AI. Điều này phù hợp vì hệ số AI của Tây Nguyên chỉ **0,45**, thấp nhất trong các vùng.
 
-Khi tối đa hóa lợi ích kỳ vọng có xét xác suất hoàn thành, danh mục chuyển sang chọn **P2, P3, P5, P6, P7, P12, P14 và P15**. Tổng chi phí là **58.800 tỷ**, tổng lợi ích gốc là **111.200 tỷ**, nhưng lợi ích kỳ vọng chỉ còn **91.285 tỷ**.
+Về chính sách, Tây Nguyên nên tập trung vào hạ tầng số, kỹ năng số, dữ liệu cơ bản, chuyển đổi số doanh nghiệp nhỏ và dịch vụ công trước. Khi các nền tảng này đủ mạnh, đầu tư AI mới có khả năng tạo hiệu quả.
 
-Điều này cho thấy khi xét rủi ro, các dự án công nghệ lớn có lợi ích danh nghĩa cao nhưng xác suất hoàn thành thấp sẽ kém hấp dẫn hơn. Đây là điểm quan trọng khi triển khai Chiến lược AI theo Quyết định 127/QĐ-TTg: muốn các dự án AI lớn thành công, Việt Nam cần đồng thời đầu tư vào dữ liệu, nhân lực, hạ tầng tính toán, an ninh mạng và cơ chế thử nghiệm chính sách.
-""",
+Nói cách khác, mô hình trả lời rằng: **không nên nhảy thẳng vào AI ở vùng có năng lực hấp thụ thấp**. Tây Nguyên cần H và I trước, AI sau.
 
-    "bai6": """
-### a) Vùng nào dẫn đầu theo TOPSIS với trọng số chuyên gia? Đây có phải vùng nên triển khai trung tâm AI đầu tiên không?
+---""",
 
-Output TOPSIS với trọng số chuyên gia cho thấy **Đông Nam Bộ** xếp hạng 1 với điểm **0,940**, **Đồng bằng sông Hồng** xếp hạng 2 với điểm **0,898**, và **Bắc Trung Bộ và duyên hải miền Trung** xếp hạng 3 với điểm **0,360**.
+    "bai5": r"""# Bài 5. Quy hoạch nguyên hỗn hợp MIP lựa chọn dự án chuyển đổi số
 
-Đông Nam Bộ dẫn đầu vì có GRDP/người cao, FDI lớn, chỉ số số hóa cao, AI readiness cao và tỷ lệ lao động qua đào tạo tốt. Đồng bằng sông Hồng cũng có lợi thế lớn về nhân lực, trung tâm nghiên cứu, cơ quan quản lý và hạ tầng số.
+## a) Vì sao mô hình bỏ qua dự án P15 Open Data dù tỷ suất lợi ích/chi phí rất cao? Đây có phải là kết quả mong muốn về mặt chính sách?
 
-Tuy nhiên, không nên hiểu rằng chỉ vùng xếp hạng 1 mới được triển khai trung tâm AI. Quyết định 127/QĐ-TTg đặt mục tiêu phát triển và ứng dụng AI đến năm 2030, nên chính sách hợp lý hơn là xây dựng mạng lưới trung tâm AI theo chức năng vùng: Đông Nam Bộ thiên về ứng dụng doanh nghiệp - công nghiệp - logistics; Đồng bằng sông Hồng thiên về nghiên cứu, chính sách và dữ liệu công.
+Theo output của bạn, trong nghiệm cơ sở ngân sách 80.000 tỷ, mô hình **không bỏ qua P15** mà đã chọn **P15 Open Data + dữ liệu mở quốc gia**. P15 có chi phí chỉ **1.500 tỷ**, lợi ích **3.800 tỷ**, nên tỷ suất lợi ích/chi phí rất cao.
 
-### b) Khi dùng trọng số Entropy, vùng nào thay đổi xếp hạng lớn nhất? Vì sao?
+Vì vậy, với output hiện tại, câu trả lời là: mô hình chọn P15 là kết quả hợp lý. Về chính sách, đây là kết quả mong muốn, vì dữ liệu mở là nền tảng cho chính phủ số, doanh nghiệp số, AI, nghiên cứu đổi mới sáng tạo và minh bạch hóa quản trị.
 
-Output cho thấy khi dùng trọng số Entropy, thứ hạng tổng thể **không thay đổi**: Đông Nam Bộ vẫn xếp thứ 1, Đồng bằng sông Hồng thứ 2, Bắc Trung Bộ và duyên hải miền Trung thứ 3, Đồng bằng sông Cửu Long thứ 4, Trung du miền núi phía Bắc thứ 5 và Tây Nguyên thứ 6.
+Nếu một mô hình nào đó bỏ qua P15, nguyên nhân có thể là do ràng buộc số lượng dự án, ngân sách năm 1-2, hoặc các ràng buộc tiên quyết khiến P15 không còn nằm trong tổ hợp tối ưu. Nhưng với output của bạn, P15 được chọn, nên cần viết đúng theo kết quả này.
 
-Điều này cho thấy kết quả TOPSIS khá ổn định. Nguyên nhân là chênh lệch giữa các vùng về GRDP/người, FDI, chỉ số số hóa, AI readiness và lao động qua đào tạo khá lớn. Dù dùng trọng số chuyên gia hay trọng số khách quan, hai vùng phát triển nhất vẫn có ưu thế rõ rệt.
+## b) Ràng buộc “bắt buộc P14 an ninh mạng” có làm giảm Z\* không? Việc bắt buộc này có hợp lý không?
 
-### c) TOPSIS giả định độc lập tuyến tính giữa các tiêu chí. Nếu AI Readiness và Internet penetration tương quan cao thì ảnh hưởng thế nào?
+Theo output bổ sung, khi bắt buộc P14, tổng lợi ích của danh mục cơ sở là **115.400 tỷ VND**. Khi bỏ ràng buộc bắt buộc P14, tổng lợi ích tăng lên **116.300 tỷ VND**. Như vậy, bắt buộc P14 làm giảm Z\* khoảng **900 tỷ VND**.
 
-Nếu AI Readiness và Internet penetration tương quan cao, TOPSIS có thể “đếm trùng” lợi thế của các vùng phát triển. Ví dụ, Đông Nam Bộ và Đồng bằng sông Hồng vừa có Internet penetration cao, vừa có AI readiness cao, nên điểm số có thể được cộng hưởng từ hai tiêu chí phản ánh cùng một nền tảng số.
+Tuy nhiên, việc bắt buộc P14 vẫn hợp lý. Khi Việt Nam phát triển định danh điện tử, dịch vụ công trực tuyến, trung tâm dữ liệu, dữ liệu mở và AI, rủi ro an ninh mạng tăng lên. Một dự án an ninh mạng có thể không tạo NPV cao nhất, nhưng đóng vai trò bảo vệ toàn hệ thống.
 
-Điều này có thể làm vùng mạnh càng mạnh hơn trong kết quả xếp hạng, trong khi vùng yếu bị đánh giá thấp hơn. Để xử lý, có thể kiểm tra ma trận tương quan, gộp tiêu chí trùng lặp, dùng PCA hoặc bổ sung tiêu chí “khoảng cách số” để phản ánh nhu cầu hỗ trợ.
+Nghị quyết 57-NQ/TW cũng nhấn mạnh yêu cầu phát triển khoa học công nghệ và chuyển đổi số gắn với bảo đảm an toàn, an ninh và chủ quyền số. ()
 
-### d) Nếu Việt Nam xây dựng 3 trung tâm AI lớn, nên chọn 3 vùng nào? Có cần điều chỉnh thêm tiêu chí địa - chính trị không?
+## c) Mô hình giả định các dự án độc lập về lợi ích, nhưng trên thực tế P8 AI quốc gia và P13 bán dẫn có lợi ích cộng hưởng. Làm thế nào để mô hình hóa hiệu ứng cộng hưởng này?
 
-Dựa trên output TOPSIS và phân tích độ nhạy, Top 3 ổn định khi trọng số AI thay đổi từ **0,10** đến **0,40**: **Đông Nam Bộ**, **Đồng bằng sông Hồng**, và **Bắc Trung Bộ và duyên hải miền Trung**.
+Để mô hình hóa cộng hưởng giữa P8 và P13, có thể thêm một biến nhị phân mới, ví dụ **z\_8\_13**. Biến này bằng 1 nếu cả P8 và P13 cùng được chọn. Sau đó thêm các ràng buộc:
 
-Nếu chỉ dựa vào mô hình, đây là ba vùng phù hợp nhất để ưu tiên trung tâm AI. Tuy nhiên, quyết định thực tế cần xét thêm địa - chính trị, an ninh dữ liệu, cân bằng vùng, hạ tầng năng lượng, rủi ro thiên tai, khả năng kết nối quốc tế và vai trò liên kết vùng. Vì vậy, TOPSIS nên được xem là công cụ hỗ trợ ra quyết định, không phải quyết định cuối cùng.
-""",
-    "bai7": """
-### a) Khi quan sát đường biên Pareto, đánh đổi giữa tăng trưởng và bao trùm có rõ ràng không?
-Có. Output Bài 7 tạo ra **120 nghiệm Pareto**, cho thấy bài toán không có một nghiệm tối ưu duy nhất mà có một tập phương án đánh đổi giữa tăng trưởng, bao trùm, môi trường và rủi ro dữ liệu. Nghiệm có **GDP_gain cao nhất** đạt khoảng **60.466,15**, nhưng đi kèm **Inequality_MAD = 969,17** và **Emission = 1.867,75**. Trong khi đó, nghiệm thỏa hiệp TOPSIS có **GDP_gain = 58.815,38**, thấp hơn khoảng **2,73%**, nhưng **Inequality_MAD giảm còn 509,46** và **Emission giảm còn 89,49**.
+z\_8\_13 ≤ y8\
+z\_8\_13 ≤ y13\
+z\_8\_13 ≥ y8 + y13 - 1
 
-Điều này cho thấy đánh đổi giữa tăng trưởng và bao trùm là rất rõ: nếu chỉ tối đa hóa GDP gain, mô hình chấp nhận phân bổ không đều hơn giữa các vùng và phát thải cao hơn; nếu chọn nghiệm thỏa hiệp, Việt Nam hy sinh một phần nhỏ tăng trưởng để cải thiện đáng kể công bằng vùng và môi trường.
+Sau đó, trong hàm mục tiêu, cộng thêm phần lợi ích cộng hưởng, ví dụ:
 
-### b) Nghiệm thỏa hiệp TOPSIS có hợp lý không?
-Nghiệm thỏa hiệp có **TOPSIS_compromise_score = 0,840491**, cao nhất trong tập nghiệm Pareto. Phương án này đạt **GDP_gain = 58.815,38**, **Inequality_MAD = 509,46**, **Emission = 89,49** và **CyberRisk_Net = -12.149,30**. So với nghiệm tăng trưởng cao nhất, GDP chỉ giảm khoảng **2,73%**, nhưng bất bình đẳng vùng giảm khoảng **47,43%**, còn phát thải giảm rất mạnh.
+Z = Σ Bᵢyᵢ + S\_8\_13 z\_8\_13
 
-Cấu trúc phân bổ cũng hợp lý vì không dồn quá mức vào AI, mà ưu tiên **H - nhân lực số** và **D - chuyển đổi số doanh nghiệp**, đặc biệt ở các vùng yếu.
+Trong đó S\_8\_13 là lợi ích tăng thêm khi trung tâm AI quốc gia và khu công nghiệp bán dẫn cùng được triển khai. Cách này làm mô hình thực tế hơn, vì nhiều dự án công nghệ không tạo lợi ích độc lập mà tạo giá trị lớn hơn khi kết hợp với nhau.
 
-### c) Nghiệm tăng trưởng cao nhất hy sinh bao nhiêu về bao trùm và môi trường?
-Nghiệm tăng trưởng cao nhất đạt **GDP_gain = 60.466,15**, cao hơn nghiệm thỏa hiệp **1.650,77**. Tuy nhiên, **Inequality_MAD tăng từ 509,46 lên 969,17**, cao hơn khoảng **90,23%**, và **Emission tăng từ 89,49 lên 1.867,75**, cao hơn khoảng **20,87 lần**.
+---""",
 
-### d) NSGA-II có thay thế được quyết định chính sách không?
-Không. NSGA-II chỉ tạo ra tập phương án Pareto để nhìn thấy đánh đổi. Việc chọn nghiệm nào vẫn là quyết định chính trị - xã hội, phụ thuộc vào ưu tiên của Nhà nước, doanh nghiệp, địa phương và người dân.
-""",
-    "bai8": """
-### a) Quỹ đạo tối ưu của K, D, AI, H có front-loaded hay back-loaded không?
-Output Bài 8 cho thấy quỹ đạo tối ưu có tính **front-loaded đối với D và AI**. Năm 2026, tỷ trọng đầu tư vào D đạt **0,8825**, AI đạt **0,1175**. Giai đoạn 2028-2032, AI tăng rất mạnh, đạt **0,7996 năm 2032**. Đến năm 2035, cơ cấu trở về cân bằng khoảng **0,25** mỗi nhóm.
+    "bai6": r"""# Bài 6. TOPSIS xếp hạng 6 vùng kinh tế Việt Nam theo ưu tiên đầu tư AI
 
-Cần diễn giải thận trọng vì K, D, AI, H có xu hướng giảm theo thời gian do đặc tả mô phỏng và khấu hao, không phải khuyến nghị thực tế để năng lực số suy giảm.
+## a) Vùng nào dẫn đầu theo TOPSIS với trọng số chuyên gia? Đây có phải vùng nên triển khai trung tâm AI quốc gia đầu tiên không?
 
-### b) Tỷ lệ đầu tư AI/H có ổn định không?
-Không. H gần như bằng 0 đến 2034, trong khi AI tăng mạnh. Về chính sách, điều này cần phản biện: AI phải đi đồng thời với đào tạo nhân lực số, thậm chí ở vùng/ngành yếu thì nhân lực nên đi trước.
+Theo output Bài 6, vùng dẫn đầu là **Đông Nam Bộ**, với điểm TOPSIS chuyên gia khoảng **0,940**. Xếp thứ hai là **Đồng bằng sông Hồng**, với điểm khoảng **0,898**. Xếp thứ ba là **Bắc Trung Bộ và duyên hải miền Trung**, với điểm khoảng **0,360**.
 
-### c) Nếu ρ giảm từ 0,97 xuống 0,90 thì sao?
-Với **ρ = 0,97**, welfare tối ưu đạt **47,8763**, cao hơn đầu tư đều (**47,7707**) và front-load giả định (**47,7513**). Nếu ρ thấp hơn, mô hình có thể ưu tiên ngắn hạn hơn và giảm đầu tư dài hạn vào AI, R&D, nhân lực.
+Đông Nam Bộ dẫn đầu vì có GRDP/người cao, FDI lớn, digital index cao, AI readiness cao, tỷ lệ lao động qua đào tạo cao và internet penetration tốt. Vì vậy, nếu chỉ xét hiệu quả triển khai AI, Đông Nam Bộ là vùng rất phù hợp để đặt trung tâm AI hoặc sandbox AI đầu tiên.
 
-### d) Cú sốc 2028 ảnh hưởng thế nào?
-GDP năm 2028 giảm từ **355,60** xuống **327,16**. Welfare giảm từ **47,8763** xuống **47,7950**. Đến 2035, GDP shock đạt **281,59**, gần bằng không shock **281,72**. Mô hình phục hồi tốt, nhưng cú sốc còn đơn giản so với thực tế.
-""",
-    "bai9": """
-### a) Ngành nào cần đầu tư đào tạo lại nhiều nhất?
-Output Bài 9 phân bổ toàn bộ **30.000 tỷ** vào **x_H của Giáo dục-Đào tạo**, tạo **UpgradeJob = 1.650.000** và **NetJob = 1.650.000**. Điều này đúng về toán học vì ngành này có hiệu quả biên cao, nhưng chưa sát thực tế vì các ngành chế biến chế tạo, bán buôn-bán lẻ, tài chính-ngân hàng và logistics cũng cần đào tạo lại.
+Tuy nhiên, không nên chỉ có một trung tâm AI ở Đông Nam Bộ. Theo Quyết định 127/QĐ-TTg, Việt Nam đặt mục tiêu phát triển nghiên cứu, ứng dụng AI đến năm 2030, nên hợp lý hơn là xây mạng lưới trung tâm AI theo chức năng vùng: Đông Nam Bộ thiên về ứng dụng doanh nghiệp, logistics, công nghiệp; Đồng bằng sông Hồng thiên về nghiên cứu, chính sách, dữ liệu công và nhân lực. ()
 
-### b) Tài chính-Ngân hàng có risk 52% nhưng tạo việc làm mới cao, nên làm gì?
-Ngành này có **risk = 52%** và **a1 = 45,8**. Chính sách phù hợp là **AI đi kèm tái đào tạo bắt buộc**, giúp chuyển lao động sang dữ liệu, kiểm soát rủi ro mô hình, an ninh mạng, tuân thủ và đạo đức AI.
+## b) Khi dùng trọng số Entropy, vùng nào có sự thay đổi xếp hạng lớn nhất? Vì sao?
 
-### c) Có nên đầu tư AI vào Nông-Lâm-Thủy sản không?
-Mô hình không chọn vì **a1 = 8,5** thấp. Tuy nhiên, nông nghiệp có **13,20 triệu lao động**, nên vẫn cần AI và số hóa quy mô phù hợp: truy xuất nguồn gốc, dự báo thời tiết, tưới tiêu thông minh, logistics lạnh, thương mại điện tử nông sản.
+Theo output, khi dùng trọng số Entropy, thứ hạng gần như **không thay đổi** so với trọng số chuyên gia. Đông Nam Bộ vẫn xếp thứ nhất, Đồng bằng sông Hồng xếp thứ hai, Bắc Trung Bộ và duyên hải miền Trung xếp thứ ba, Đồng bằng sông Cửu Long xếp thứ tư, Trung du miền núi phía Bắc xếp thứ năm và Tây Nguyên xếp thứ sáu.
 
-### d) Ràng buộc “tự động hóa không vượt năng lực đào tạo lại” là gì?
-Ràng buộc là **DisplacedJobᵢ ≤ RetrainingCapacityᵢ**. Output cho thấy bài toán vẫn khả thi với ràng buộc không ngành nào mất quá 5% lao động, nhưng vì nghiệm không đầu tư AI nên DisplacedJob = 0. Cần bổ sung ràng buộc đầu tư tối thiểu vào ngành rủi ro cao.
-""",
-    "bai10": """
-### a) SP đầu tư H nhiều hơn hay ít hơn?
-First-stage dồn toàn bộ **65.000** vào **AI**. Second-stage dồn **15.000 vào D** ở kịch bản tốt và **15.000 vào H** ở kịch bản bi quan/khủng hoảng. Như vậy, H chưa được đầu tư trước, mà chỉ xuất hiện như công cụ thích nghi khi kịch bản xấu xảy ra.
+Như vậy, không có vùng nào thay đổi xếp hạng lớn. Điều này cho thấy kết quả TOPSIS khá ổn định. Lý do là khoảng cách giữa nhóm vùng dẫn đầu và nhóm vùng còn lại khá rõ ràng về GRDP/người, FDI, digital index, AI readiness, R&D và internet penetration.
 
-### b) VSS dương nói lên điều gì? Output VSS = 0 thì sao?
-VSS dương nghĩa là lời giải stochastic tốt hơn lời giải kỳ vọng. Output hiện có **SP_value = EEV_value = Wait-and-See_value = 98.575**, nên **VSS = 0** và **EVPI = 0**. Điều này không có nghĩa tư duy xác suất vô ích, mà cho thấy mô hình hiện tại chưa tạo đủ khác biệt giữa các kịch bản.
+Điều này làm tăng độ tin cậy của kết quả: dù dùng trọng số chủ quan hay khách quan, Đông Nam Bộ và Đồng bằng sông Hồng vẫn là hai vùng có nền tảng AI tốt nhất.
 
-### c) Việt Nam có dưới đầu tư nhân lực số như hàng hóa bảo hiểm không?
-Có rủi ro như vậy. Output cho thấy khi kịch bản xấu xảy ra, mô hình chuyển sang H. Chính sách thực tế nên đầu tư nhân lực số từ trước, không chỉ phản ứng sau cú sốc.
-""",
-    "bai11": """
-### a) GDP thấp, D thấp, U cao thì π*(s) chọn gì?
-Ở state **LowGDP_LowD_LowAI_HighU = [0, 0, 0, 2]**, mô hình chọn **Truyền thống**, nhưng **Q-value = 0**, cho thấy agent chưa học đủ ở trạng thái này. Trong thực tế, quick win nên là số hóa dịch vụ công, hỗ trợ SME chuyển đổi số và đào tạo lại ngắn hạn.
+## c) TOPSIS giả định độc lập tuyến tính giữa các tiêu chí. Nếu AI Readiness và Internet penetration tương quan rất cao thì ảnh hưởng thế nào? Đề xuất cách xử lý.
 
-### b) GDP cao, AI cao, U thấp thì chọn gì?
-Ở state **HighGDP_HighD_HighAI_LowU = [2,2,2,0]**, mô hình cũng chọn **Truyền thống**, **Q-value = 0**. Có thể hiểu một phần là consolidation, nhưng không nên xem là khuyến nghị mạnh. Kết quả đáng tin hơn là state VN_2026 chọn **Số hóa nhanh** với **Q-value = 15,2896**.
+Nếu AI Readiness và Internet penetration tương quan rất cao, TOPSIS có thể bị “đếm trùng” lợi thế của các vùng phát triển. Ví dụ, Đông Nam Bộ và Đồng bằng sông Hồng vừa có internet penetration cao, vừa có AI readiness cao. Nếu hai tiêu chí này phản ánh cùng một nền tảng số, mô hình có thể cộng điểm hai lần cho cùng một lợi thế.
 
-### c) Q-learning có tốt hơn chính sách cố định không?
-Có. **Q_learning_policy = 8,2600**, cao hơn **Always_balanced = 7,4861**, **Always_AI_led = 7,5729** và **Random = 7,5335**.
+Điều này làm vùng mạnh càng mạnh hơn trong bảng xếp hạng, còn vùng yếu càng bị đẩy xuống thấp. Để xử lý, có thể kiểm tra ma trận tương quan giữa các tiêu chí. Nếu hai tiêu chí tương quan quá cao, có thể gộp chúng thành một chỉ số tổng hợp, giảm trọng số một trong hai tiêu chí, hoặc dùng PCA để rút gọn biến.
 
-### d) Tích hợp π* vào chính sách thế nào?
-Chỉ dùng Q-learning như **hệ thống khuyến nghị**, không tự động ra quyết định. Cần chuyên gia kiểm định, hội đồng chính sách đánh giá và cơ quan có thẩm quyền quyết định.
-""",
-    "bai12": """
-### a) Kịch bản nào có GDP_index 2030 cao nhất?
-Output cho thấy **S3_AI_dan_dat** cao nhất với **GDP_index = 380,7220**. S2_So_hoa_nhanh đứng thứ hai với **380,3790**, S5_Toi_uu_can_bang đứng thứ ba với **379,4473**.
+Ngoài ra, nếu mục tiêu chính sách là phát triển bao trùm, nên bổ sung tiêu chí “nhu cầu hỗ trợ” hoặc “khoảng cách số” để vùng yếu không bị loại hoàn toàn khỏi ưu tiên đầu tư.
 
-### b) Kịch bản nào phù hợp nhất với thực tiễn Việt Nam?
-Nếu chỉ xét GDP, S3 tốt nhất. Nhưng xét năng lực thực thi, **S5_Toi_uu_can_bang** hoặc **S2_So_hoa_nhanh** phù hợp hơn vì cân bằng giữa D, AI và H.
+## d) Nếu Việt Nam xây dựng 3 trung tâm AI lớn, nên chọn 3 vùng nào? Có cần điều chỉnh thêm tiêu chí địa - chính trị không?
 
-### c) Cảnh báo rủi ro nói gì?
-Cả 5 kịch bản đều có **cyber_risk = Trung bình**, **digital_gap_risk = Cao**, **human_capital_status = Thiếu**. Điều này cho thấy dù chọn kịch bản nào, Việt Nam vẫn cần giảm khoảng cách số, đào tạo nhân lực và bảo vệ dữ liệu.
+Dựa trên output TOPSIS, ba vùng nên chọn là **Đông Nam Bộ**, **Đồng bằng sông Hồng**, và **Bắc Trung Bộ và duyên hải miền Trung**. Kết quả này ổn định cả khi thay đổi trọng số AI từ 0,10 đến 0,40.
 
-### d) Dashboard có đáp ứng hỗ trợ ra quyết định không?
-Có về cấu trúc: có dự báo, phân bổ, lao động, bất định, Q-learning và so sánh kịch bản. Nên bổ sung chức năng chỉnh trọng số, giải thích biểu đồ và giới hạn mô hình.
+Tuy nhiên, quyết định thực tế cần điều chỉnh thêm tiêu chí địa - chính trị. Cần xét đến an ninh dữ liệu, cân bằng vùng miền, hạ tầng năng lượng, rủi ro thiên tai, khả năng kết nối quốc tế và vai trò liên kết vùng. Ví dụ, Đồng bằng sông Hồng có lợi thế về cơ quan quản lý, đại học và viện nghiên cứu; Đông Nam Bộ có lợi thế về doanh nghiệp và ứng dụng; miền Trung có thể đóng vai trò trung tâm kết nối và giảm tập trung quá mức vào hai cực Bắc - Nam.
 
-### e) Khuyến nghị tổng hợp là gì?
-Không chọn cực đoan truyền thống hoặc AI dẫn dắt tuyệt đối. Nên chọn **S5_Toi_uu_can_bang** làm kịch bản khuyến nghị, còn S3_AI_dan_dat là kịch bản tăng trưởng cao nhưng rủi ro hấp thụ lớn hơn.
-""",
+Vì vậy, TOPSIS là công cụ hỗ trợ lựa chọn, không phải quyết định cuối cùng.
+
+---""",
+
+    "bai7": r"""# Bài 7. Tối ưu đa mục tiêu Pareto với NSGA-II
+
+## a) Khi quan sát đường biên Pareto, đánh đổi giữa tăng trưởng và bao trùm có rõ ràng không? Mức đánh đổi đó nói lên điều gì về cơ cấu kinh tế Việt Nam?
+
+Có. Output Bài 7 tạo ra **120 nghiệm Pareto**, cho thấy không có một nghiệm tối ưu duy nhất. Nghiệm có GDP\_gain cao nhất đạt khoảng **60.466,15**, nhưng đi kèm Inequality\_MAD khoảng **969,17** và Emission khoảng **1.867,75**. Trong khi đó, nghiệm thỏa hiệp TOPSIS đạt GDP\_gain khoảng **58.815,38**, thấp hơn khoảng **2,73%**, nhưng Inequality\_MAD giảm còn **509,46** và Emission giảm còn **89,49**.
+
+Điều này cho thấy đánh đổi giữa tăng trưởng và bao trùm là rõ ràng. Nếu chỉ tối đa hóa tăng trưởng, vốn sẽ có xu hướng tập trung vào vùng có năng lực hấp thụ cao, làm tăng khoảng cách vùng. Nếu chọn nghiệm thỏa hiệp, Việt Nam chấp nhận giảm một phần nhỏ tăng trưởng để cải thiện công bằng vùng và môi trường.
+
+Về cơ cấu kinh tế, kết quả này phản ánh thực tế Việt Nam: năng lực số, FDI, hạ tầng và nhân lực chất lượng cao tập trung nhiều ở các vùng phát triển. Vì vậy, chính sách chuyển đổi số nếu không có ràng buộc bao trùm sẽ dễ làm khoảng cách vùng miền lớn hơn.
+
+## b) Trọng số 0,40; 0,25; 0,20; 0,15 có phản ánh đúng ưu tiên hiện tại của Việt Nam không? Nên điều chỉnh thế nào để phù hợp với COP26 và Quyết định 127/QĐ-TTg?
+
+Bộ trọng số **0,40 tăng trưởng; 0,25 bao trùm; 0,20 môi trường; 0,15 an ninh** phản ánh khá đúng ưu tiên phát triển hiện nay của Việt Nam, vì tăng trưởng vẫn là mục tiêu quan trọng, nhưng không còn là mục tiêu duy nhất. Bao trùm, môi trường và an ninh dữ liệu ngày càng quan trọng trong bối cảnh chuyển đổi số.
+
+Tuy nhiên, nếu muốn phù hợp hơn với cam kết Net Zero 2050 tại COP26, nên tăng trọng số môi trường từ **0,20** lên khoảng **0,25 hoặc 0,30**. Nếu muốn phù hợp hơn với Quyết định 127/QĐ-TTg về AI, có thể tăng trọng số an ninh dữ liệu và năng lực quản trị AI, vì phát triển AI không thể tách rời bảo vệ dữ liệu, an toàn hệ thống và chủ quyền số. ()
+
+Một bộ trọng số điều chỉnh có thể là: tăng trưởng **0,35**, bao trùm **0,25**, môi trường **0,25**, an ninh **0,15**. Nếu nhấn mạnh an toàn AI hơn, có thể dùng: tăng trưởng **0,35**, bao trùm **0,25**, môi trường **0,20**, an ninh **0,20**.
+
+## c) Vai trò của NSGA-II khác gì so với LP đơn mục tiêu? Nó có thay thế được quyết định chính trị không?
+
+LP đơn mục tiêu tìm một nghiệm tối ưu duy nhất theo một hàm mục tiêu, ví dụ tối đa hóa GDP gain. Trong khi đó, NSGA-II tìm một tập nghiệm Pareto, cho thấy các phương án đánh đổi giữa tăng trưởng, bao trùm, môi trường và an ninh dữ liệu.
+
+Vì vậy, NSGA-II phù hợp hơn với bài toán chính sách phức tạp, nơi các mục tiêu thường xung đột nhau. Nó giúp nhà hoạch định chính sách nhìn thấy nếu tăng trưởng thêm thì phải hy sinh bao nhiêu về công bằng hoặc môi trường.
+
+Tuy nhiên, NSGA-II không thay thế được quyết định chính trị. Việc chọn nghiệm nào phụ thuộc vào ưu tiên xã hội, tham vấn công chúng, chiến lược quốc gia và trách nhiệm giải trình của Nhà nước. Mô hình chỉ hỗ trợ ra quyết định, không tự quyết định thay con người.
+
+---""",
+
+    "bai8": r"""# Bài 8. Tối ưu động phân bổ liên thời gian 2026-2035
+
+## a) Quỹ đạo tối ưu của K, D, AI, H có front-loaded hay back-loaded không? Vì sao mô hình đề xuất như vậy?
+
+Theo output Bài 8, quỹ đạo tối ưu có tính **front-loaded** đối với D và AI. Năm 2026, tỷ trọng đầu tư vào D là **0,8825**, AI là **0,1175**, còn K và H gần như bằng 0. Từ 2028 đến 2032, tỷ trọng AI tăng rất mạnh, đạt **0,3978 năm 2028**, **0,7012 năm 2030** và **0,7996 năm 2032**. Đến năm 2035, mô hình trở lại phân bổ cân bằng hơn, mỗi nhóm khoảng **0,25**.
+
+Mô hình đề xuất như vậy vì đầu tư số hóa và AI tạo tác động lan tỏa đến năng suất trong các năm sau. Nếu đầu tư sớm, nền kinh tế có thêm thời gian tích lũy lợi ích từ công nghệ. Điều này phù hợp với định hướng của Quyết định 749/QĐ-TTg và Quyết định 411/QĐ-TTg về chuyển đổi số, kinh tế số và xã hội số. ()
+
+Tuy nhiên, cần lưu ý output có hiện tượng K, D, AI, H giảm theo thời gian do cách đặc tả mô phỏng và khấu hao. Vì vậy, trong báo cáo nên nói rõ mô hình cần bổ sung ràng buộc không để năng lực số suy giảm dưới mức tối thiểu.
+
+## b) Tỷ lệ đầu tư AI/đầu tư H theo thời gian có ổn định không? Mô hình ngụ ý gì về việc đào tạo nhân lực nên đi trước hay đồng thời với đầu tư AI?
+
+Tỷ lệ AI/H không ổn định. Trong giai đoạn 2026-2034, H gần như bằng 0, trong khi AI tăng mạnh. Đến năm 2035, H mới tăng lên khoảng **0,25**.
+
+Nếu đọc máy móc, mô hình có vẻ ưu tiên AI trước, nhân lực sau. Nhưng về chính sách, điều này cần được phản biện. AI không thể phát huy hiệu quả nếu thiếu nhân lực số, chuyên gia dữ liệu, kỹ sư AI, chuyên gia an ninh mạng và lực lượng lao động có kỹ năng sử dụng công nghệ.
+
+Do đó, kết luận hợp lý hơn là: đào tạo nhân lực phải đi **đồng thời** với đầu tư AI, thậm chí ở nhiều vùng và ngành, nhân lực số cần đi trước. Nghị quyết 57-NQ/TW cũng nhấn mạnh phát triển nguồn nhân lực chất lượng cao là điều kiện quan trọng cho khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số. ()
+
+## c) Hệ số chiết khấu ρ = 0,97 ngụ ý chính phủ quan tâm nhiều đến dài hạn. Nếu ρ = 0,90 thì kết quả thay đổi thế nào? Đây có phải lý do các chính phủ thường “dưới đầu tư” vào R&D?
+
+Với ρ = **0,97**, mô hình coi trọng lợi ích dài hạn, nên sẵn sàng đầu tư sớm vào D và AI để tạo tác động năng suất về sau. Output cho thấy chiến lược tối ưu đạt welfare **47,8763**, cao hơn đầu tư đều và front-load giả định.
+
+Nếu ρ giảm xuống **0,90**, nghĩa là chính phủ coi trọng ngắn hạn hơn, mô hình có thể ưu tiên tiêu dùng hiện tại hoặc các khoản đầu tư có hiệu quả nhanh, thay vì đầu tư dài hạn vào R&D, AI và nhân lực. Khi đó, đầu tư vào các lĩnh vực có độ trễ dài như R&D có thể giảm.
+
+Đây đúng là một lý do khiến chính phủ thường “dưới đầu tư” vào R&D: chi phí xuất hiện ngay, nhưng lợi ích thường đến muộn, khó đo lường và có thể vượt qua nhiệm kỳ ngân sách. Vì vậy, Việt Nam cần các cơ chế đầu tư dài hạn như quỹ đổi mới sáng tạo, ngân sách trung hạn cho khoa học công nghệ và hợp tác công - tư.
+
+---""",
+
+    "bai9": r"""# Bài 9. Tác động AI tới thị trường lao động Việt Nam
+
+## a) Ngành nào cần đầu tư đào tạo lại nhiều nhất theo kết quả tối ưu? Có khớp với cảm nhận thực tế ở Việt Nam không?
+
+Theo output Bài 9, mô hình phân bổ toàn bộ **30.000 tỷ** vào đào tạo lại x\_H của ngành **Giáo dục - Đào tạo**. Kết quả tạo ra **1.650.000 việc làm nâng cấp** và NetJob cũng bằng **1.650.000**.
+
+Về mặt toán học, kết quả này xảy ra vì ngành Giáo dục - Đào tạo có hệ số tạo việc làm nâng cấp từ đào tạo lại rất cao. Mô hình tuyến tính sẽ dồn ngân sách vào nơi có hiệu quả biên lớn nhất.
+
+Nhưng nếu xét thực tế Việt Nam, kết quả này chưa hoàn toàn hợp lý nếu hiểu là chỉ giáo dục cần đào tạo lại. Các ngành như công nghiệp chế biến chế tạo, bán buôn - bán lẻ, logistics và tài chính - ngân hàng cũng có rủi ro tự động hóa cao. Vì vậy, mô hình cần bổ sung ràng buộc phân bổ tối thiểu cho các ngành có nhiều lao động hoặc có nguy cơ tự động hóa cao.
+
+## b) Ngành Tài chính - Ngân hàng có nguy cơ thay thế 52% nhưng cũng có hệ số tạo việc làm mới rất cao. Mô hình khuyến nghị chiến lược gì cho ngành này?
+
+Trong dữ liệu mô hình, Tài chính - Ngân hàng có rủi ro tự động hóa **52%**, cao nhất trong các ngành. Nhưng ngành này cũng có hệ số tạo việc làm mới từ AI khá cao, **a1 = 45,8**.
+
+Điều này cho thấy tài chính - ngân hàng là ngành có hai mặt. AI có thể thay thế các công việc lặp lại như nhập liệu, xử lý hồ sơ, giao dịch đơn giản. Nhưng AI cũng tạo ra việc làm mới trong phân tích dữ liệu, quản trị rủi ro, chống gian lận, an ninh mạng, tín dụng số và tài chính cá nhân hóa.
+
+Vì vậy, chiến lược phù hợp là **không né AI**, nhưng phải đi kèm tái đào tạo bắt buộc. Nhân viên tài chính cần được đào tạo về dữ liệu, kiểm soát rủi ro mô hình, an ninh mạng, đạo đức AI và tuân thủ. Cách này phù hợp với định hướng phát triển AI trong Quyết định 127/QĐ-TTg. ()
+
+## c) Có nên đầu tư x\_AI vào ngành Nông-Lâm-Thủy sản không, vì hệ số tạo việc làm AI thấp 8,5 nhưng số lao động dịch chuyển lại rất lớn? Mô hình nói gì?
+
+Theo output, mô hình không phân bổ x\_AI vào Nông-Lâm-Thủy sản. Lý do là hệ số tạo việc làm AI của ngành này thấp, chỉ **8,5**, trong khi mục tiêu của mô hình là tối đa hóa NetJob.
+
+Tuy nhiên, về chính sách, không nên kết luận rằng nông nghiệp không cần AI. Nông-Lâm-Thủy sản có **13,20 triệu lao động**, là ngành có quy mô lao động rất lớn. AI và số hóa có thể hỗ trợ dự báo thời tiết, truy xuất nguồn gốc, tối ưu tưới tiêu, quản lý sâu bệnh, logistics lạnh và thương mại điện tử nông sản.
+
+Vì vậy, với nông nghiệp, nên đầu tư AI ở mức phù hợp, đi kèm chuyển đổi số quy mô nhỏ và đào tạo kỹ năng số cơ bản. Mục tiêu không chỉ là tạo việc làm AI mới, mà là nâng năng suất và giảm rủi ro cho nông dân.
+
+## d) “Tốc độ tự động hóa không nên vượt quá năng lực đào tạo lại” được biểu diễn bằng ràng buộc nào? Có nên bổ sung ràng buộc nào để bảo đảm an sinh xã hội không?
+
+Phát biểu này được biểu diễn bằng ràng buộc:
+
+**DisplacedJobᵢ ≤ RetrainingCapacityᵢ**
+
+Nghĩa là số lao động bị thay thế bởi tự động hóa ở mỗi ngành không được vượt quá năng lực đào tạo lại của ngành đó.
+
+Output cũng kiểm tra thêm ràng buộc “không ngành nào mất quá 5% lao động”, và bài toán vẫn khả thi. Tuy nhiên, vì nghiệm tối ưu hiện tại không đầu tư AI vào ngành nào, DisplacedJob bằng 0 nên ràng buộc an sinh chưa thực sự phát huy tác dụng.
+
+Để mô hình sát thực tế hơn, nên bổ sung ràng buộc: mỗi ngành có rủi ro tự động hóa trên 35% phải nhận một mức đào tạo tối thiểu; ngành có quy mô lao động lớn phải có ngân sách hỗ trợ tối thiểu; và DisplacedJob không chỉ giới hạn theo ngành mà còn theo nhóm lao động dễ tổn thương như lao động phổ thông, phụ nữ, lao động lớn tuổi.
+
+---""",
+
+    "bai10": r"""# Bài 10. Quy hoạch ngẫu nhiên hai giai đoạn dưới bất định
+
+## a) So với lời giải xác định, lời giải SP có xu hướng đầu tư H nhiều hơn hay ít hơn? Vì sao?
+
+Theo output Bài 10, quyết định first-stage của mô hình SP phân bổ toàn bộ **65.000** vào AI, còn I, D và H đều bằng 0. Ở second-stage, mô hình phân bổ **15.000 vào D** trong kịch bản lạc quan và cơ sở, còn trong kịch bản bi quan và khủng hoảng thì phân bổ **15.000 vào H**.
+
+Như vậy, ở giai đoạn đầu, SP đầu tư H **ít hơn**, vì mô hình dồn vào AI do hệ số lợi ích cơ bản của AI cao. Nhưng khi kịch bản xấu xảy ra, mô hình chuyển sang đầu tư H, vì nhân lực giúp nền kinh tế thích nghi tốt hơn với cú sốc.
+
+Về chính sách, kết quả này cho thấy nhân lực số đóng vai trò như một loại “hàng hóa bảo hiểm”. Tuy nhiên, không nên đợi đến khi khủng hoảng mới đầu tư vào H, vì đào tạo nhân lực cần thời gian. Do đó, trong thực tế, Việt Nam nên đầu tư nhân lực số ngay từ giai đoạn đầu.
+
+## b) VSS dương nói lên điều gì về giá trị của tư duy xác suất trong hoạch định chính sách Việt Nam?
+
+Về lý thuyết, VSS dương cho thấy lời giải stochastic tốt hơn lời giải dựa trên kịch bản kỳ vọng. Nói cách khác, nếu VSS dương, việc tính đến bất định giúp chính sách tốt hơn.
+
+Tuy nhiên, output của bạn cho thấy **SP\_value = 98.575**, **EEV\_value = 98.575**, **Wait-and-See\_value = 98.575**, nên **VSS = 0** và **EVPI = 0**. Điều này không có nghĩa là tư duy xác suất không quan trọng. Nó chỉ cho thấy trong phiên bản mô hình hiện tại, các kịch bản chưa đủ khác biệt hoặc ràng buộc chưa đủ mạnh để tạo ra khác biệt giữa các lời giải.
+
+Khi viết báo cáo, nên nói rằng mô hình đã cài đặt được cấu trúc stochastic LP, nhưng cần làm bất định mạnh hơn để VSS và EVPI thể hiện rõ hơn. Ví dụ, có thể thêm chi phí điều chỉnh, thêm rủi ro AI thất bại trong khủng hoảng, hoặc bắt buộc đầu tư H tối thiểu ở giai đoạn đầu.
+
+## c) COVID-19 và bão Yagi là các cú sốc thực tế. Việt Nam có đang dưới đầu tư vào nhân lực số như một hàng hóa bảo hiểm không?
+
+Có thể nói là có rủi ro dưới đầu tư. Output cho thấy trong kịch bản xấu, mô hình chuyển second-stage sang H = **15.000**, tức nhân lực trở thành công cụ thích nghi khi cú sốc xảy ra.
+
+Thực tế COVID-19 và bão Yagi cho thấy nền kinh tế cần khả năng thích nghi nhanh. Lao động có kỹ năng số có thể chuyển sang làm việc từ xa, thương mại điện tử, dịch vụ số, logistics số và các mô hình sản xuất linh hoạt. Năm 2024, dù GDP Việt Nam tăng **7,09%**, nền kinh tế vẫn chịu tác động của thiên tai, biến động bên ngoài và yêu cầu phục hồi sản xuất. ()
+
+Vì vậy, nhân lực số nên được xem là khoản đầu tư bảo hiểm dài hạn. Việt Nam không nên chỉ đầu tư vào hạ tầng hoặc AI, mà cần đầu tư đều vào kỹ năng số cơ bản, đào tạo lại lao động và năng lực học suốt đời.
+
+---""",
+
+    "bai11": r"""# Bài 11. Q-learning cho chính sách kinh tế thích nghi
+
+## a) Khi nền kinh tế ở trạng thái GDP growth thấp, D thấp, U cao, chính sách π\*(s) chọn hành động gì? Có khớp với “quick win” không?
+
+Theo output Bài 11, ở trạng thái **LowGDP\_LowD\_LowAI\_HighU = [0,0,0,2]**, mô hình chọn hành động **Truyền thống**, với Q-value bằng **0**.
+
+Kết quả này chưa khớp với logic “quick win”. Khi GDP thấp, số hóa thấp và thất nghiệp cao, chính sách quick win thường nên là số hóa dịch vụ công, hỗ trợ doanh nghiệp nhỏ chuyển đổi số, đào tạo kỹ năng số ngắn hạn và hỗ trợ việc làm. Những chính sách này có thể tạo hiệu quả nhanh hơn so với quay về đầu tư truyền thống.
+
+Tuy nhiên, vì Q-value = 0, có thể hiểu rằng agent chưa học đủ ở trạng thái này. Do đó, không nên xem đây là khuyến nghị chính sách mạnh, mà nên xem là dấu hiệu mô hình Q-learning cần huấn luyện thêm, cải thiện hàm thưởng và tăng số lần agent trải nghiệm các trạng thái xấu.
+
+## b) Khi GDP growth cao, AI cao, U thấp, chính sách chọn gì? Phù hợp với “consolidation” không?
+
+Theo output, ở trạng thái **HighGDP\_HighD\_HighAI\_LowU = [2,2,2,0]**, mô hình cũng chọn **Truyền thống**, với Q-value = **0**.
+
+Nếu diễn giải chính sách, trong trạng thái GDP cao, AI cao và thất nghiệp thấp, lựa chọn “Truyền thống” có thể được hiểu là giai đoạn củng cố: giảm tốc độ mở rộng AI quá nhanh, tập trung ổn định hệ thống, kiểm soát rủi ro, đầu tư hạ tầng nền và bảo đảm an toàn dữ liệu.
+
+Tuy nhiên, vì Q-value vẫn bằng 0, kết quả này chưa đủ mạnh để kết luận. Output đáng tin cậy hơn là trạng thái **VN\_2026 = [1,1,0,1]**, nơi mô hình chọn **Số hóa nhanh** với Q-value khoảng **15,2896**. Điều này hợp lý với Việt Nam hiện nay: khi năng lực AI còn đang phát triển, ưu tiên số hóa nhanh là bước đi phù hợp trước khi mở rộng AI mạnh hơn.
+
+## c) AI không thay thế quyết định chính trị - xã hội. Tích hợp π\* vào quy trình hoạch định chính sách Việt Nam thế nào?
+
+Q-learning nên được dùng như một **hệ thống khuyến nghị chính sách**, không phải hệ thống tự động ra quyết định. Mô hình có thể gợi ý hành động tốt nhất trong từng trạng thái kinh tế, nhưng quyết định cuối cùng vẫn phải do con người và cơ quan có thẩm quyền chịu trách nhiệm.
+
+Quy trình phù hợp là: mô hình đề xuất chính sách; chuyên gia kiểm định dữ liệu và giả định; hội đồng chính sách đánh giá tác động kinh tế - xã hội - pháp lý; sau đó cơ quan quản lý quyết định và công khai giải trình. Cách này bảo đảm AI hỗ trợ minh bạch hóa đánh đổi, nhưng không thay thế trách nhiệm chính trị.
+
+Output cũng cho thấy Q-learning có avg\_total\_reward **8,2600**, cao hơn các chính sách cố định như Always balanced và Always AI-led. Điều đó chứng minh chính sách thích nghi có tiềm năng tốt hơn chính sách cứng nhắc, nhưng vẫn phải nằm trong khuôn khổ quản trị công.
+
+---""",
+
+    "bai12": r"""# Bài 12. Đồ án tích hợp AIDEOM-VN
+
+Trong đề, Bài 12 không có mục “Câu hỏi thảo luận chính sách” riêng như Bài 1-11. Tuy nhiên, dựa trên yêu cầu đồ án và output của bạn, có thể viết phần thảo luận tổng hợp như sau. Đề yêu cầu Bài 12 tích hợp các kỹ thuật từ Bài 1-11 thành hệ thống AIDEOM-VN gồm 6 module và dashboard có các tab tối thiểu như Tổng quan, Phân bổ, Kịch bản so sánh và Cảnh báo rủi ro.
+
+## a) Kịch bản nào cho kết quả GDP\_index năm 2030 cao nhất?
+
+Theo output Bài 12, kịch bản có GDP\_index năm 2030 cao nhất là **S3\_AI\_dan\_dat**, đạt **380,7220**. Xếp thứ hai là **S2\_So\_hoa\_nhanh**, đạt **380,3790**. Xếp thứ ba là **S5\_Toi\_uu\_can\_bang**, đạt **379,4473**. Kịch bản thấp nhất là **S1\_Truyen\_thong**, đạt **377,7788**.
+
+Điều này cho thấy trong mô hình, chiến lược AI dẫn dắt có thể tạo tăng trưởng cao nhất. Tuy nhiên, khoảng cách giữa S3 và S2 khá nhỏ, chỉ khoảng **0,343 điểm**. Vì vậy, AI dẫn dắt không vượt trội tuyệt đối so với số hóa nhanh.
+
+## b) Kịch bản nào phù hợp nhất với thực tiễn Việt Nam hiện nay?
+
+Nếu chỉ xét GDP\_index, S3\_AI\_dan\_dat là cao nhất. Nhưng nếu xét tính khả thi, Việt Nam có thể phù hợp hơn với **S5\_Toi\_uu\_can\_bang** hoặc **S2\_So\_hoa\_nhanh**.
+
+S2 giúp chỉ số D đạt **21,5976**, cao nhất trong các kịch bản, phù hợp với định hướng chuyển đổi số và phát triển kinh tế số. S5 có kết quả cân bằng hơn giữa GDP, D, AI và H. Điều này hợp với thực tế Việt Nam vì AI cần hạ tầng số, dữ liệu và nhân lực đi kèm. Quyết định 749/QĐ-TTg và Quyết định 411/QĐ-TTg đều nhấn mạnh chuyển đổi số là quá trình đồng bộ, không chỉ đầu tư vào một công nghệ riêng lẻ. ()
+
+Vì vậy, nếu phải chọn một kịch bản khuyến nghị chính sách, nên chọn **S5\_Toi\_uu\_can\_bang**. Còn S3 có thể trình bày như kịch bản tăng trưởng cao nhưng rủi ro hấp thụ lớn hơn.
+
+## c) Cảnh báo rủi ro trong output nói lên điều gì?
+
+Output Bài 12 cho thấy cả 5 kịch bản đều có **cyber\_risk = Trung bình**, **digital\_gap\_risk = Cao**, và **human\_capital\_status = Thiếu**. Đây là kết quả rất quan trọng.
+
+Nó cho thấy dù chọn kịch bản nào, Việt Nam vẫn đối mặt với ba vấn đề: rủi ro an ninh mạng, khoảng cách số giữa vùng mạnh và vùng yếu, và thiếu hụt nhân lực số. Điều này phù hợp với Nghị quyết 57-NQ/TW, vì Nghị quyết nhấn mạnh chuyển đổi số phải gắn với phát triển nguồn nhân lực, bảo đảm an toàn dữ liệu và nâng cao năng lực quốc gia. ()
+
+Vì vậy, dashboard không nên chỉ hiển thị kịch bản có GDP cao nhất. Nó cần cảnh báo rằng nếu không xử lý nhân lực, khoảng cách số và an ninh mạng, tăng trưởng AI có thể thiếu bền vững.
+
+## d) Hướng mở rộng nghiên cứu sau đồ án nên là gì?
+
+Có bốn hướng mở rộng phù hợp. Thứ nhất, chọn một use case cụ thể như Đồng bằng sông Cửu Long hoặc ngành chế biến chế tạo để viết báo cáo nghiên cứu sâu hơn. Thứ hai, mở rộng mô hình sang CGE hoặc DSGE-AI để phản ánh cân bằng tổng thể. Thứ ba, tích hợp dữ liệu thời gian thực từ dữ liệu mở, hải quan, thị trường lao động và đầu tư. Thứ tư, mở rộng Q-learning thành Multi-Agent RL, trong đó mỗi agent đại diện cho một bộ, ngành hoặc vùng.
+
+Trong thực tế, hướng mở rộng quan trọng nhất là tích hợp dữ liệu thời gian thực và cho phép người dùng thay đổi trọng số chính sách trên dashboard. Như vậy, AIDEOM-VN sẽ không chỉ là bài tập mô phỏng, mà trở thành công cụ hỗ trợ ra quyết định có thể cập nhật theo bối cảnh mới."""
+
 }
 
 # =========================

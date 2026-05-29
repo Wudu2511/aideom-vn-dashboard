@@ -9,10 +9,11 @@ st.set_page_config(
     layout="wide"
 )
 
-DATA_DIR = Path("data")
+BASE_DIR = Path(__file__).parent
+DATA_DIR = BASE_DIR / "data"
+
 MAIN_FILE = DATA_DIR / "ket_qua_bai_1_den_6.xlsx"
 SUPP_FILE = DATA_DIR / "ket_qua_bo_sung_bai_2_5.xlsx"
-
 
 @st.cache_data
 def load_excel(file_path):

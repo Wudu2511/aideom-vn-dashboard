@@ -568,10 +568,12 @@ elif page == "Bài 7 - Pareto NSGA-II":
     compromise = adv["Bai7_Compromise"]
     allocation = adv["Bai7_Allocation"]
 
-    tab1, tab2, tab3 = st.tabs([
+    tab1, tab2, tab3, tab4 = st.tabs([
         "Biên Pareto",
         "Nghiệm thỏa hiệp",
-        "Phân bổ ngân sách"
+        "Phân bổ ngân sách",
+        "Thảo luận chính sách"
+        
     ])
 
     with tab1:
@@ -620,7 +622,37 @@ elif page == "Bài 7 - Pareto NSGA-II":
             title="Cơ cấu phân bổ ngân sách theo vùng"
         )
         st.plotly_chart(fig2, use_container_width=True)
+ with tab4:
+        st.subheader("Thảo luận chính sách")
+        st.markdown(""" 
+### a) Khi quan sát đường biên Pareto, đánh đổi giữa tăng trưởng và bao trùm có rõ ràng không?
 
+Có. Output Bài 7 tạo ra **120 nghiệm Pareto**, cho thấy bài toán không có một nghiệm tối ưu duy nhất mà có một tập phương án đánh đổi giữa tăng trưởng, bao trùm, môi trường và rủi ro dữ liệu. Nghiệm có **GDP_gain cao nhất** đạt khoảng **60.466,15**, nhưng đi kèm **Inequality_MAD = 969,17** và **Emission = 1.867,75**. Trong khi đó, nghiệm thỏa hiệp TOPSIS có **GDP_gain = 58.815,38**, thấp hơn khoảng **2,73%**, nhưng **Inequality_MAD giảm còn 509,46** và **Emission giảm còn 89,49**.
+
+Điều này cho thấy đánh đổi giữa tăng trưởng và bao trùm là rất rõ: nếu chỉ tối đa hóa GDP gain, mô hình chấp nhận phân bổ không đều hơn giữa các vùng và phát thải cao hơn; nếu chọn nghiệm thỏa hiệp, Việt Nam hy sinh một phần nhỏ tăng trưởng để cải thiện đáng kể công bằng vùng và môi trường. Cách tiếp cận này phù hợp với yêu cầu của đề bài: Bài 7 dùng NSGA-II để tạo tập nghiệm Pareto, sau đó dùng TOPSIS để chọn nghiệm thỏa hiệp theo trọng số chính sách **0,40 cho tăng trưởng, 0,25 cho bao trùm, 0,20 cho môi trường và 0,15 cho an ninh**.
+
+Về thực tiễn, Nghị quyết 57-NQ/TW xác định khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số là đột phá phát triển quốc gia, nhưng đồng thời cũng chỉ ra hạn chế về hạ tầng số, nhân lực chất lượng cao và an toàn dữ liệu. Vì vậy, nghiệm thỏa hiệp hợp lý hơn nghiệm chỉ tối đa hóa tăng trưởng, vì chính sách chuyển đổi số không thể bỏ qua công bằng vùng và an toàn hệ thống.
+
+### b) Nghiệm thỏa hiệp TOPSIS có hợp lý không?
+
+Nghiệm thỏa hiệp có **TOPSIS_compromise_score = 0,840491**, cao nhất trong tập nghiệm Pareto. Phương án này đạt **GDP_gain = 58.815,38**, **Inequality_MAD = 509,46**, **Emission = 89,49** và **CyberRisk_Net = -12.149,30**. So với nghiệm tăng trưởng cao nhất, GDP chỉ giảm khoảng **2,73%**, nhưng bất bình đẳng vùng giảm khoảng **47,43%**, còn phát thải giảm rất mạnh.
+
+Cấu trúc phân bổ của nghiệm thỏa hiệp cũng hợp lý. Mô hình không dồn vốn quá mức vào AI, mà ưu tiên nhiều cho **H - nhân lực số** và **D - chuyển đổi số doanh nghiệp**. Ví dụ: Trung du miền núi phía Bắc nhận khoảng **8.009,75** cho H; Tây Nguyên nhận khoảng **9.602,87** cho H; Đông Nam Bộ nhận khoảng **4.149,79** cho D. Điều này phù hợp với logic phát triển bao trùm: vùng yếu không nên nhảy thẳng vào AI khi chưa có hạ tầng dữ liệu, kỹ năng số và năng lực hấp thụ.
+
+Về chính sách, đây là phương án có tính cân bằng tốt hơn, vì Quyết định 411/QĐ-TTg không chỉ đặt vấn đề kinh tế số mà còn nhấn mạnh phát triển xã hội số, tức là chuyển đổi số phải bao phủ người dân, doanh nghiệp và địa phương chứ không chỉ tập trung vào các vùng mạnh.
+
+### c) Nghiệm tăng trưởng cao nhất hy sinh bao nhiêu về bao trùm và môi trường so với nghiệm thỏa hiệp?
+
+Nghiệm tăng trưởng cao nhất đạt **GDP_gain = 60.466,15**, cao hơn nghiệm thỏa hiệp **1.650,77** đơn vị. Tuy nhiên, chi phí đi kèm rất lớn. **Inequality_MAD tăng từ 509,46 lên 969,17**, tức cao hơn khoảng **90,23%** so với nghiệm thỏa hiệp. **Emission tăng từ 89,49 lên 1.867,75**, tức cao hơn khoảng **20,87 lần**.
+
+Như vậy, phần tăng thêm về GDP gain là tương đối nhỏ so với phần hy sinh về môi trường và công bằng vùng. Trong bối cảnh Việt Nam đã cam kết chuyển đổi xanh và phát triển bền vững, chính sách chỉ tối đa hóa tăng trưởng ngắn hạn có thể tạo chi phí dài hạn về môi trường, xã hội và năng lực hấp thụ số giữa các vùng.
+
+### d) NSGA-II có thay thế được quyết định chính sách không?
+
+Không. NSGA-II chỉ là công cụ tạo ra tập phương án Pareto, giúp nhà hoạch định chính sách nhìn thấy các đánh đổi. Việc chọn nghiệm nào vẫn là quyết định chính trị - xã hội, phụ thuộc vào ưu tiên của Nhà nước, doanh nghiệp, địa phương và người dân.
+
+Đặc biệt, trọng số TOPSIS **0,40 cho tăng trưởng, 0,25 cho bao trùm, 0,20 cho môi trường và 0,15 cho an ninh** không phải là “chân lý kỹ thuật”, mà là lựa chọn giá trị. Nếu Chính phủ ưu tiên chuyển đổi xanh hơn, trọng số môi trường cần tăng; nếu ưu tiên vùng yếu, trọng số bao trùm cần tăng. Vì vậy, mô hình nên được dùng như công cụ hỗ trợ ra quyết định, không phải công cụ tự động quyết định chính sách.
+""")
 
 elif page == "Bài 8 - Tối ưu động":
     section_title(
@@ -632,10 +664,11 @@ elif page == "Bài 8 - Tối ưu động":
     shock = adv["Bai8_Shock_2028"]
     compare = adv["Bai8_Strategy_Compare"]
 
-    tab1, tab2, tab3 = st.tabs([
+    tab1, tab2, tab3, tab4 = st.tabs([
         "Quỹ đạo tối ưu",
         "Cú sốc 2028",
-        "So sánh chiến lược"
+        "So sánh chiến lược",
+        "Thảo luận chính sách"
     ])
 
     with tab1:
@@ -719,7 +752,39 @@ elif page == "Bài 8 - Tối ưu động":
         )
         fig2.update_traces(texttemplate="%{text:.2f}", textposition="outside")
         st.plotly_chart(fig2, use_container_width=True)
+with tab3:
+ st.subheader("Thảo luận chính sách")
+        st.markdown("""
+        ### a) Quỹ đạo tối ưu của K, D, AI, H có front-loaded hay back-loaded không?
 
+Output Bài 8 cho thấy quỹ đạo tối ưu có tính **front-loaded đối với D và AI**. Năm 2026, tỷ trọng đầu tư vào D đạt **0,8825**, AI đạt **0,1175**, trong khi K và H gần như bằng 0. Sang các năm 2028-2032, tỷ trọng đầu tư vào AI tăng rất mạnh: **0,3978 năm 2028**, **0,5717 năm 2029**, **0,7012 năm 2030**, **0,7736 năm 2031** và **0,7996 năm 2032**. Đến năm 2035, mô hình trở về cơ cấu cân bằng hơn, mỗi nhóm K, D, AI, H khoảng **0,25**.
+
+Điều này cho thấy mô hình ưu tiên số hóa và AI ở giai đoạn đầu để tạo tác động năng suất về sau. Kết quả này phù hợp với định hướng của Quyết định 749/QĐ-TTg về Chương trình Chuyển đổi số quốc gia đến năm 2025, định hướng đến năm 2030, và Quyết định 411/QĐ-TTg về phát triển kinh tế số, xã hội số.
+
+Tuy nhiên, cần diễn giải thận trọng. Trong output, các biến trạng thái như K, D, AI, H có xu hướng giảm theo thời gian, ví dụ K giảm từ **27.500 năm 2026** xuống **17.332,09 năm 2035**, D giảm từ **20,3** xuống **8,41**, AI giảm từ **86** xuống **34,50**. Đây là hệ quả của cách đặc tả mô phỏng và khấu hao trong code, không nên hiểu là khuyến nghị thực tế để năng lực số suy giảm. Khi đưa vào báo cáo, cần ghi rõ mô hình nên bổ sung ràng buộc “không suy giảm năng lực tối thiểu” cho D, AI và H.
+
+### b) Tỷ lệ đầu tư AI/H theo thời gian có ổn định không? Mô hình ngụ ý đào tạo nhân lực nên đi trước hay đồng thời với AI?
+
+Tỷ lệ đầu tư AI/H trong output **không ổn định**. Giai đoạn 2026-2034, tỷ trọng H gần như bằng 0, trong khi AI tăng rất mạnh. Đặc biệt, AI chiếm **0,7012 năm 2030**, **0,7736 năm 2031** và **0,7996 năm 2032**. Đến năm 2035, H mới tăng lên khoảng **0,25**.
+
+Nếu chỉ đọc máy móc, mô hình có vẻ khuyến nghị “AI đi trước, nhân lực đi sau”. Nhưng về chính sách, kết quả này cần phản biện. AI không thể phát huy hiệu quả nếu thiếu nhân lực số, chuyên gia dữ liệu, kỹ sư AI, chuyên gia an ninh mạng và lực lượng lao động có khả năng sử dụng công nghệ. Nghị quyết 57-NQ/TW cũng chỉ rõ nguồn nhân lực chất lượng cao còn thiếu là một trong các điểm nghẽn của phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số.
+
+Vì vậy, hàm ý chính sách phù hợp hơn là **đầu tư AI phải đi đồng thời với đào tạo nhân lực số**, thậm chí ở các ngành/vùng có năng lực hấp thụ thấp thì nhân lực số nên đi trước. Nếu không, đầu tư AI có thể tạo ra “năng lực công nghệ trên giấy” nhưng khó chuyển hóa thành năng suất thực tế.
+
+### c) Hệ số chiết khấu ρ = 0,97 ngụ ý chính phủ quan tâm dài hạn. Nếu ρ = 0,90 thì kết quả có thể thay đổi thế nào?
+
+Với **ρ = 0,97**, mô hình coi trọng phúc lợi dài hạn, nên có xu hướng chấp nhận đầu tư sớm vào D và AI để tạo lợi ích về sau. Output cho thấy welfare của chiến lược tối ưu đạt **47,8763**, cao hơn chiến lược đầu tư đều (**47,7707**) và chiến lược front-load giả định (**47,7513**).
+
+Nếu giảm ρ xuống **0,90**, tức Chính phủ quan tâm ngắn hạn hơn, mô hình thường sẽ ưu tiên các khoản đầu tư có hiệu quả tức thời hoặc giữ tiêu dùng hiện tại, thay vì đầu tư dài hạn vào AI, R&D và nhân lực số. Đây là một lý do các chính phủ có thể “dưới đầu tư” vào R&D và nhân lực: chi phí phát sinh ngay, nhưng lợi ích xuất hiện chậm, vượt ra ngoài nhiệm kỳ hoặc chu kỳ ngân sách.
+
+Hàm ý chính sách là Việt Nam cần cơ chế bảo vệ các khoản đầu tư dài hạn, như ngân sách trung hạn cho khoa học công nghệ, quỹ đổi mới sáng tạo, đặt hàng nghiên cứu, hợp tác công tư và các chương trình đào tạo lại lao động dài hạn.
+
+### d) Cú sốc năm 2028 ảnh hưởng thế nào đến kết quả?
+
+Khi thêm cú sốc năm 2028, GDP năm 2028 giảm từ **355,60** xuống **327,16**. Welfare giảm từ **47,8763** xuống **47,7950**. Tuy nhiên đến năm 2035, GDP trong kịch bản shock đạt **281,59**, gần bằng kịch bản không shock là **281,72**.
+
+Điều này cho thấy mô hình có khả năng phục hồi sau cú sốc, nhưng mức chênh lệch nhỏ cũng cho thấy cú sốc trong mô hình còn khá nhẹ và đơn giản. Trong thực tế, các cú sốc như COVID-19, bão Yagi, biến động xuất khẩu, suy giảm FDI hoặc đứt gãy chuỗi cung ứng có thể tạo tác động mạnh hơn. Năm 2024, GDP Việt Nam tăng **7,09%**, nhưng nền kinh tế vẫn chịu ảnh hưởng của thiên tai và biến động bên ngoài; điều này cho thấy mô hình cần bổ sung thêm các cú sốc thực tế như xuất khẩu, FDI, lạm phát, thiên tai và năng lượng.
+""")
 
 elif page == "Bài 9 - Lao động và AI":
     section_title(
@@ -732,11 +797,12 @@ elif page == "Bài 9 - Lao động và AI":
     feasibility = adv["Bai9_Feasibility"]
     sankey = adv["Bai9_Sankey"]
 
-    tab1, tab2, tab3, tab4 = st.tabs([
+    tab1, tab2, tab3, tab4, tab5 = st.tabs([
         "Kết quả lao động",
         "Ngưỡng đào tạo",
         "Tính khả thi",
-        "Sankey lao động"
+        "Sankey lao động",
+        "Thảo luận chính sách"
     ])
 
     with tab1:
@@ -793,7 +859,42 @@ elif page == "Bài 9 - Lao động và AI":
 
         fig.update_layout(title_text="Sankey: luồng dịch chuyển lao động", font_size=12)
         st.plotly_chart(fig, use_container_width=True)
+with tab5:
+ st.subheader("Thảo luận chính sách")
+        st.markdown("""
+        ### a) Ngành nào cần đầu tư đào tạo lại nhiều nhất theo kết quả tối ưu? Có khớp với cảm nhận thực tế ở Việt Nam không?
 
+Theo output Bài 9, mô hình phân bổ toàn bộ **30.000 tỷ** vào **x_H của ngành Giáo dục-Đào tạo**, tạo **UpgradeJob = 1.650.000** và **NetJob = 1.650.000**. Các ngành còn lại có x_AI = 0, x_H = 0 và NetJob = 0.
+
+Về mặt toán học, kết quả này xảy ra vì ngành Giáo dục-Đào tạo có hệ số tạo việc làm nâng cấp từ đào tạo lại rất cao, nên mô hình tuyến tính dồn ngân sách vào ngành có hiệu quả biên lớn nhất. Tuy nhiên, kết quả này chưa hoàn toàn khớp với thực tế Việt Nam nếu hiểu là chỉ ngành giáo dục cần đào tạo lại. Trên thực tế, các ngành như **Công nghiệp chế biến chế tạo, Bán buôn-bán lẻ, Tài chính-Ngân hàng và Logistics-Vận tải** cũng chịu rủi ro tự động hóa cao và cần đào tạo lại lớn.
+
+Vì vậy, cần phản biện mô hình: output hiện tại đúng về kỹ thuật nhưng còn thiếu ràng buộc chính sách. Để sát thực tế hơn, nên thêm ràng buộc phân bổ tối thiểu cho các ngành có lao động lớn hoặc rủi ro tự động hóa cao, chẳng hạn CN chế biến chế tạo, bán buôn-bán lẻ và logistics. Quyết định 1446/QĐ-TTg về đào tạo, đào tạo lại, nâng cao kỹ năng nguồn nhân lực đáp ứng yêu cầu Cách mạng công nghiệp lần thứ tư cũng cho thấy đào tạo lại là vấn đề liên ngành, không chỉ riêng giáo dục.
+
+### b) Ngành Tài chính-Ngân hàng có nguy cơ thay thế 52% nhưng cũng có hệ số tạo việc làm mới rất cao. Mô hình khuyến nghị chiến lược gì?
+
+Trong dữ liệu mô hình, ngành Tài chính-Ngân hàng có **risk = 52%**, cao nhất trong 8 ngành, nhưng hệ số tạo việc làm mới từ AI cũng cao, **a1 = 45,8**. Điều này cho thấy ngành tài chính là ngành có hai mặt: vừa dễ bị tự động hóa ở các tác vụ lặp lại, vừa có khả năng tạo việc làm mới trong dữ liệu, quản trị rủi ro, phân tích tín dụng, chống gian lận, bảo mật và tài chính số.
+
+Output hiện tại không phân bổ vốn cho tài chính-ngân hàng vì nghiệm tối ưu dồn toàn bộ vào Giáo dục-Đào tạo. Tuy nhiên, về chính sách, không nên kết luận rằng tài chính-ngân hàng không cần đầu tư. Chiến lược phù hợp là **AI đi kèm tái đào tạo bắt buộc**: cho phép ứng dụng AI trong phân tích dữ liệu và dịch vụ tài chính, nhưng phải đào tạo lại nhân viên sang các kỹ năng như dữ liệu, kiểm soát rủi ro mô hình, an ninh mạng, tuân thủ và đạo đức AI.
+
+Điều này phù hợp với Quyết định 127/QĐ-TTg về Chiến lược quốc gia về nghiên cứu, phát triển và ứng dụng AI đến năm 2030, vì AI được định hướng là công nghệ quan trọng, nhưng cần đi cùng nhân lực và hệ sinh thái ứng dụng.
+
+### c) Có nên đầu tư x_AI vào ngành Nông-Lâm-Thủy sản không?
+
+Theo output, ngành Nông-Lâm-Thủy sản không được phân bổ x_AI hay x_H trong nghiệm tối ưu. Nguyên nhân là hệ số tạo việc làm mới từ AI của ngành này thấp, **a1 = 8,5**, trong khi mục tiêu của mô hình là tối đa hóa tổng NetJob. Vì vậy, mô hình không chọn đầu tư AI vào nông nghiệp nếu chỉ xét số việc làm ròng ngắn hạn.
+
+Tuy nhiên, về chính sách, không nên hiểu là nông nghiệp không cần AI. Nông-Lâm-Thủy sản có **13,20 triệu lao động**, là ngành có quy mô lao động lớn nhất trong bảng. Dù hệ số tạo việc làm AI thấp, AI và số hóa vẫn có thể tạo lợi ích về năng suất, truy xuất nguồn gốc, dự báo thời tiết, tưới tiêu thông minh, logistics lạnh, thương mại điện tử nông sản và giảm rủi ro thiên tai. Do đó, với ngành này, chính sách nên ưu tiên chuyển đổi số phù hợp quy mô nhỏ, đào tạo kỹ năng số cơ bản và các ứng dụng AI chi phí thấp, thay vì đầu tư AI quy mô lớn như trong tài chính hay CNTT.
+
+### d) “Tốc độ tự động hóa không nên vượt quá năng lực đào tạo lại” được biểu diễn bằng ràng buộc nào? Có nên bổ sung ràng buộc gì?
+
+Trong mô hình, phát biểu này được biểu diễn bằng ràng buộc:
+
+**DisplacedJobᵢ ≤ RetrainingCapacityᵢ**
+
+Nghĩa là số lao động bị dịch chuyển do tự động hóa ở ngành i không được vượt quá năng lực đào tạo lại của ngành đó. Output cũng kiểm tra thêm ràng buộc “không ngành nào mất quá 5% lao động”, và kết quả cho thấy bài toán vẫn khả thi với **objective_total_netjob = 1.650.000** trong cả hai trường hợp Base và With_DisplacedJob_5pct_Labor_Cap.
+
+Tuy nhiên, vì nghiệm tối ưu hiện tại không đầu tư AI vào ngành nào nên DisplacedJob bằng 0, làm cho ràng buộc an sinh chưa thực sự phát huy tác dụng. Để mô hình có ý nghĩa chính sách mạnh hơn, nên bổ sung: ràng buộc đầu tư tối thiểu vào ngành rủi ro cao; ràng buộc tỷ lệ ngân sách đào tạo lại tối thiểu cho CN chế biến chế tạo, bán buôn-bán lẻ, logistics; và ràng buộc không ngành nào nhận dưới một ngưỡng hỗ trợ nếu có rủi ro tự động hóa trên 35%.
+""")
+        
 
 elif page == "Bài 10 - Stochastic LP":
     section_title(
@@ -806,11 +907,12 @@ elif page == "Bài 10 - Stochastic LP":
     waitsee = adv["Bai10_Wait_See"]
     summary = adv["Bai10_VSS_EVPI"]
 
-    tab1, tab2, tab3, tab4 = st.tabs([
+    tab1, tab2, tab3, tab4, tab5 = st.tabs([
         "First-stage",
         "Second-stage",
         "Wait-and-see",
-        "VSS và EVPI"
+        "VSS và EVPI",
+        "Thảo luận chính sách"
     ])
 
     with tab1:
@@ -874,7 +976,33 @@ elif page == "Bài 10 - Stochastic LP":
         )
         fig.update_traces(texttemplate="%{text:.2f}", textposition="outside")
         st.plotly_chart(fig, use_container_width=True)
+with tab5:
+ st.subheader("Thảo luận chính sách")
+        st.markdown("""
+        ### a) So với lời giải xác định, lời giải SP có xu hướng đầu tư H nhiều hơn hay ít hơn? Vì sao?
 
+Output Bài 10 cho thấy quyết định first-stage của mô hình SP phân bổ toàn bộ **65.000** vào **AI**, trong khi **I = 0, D = 0, H = 0**. Ở second-stage, mô hình phân bổ **15.000 vào D** trong kịch bản lạc quan và cơ sở; phân bổ **15.000 vào H** trong kịch bản bi quan và khủng hoảng.
+
+Như vậy, ở giai đoạn đầu, lời giải SP không đầu tư H nhiều hơn, mà dồn vào AI do hệ số lợi ích cơ bản của AI cao nhất. Tuy nhiên, khi xảy ra kịch bản xấu, mô hình chuyển sang H, vì trong bảng hệ số của đề bài, H có hệ số cao hơn trong kịch bản khủng hoảng, phản ánh vai trò của lao động qua đào tạo trong khả năng chuyển đổi việc làm và hấp thụ cú sốc.
+
+Về chính sách, kết quả này có thể hiểu là: AI hấp dẫn trong điều kiện bình thường, nhưng nhân lực số đóng vai trò hàng hóa bảo hiểm khi bất định xảy ra. Tuy nhiên, việc không đầu tư H ở first-stage là điểm cần phản biện, vì nếu khủng hoảng xảy ra mà mới bắt đầu đầu tư H thì có thể quá muộn. Chính sách thực tế nên đầu tư nhân lực số từ trước, không chỉ phản ứng sau cú sốc.
+
+### b) VSS dương nói lên điều gì? Nhưng output hiện tại VSS = 0 thì nên diễn giải thế nào?
+
+Theo lý thuyết, **VSS dương** cho thấy lời giải stochastic có giá trị hơn lời giải dựa trên kỳ vọng, tức là tư duy xác suất giúp chính sách tốt hơn trong môi trường bất định. Đề bài yêu cầu tính VSS và EVPI để đánh giá giá trị của mô hình stochastic và thông tin hoàn hảo.
+
+Tuy nhiên, output của bạn cho thấy **SP_value = 98.575, EEV_value = 98.575, Wait-and-See_value = 98.575**, nên **VSS = 0** và **EVPI = 0**. Điều này không có nghĩa là tư duy xác suất vô ích trong thực tế; nó chỉ cho thấy trong phiên bản mô hình hiện tại, các kịch bản chưa đủ khác biệt hoặc ràng buộc chưa đủ mạnh để tạo ra khác biệt giữa lời giải stochastic và lời giải kỳ vọng.
+
+Vì vậy, khi viết báo cáo, nên diễn giải thận trọng: mô hình đã cài đặt được cấu trúc stochastic LP, nhưng cần làm bất định mạnh hơn để VSS và EVPI phản ánh rõ giá trị của thông tin. Có thể tăng khác biệt giữa các hệ số kịch bản, thêm penalty khi điều chỉnh quá mức, thêm ràng buộc dự phòng nhân lực, hoặc thêm rủi ro làm giảm hiệu quả AI trong kịch bản khủng hoảng.
+
+### c) COVID-19 và bão Yagi cho thấy Việt Nam có đang “dưới đầu tư” vào nhân lực số như một hàng hóa bảo hiểm không?
+
+Có thể nói là có rủi ro dưới đầu tư. Output Bài 10 cho thấy khi kịch bản bi quan hoặc khủng hoảng xảy ra, mô hình chuyển second-stage sang **H = 15.000**, tức nhân lực trở thành lựa chọn thích nghi trong cú sốc. Điều này phù hợp với thực tế: khi xảy ra COVID-19, thiên tai hoặc đứt gãy chuỗi cung ứng, lao động có kỹ năng số và khả năng chuyển đổi việc làm sẽ giúp nền kinh tế linh hoạt hơn.
+
+Bão Yagi năm 2024 là ví dụ cho thấy cú sốc thiên tai có thể ảnh hưởng đến sản xuất, logistics, nông nghiệp và đời sống doanh nghiệp. Cục Thống kê công bố GDP năm 2024 vẫn tăng **7,09%**, nhưng nền kinh tế chịu tác động bởi bối cảnh bên ngoài và thiên tai, cho thấy khả năng chống chịu là vấn đề chính sách quan trọng.
+
+Vì vậy, nhân lực số nên được xem như một khoản đầu tư bảo hiểm xã hội - kinh tế, không chỉ là chi phí đào tạo. Việt Nam cần đầu tư trước vào đào tạo lại, kỹ năng số cơ bản, kỹ năng dữ liệu, kỹ năng an ninh mạng và năng lực học suốt đời. Quyết định 1446/QĐ-TTg về đào tạo, đào tạo lại nguồn nhân lực cho Cách mạng công nghiệp lần thứ tư là căn cứ chính sách phù hợp cho hướng này.
+""")
 
 elif page == "Bài 11 - Q-learning":
     section_title(
@@ -886,10 +1014,11 @@ elif page == "Bài 11 - Q-learning":
     compare = adv["Bai11_Policy_Compare"]
     curve = adv["Bai11_Learning_Curve"]
 
-    tab1, tab2, tab3 = st.tabs([
+    tab1, tab2, tab3, tab4 = st.tabs([
         "Chính sách học được",
         "So sánh chính sách",
-        "Learning curve"
+        "Learning curve",
+        "Thảo luận chính sách"
     ])
 
     with tab1:
@@ -922,7 +1051,35 @@ elif page == "Bài 11 - Q-learning":
             title="Đường học Q-learning, rolling reward 200 episodes"
         )
         st.plotly_chart(fig, use_container_width=True)
+with tab4:
+ st.subheader("Thảo luận chính sách")
+        st.markdown("""
+        ### a) Khi nền kinh tế ở trạng thái GDP growth thấp, D thấp, U cao, chính sách π*(s) chọn hành động gì? Có khớp với “quick win” không?
 
+Output `Bai11_Q_Policy` cho thấy ở trạng thái **LowGDP_LowD_LowAI_HighU = [0, 0, 0, 2]**, chính sách chọn **best_action_id = 0**, tức **Truyền thống**. Tuy nhiên, Q-value ở trạng thái này bằng **0**, cho thấy agent gần như chưa học được kinh nghiệm rõ ràng tại trạng thái này hoặc trạng thái này xuất hiện ít trong quá trình huấn luyện.
+
+Về chính sách, lựa chọn “Truyền thống” trong trạng thái GDP thấp, D thấp và thất nghiệp cao chưa thật sự khớp với logic “quick win”. Trong thực tế, khi D thấp và rủi ro thất nghiệp cao, chính sách quick win nên ưu tiên các hành động có khả năng tạo tác động nhanh như số hóa dịch vụ công, hỗ trợ doanh nghiệp nhỏ chuyển đổi số, đào tạo lại lao động ngắn hạn và mở rộng kỹ năng số cơ bản. Do đó, kết quả này cần được xem là tín hiệu mô hình còn cần huấn luyện thêm hoặc cần cải thiện thiết kế phần thưởng.
+
+Đề bài cũng nhấn mạnh Q-learning chỉ minh họa kỹ thuật ra quyết định thích nghi, không nhằm tự động hóa hoạch định chính sách.
+
+### b) Khi GDP growth cao, AI cao, U thấp, chính sách chọn gì? Có phù hợp với “consolidation” không?
+
+Ở trạng thái **HighGDP_HighD_HighAI_LowU = [2, 2, 2, 0]**, output cũng cho thấy chính sách chọn **Truyền thống**, với **Q-value = 0**. Nếu diễn giải theo logic chính sách, khi GDP cao, D cao, AI cao và thất nghiệp thấp, chính sách “consolidation” thường nên giảm tốc độ mở rộng AI quá nhanh, chuyển sang củng cố thể chế, an ninh dữ liệu, hạ tầng nền tảng, nhân lực và kiểm soát rủi ro. Hành động “Truyền thống” có thể phù hợp một phần nếu hiểu là giảm rủi ro công nghệ và quay về củng cố nền tảng.
+
+Tuy nhiên, vì Q-value = 0, không nên diễn giải đây là khuyến nghị mạnh của mô hình. Kết quả đáng tin cậy hơn nằm ở trạng thái **VN_2026 = [1,1,0,1]**, nơi mô hình chọn **Số hóa nhanh** với **Q-value = 15,2896**. Điều này hợp lý hơn với thực tiễn Việt Nam: khi năng lực AI còn thấp nhưng nền kinh tế đang chuyển đổi, ưu tiên số hóa nhanh là bước đi phù hợp trước khi mở rộng AI dẫn dắt.
+
+### c) Q-learning có tốt hơn chính sách cố định không?
+
+Có, trong output của bạn, Q-learning có kết quả tốt hơn các baseline. **Q_learning_policy** đạt **avg_total_reward = 8,2600**, cao hơn **Always_balanced_a1 = 7,4861**, **Always_AI_led_a3 = 7,5729** và **Random = 7,5335**. Điều này cho thấy chính sách thích nghi theo trạng thái có thể tạo phúc lợi cao hơn chính sách cố định.
+
+Tuy nhiên, kết quả cũng cho thấy một số trạng thái có Q-value = 0, tức agent chưa học đầy đủ toàn bộ không gian trạng thái. Vì vậy, mô hình cần được cải tiến bằng cách tăng số episode, cải thiện hàm thưởng, kiểm tra tần suất ghé thăm trạng thái và bổ sung ràng buộc an sinh, phát thải, an ninh dữ liệu rõ hơn.
+
+### d) Tích hợp π* vào hoạch định chính sách Việt Nam như thế nào để không vi phạm nguyên tắc “AI không thay thế quyết định chính trị - xã hội”?
+
+Cách phù hợp là tích hợp Q-learning như **hệ thống khuyến nghị chính sách**, không phải hệ thống tự động ra quyết định. Quy trình nên gồm 4 bước: mô hình đề xuất hành động theo trạng thái; chuyên gia kiểm định giả định và dữ liệu; hội đồng chính sách đánh giá tác động xã hội - ngân sách - pháp lý; cuối cùng cơ quan có thẩm quyền quyết định và chịu trách nhiệm.
+
+Điều này đặc biệt quan trọng vì phần thưởng trong Q-learning phản ánh trọng số chủ quan: tăng trưởng, thất nghiệp, rủi ro mạng và phát thải. Nếu trọng số thay đổi, chính sách tối ưu cũng thay đổi. Do đó, AI chỉ nên đóng vai trò hỗ trợ minh bạch hóa các đánh đổi, không thay thế trách nhiệm chính trị, trách nhiệm giải trình và tham vấn xã hội.
+""")
 
 elif page == "Bài 12 - Tổng hợp kịch bản":
     section_title(
@@ -934,10 +1091,11 @@ elif page == "Bài 12 - Tổng hợp kịch bản":
     kpi = adv["Bai12_KPI_2030"]
     risk = adv["Bai12_Risk_Warning"]
 
-    tab1, tab2, tab3 = st.tabs([
+    tab1, tab2, tab3, tab4 = st.tabs([
         "Đường kịch bản",
         "KPI năm 2030",
-        "Cảnh báo rủi ro"
+        "Cảnh báo rủi ro",
+        "Thảo luận chính sách"
     ])
 
     with tab1:
@@ -1002,3 +1160,38 @@ elif page == "Bài 12 - Tổng hợp kịch bản":
     with tab3:
         st.subheader("Cảnh báo rủi ro theo kịch bản")
         st.dataframe(risk, use_container_width=True)
+with tab4:
+ st.subheader("Thảo luận chính sách")
+        st.markdown("""
+        ### a) Kịch bản nào cho kết quả GDP_index năm 2030 cao nhất?
+
+Output `Bai12_KPI_2030` cho thấy kịch bản có **GDP_index cao nhất** là **S3_AI_dan_dat**, đạt **380,7220**, xếp hạng 1. Kịch bản đứng thứ 2 là **S2_So_hoa_nhanh**, đạt **380,3790**; đứng thứ 3 là **S5_Toi_uu_can_bang**, đạt **379,4473**. Kịch bản thấp nhất là **S1_Truyen_thong**, đạt **377,7788**.
+
+Điều này cho thấy trong mô hình, chiến lược AI dẫn dắt có thể tạo tăng trưởng cao nhất đến năm 2030, nhờ tăng mạnh năng lực AI lên **90,5915**. Kết quả phù hợp với Quyết định 127/QĐ-TTg, trong đó Việt Nam đặt mục tiêu phát triển nghiên cứu, ứng dụng AI đến năm 2030.
+
+Tuy nhiên, chênh lệch GDP_index giữa S3 và S2 không quá lớn, chỉ khoảng **0,3430 điểm**. Điều này hàm ý chiến lược AI dẫn dắt không vượt trội tuyệt đối so với số hóa nhanh. Nếu xét thêm rủi ro nhân lực, khoảng cách số và an ninh dữ liệu, chiến lược số hóa nhanh hoặc tối ưu cân bằng có thể thực tế hơn.
+
+### b) Kịch bản nào phù hợp nhất với thực tiễn Việt Nam hiện nay?
+
+Nếu chỉ xét GDP_index, **S3_AI_dan_dat** là tốt nhất. Nhưng nếu xét năng lực thực thi, Việt Nam có thể phù hợp hơn với **S5_Toi_uu_can_bang** hoặc **S2_So_hoa_nhanh**. S2 giúp D đạt **21,5976**, cao nhất trong 5 kịch bản, phù hợp với mục tiêu kinh tế số và xã hội số. S5 có kết quả cân bằng hơn: **GDP_index = 379,4473**, **D = 20,6641**, **AI = 84,7566**, **H = 29,6657**.
+
+Quyết định 749/QĐ-TTg và Quyết định 411/QĐ-TTg đều nhấn mạnh chuyển đổi số là quá trình đồng bộ giữa chính phủ số, kinh tế số và xã hội số, không chỉ là đầu tư vào một công nghệ đơn lẻ. Vì vậy, chiến lược cân bằng giữa D, AI và H có tính khả thi cao hơn chiến lược chỉ nhấn mạnh AI.
+
+### c) Cảnh báo rủi ro trong output nói lên điều gì?
+
+Output `Bai12_Risk_Warning` cho thấy cả 5 kịch bản đều có **cyber_risk = Trung bình**, **digital_gap_risk = Cao**, và **human_capital_status = Thiếu**. Đây là kết quả rất quan trọng: dù kịch bản nào được chọn, mô hình đều cảnh báo Việt Nam vẫn đối mặt với khoảng cách số và thiếu hụt nhân lực.
+
+Điều này phù hợp với Nghị quyết 57-NQ/TW, trong đó nêu rõ hạ tầng số còn hạn chế, nguồn nhân lực chất lượng cao còn thiếu, an ninh - an toàn thông tin và bảo vệ dữ liệu còn nhiều thách thức. Vì vậy, khuyến nghị chính sách không nên chỉ là “chọn kịch bản GDP cao nhất”, mà phải đi kèm chương trình giảm khoảng cách số, đào tạo lại lao động và tăng cường an toàn dữ liệu.
+
+### d) Dashboard AIDEOM-VN có đáp ứng yêu cầu hỗ trợ ra quyết định không?
+
+Về cấu trúc, dashboard đã đáp ứng yêu cầu cơ bản: có các module từ dự báo, phân bổ, lao động, bất định, Q-learning đến so sánh kịch bản. Đề bài yêu cầu module M6 là dashboard web bằng Streamlit hoặc Plotly Dash, tối thiểu gồm các tab Tổng quan, Phân bổ, Kịch bản so sánh và Cảnh báo rủi ro. Output hiện tại đã có **Bai12_Scenario_Path**, **Bai12_KPI_2030** và **Bai12_Risk_Warning**, đủ để xây dựng các tab này.
+
+Tuy nhiên, để dashboard có chất lượng cao hơn, cần thêm ba cải tiến. Thứ nhất, cho phép người dùng điều chỉnh trọng số chính sách và xem thay đổi kết quả. Thứ hai, thêm giải thích dưới mỗi biểu đồ để tránh người xem hiểu nhầm mô hình là quyết định cuối cùng. Thứ ba, bổ sung phần giới hạn mô hình, đặc biệt là các giả định đơn giản hóa trong Bài 8, Bài 10 và Bài 11.
+
+### e) Khuyến nghị chính sách tổng hợp từ Bài 12 là gì?
+
+Từ output Bài 12, khuyến nghị chính sách hợp lý nhất là không chọn cực đoan “truyền thống” hoặc “AI dẫn dắt tuyệt đối”, mà nên chọn chiến lược **tối ưu cân bằng có điều chỉnh**. Cụ thể, Việt Nam nên ưu tiên số hóa nền kinh tế và chính phủ số; mở rộng AI ở các ngành/vùng có năng lực hấp thụ cao; đầu tư mạnh hơn vào nhân lực số; và kiểm soát khoảng cách số giữa các vùng.
+
+Nếu cần chọn một kịch bản để trình bày trên dashboard, có thể chọn **S5_Toi_uu_can_bang** làm kịch bản khuyến nghị chính sách, còn **S3_AI_dan_dat** là kịch bản tăng trưởng cao nhưng rủi ro hấp thụ lớn hơn. Cách trình bày này cân bằng giữa mục tiêu tăng trưởng, khả năng thực thi và phát triển bao trùm.
+""")

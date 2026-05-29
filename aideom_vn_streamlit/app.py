@@ -5,10 +5,43 @@ from pathlib import Path
 
 st.set_page_config(
     page_title="AIDEOM-VN Dashboard",
-    page_icon="📊",
+    page_icon="😇",
     layout="wide"
 )
+st.markdown(
+    """
+    <style>
+    html, body, [class*="css"], [class*="st-"], .stMarkdown, .stText, .stDataFrame {
+        font-family: "Times New Roman", Times, serif !important;
+    }
 
+    h1, h2, h3, h4, h5, h6 {
+        font-family: "Times New Roman", Times, serif !important;
+        font-weight: 700;
+    }
+
+    p, div, span, label, button {
+        font-family: "Times New Roman", Times, serif !important;
+    }
+
+    .stMarkdown p {
+        font-size: 18px;
+        line-height: 1.7;
+        text-align: justify;
+    }
+
+    .stMarkdown li {
+        font-size: 18px;
+        line-height: 1.7;
+    }
+
+    .stDataFrame {
+        font-size: 16px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 BASE_DIR = Path(__file__).parent
 DATA_DIR = BASE_DIR / "data"
 

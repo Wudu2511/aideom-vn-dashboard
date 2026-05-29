@@ -141,25 +141,26 @@ elif page == "Bài 1 - Cobb-Douglas":
     with tab4:
         st.subheader("Thảo luận chính sách")
         st.markdown("""
-### a) TFP của Việt Nam có xu hướng tăng hay giảm?
+### a) TFP của Việt Nam có xu hướng tăng hay giảm trong giai đoạn 2020-2025? Điều đó nói lên gì về chất lượng tăng trưởng?
 
-Kết quả ước lượng cho thấy TFP A_t tăng từ khoảng **27,75 năm 2020** lên **34,91 năm 2025**. Đây là tín hiệu tích cực, vì tăng trưởng GDP trong mô hình không chỉ được giải thích bởi mở rộng vốn vật chất K và lao động L, mà còn bởi phần năng suất tổng hợp của nền kinh tế.
+Dựa trên output mô hình, TFP A_t tăng liên tục từ **27,75 năm 2020** lên **34,91 năm 2025**. Điều này cho thấy phần tăng trưởng không được giải thích trực tiếp bởi vốn vật chất K, lao động L, số hóa D, năng lực AI và nhân lực số H có xu hướng tăng. Nói cách khác, chất lượng tăng trưởng trong mô hình có cải thiện, vì GDP không chỉ tăng nhờ mở rộng đầu vào mà còn nhờ hiệu quả tổng hợp cao hơn.
 
-Trong phân rã tăng trưởng, TFP đóng góp khoảng **49,08%** vào tăng trưởng bình quân, cao hơn đóng góp của vốn vật chất K là khoảng **31,78%**. Điều này cho thấy chất lượng tăng trưởng của Việt Nam trong mô hình có xu hướng cải thiện.
+Dẫn chứng rõ hơn là trong bảng phân rã tăng trưởng, TFP đóng góp **49,08%** vào tăng trưởng bình quân, cao hơn cả vốn vật chất K với **31,78%**. Điều này phù hợp với bối cảnh Việt Nam đang chuyển từ mô hình tăng trưởng dựa nhiều vào vốn và lao động sang mô hình dựa nhiều hơn vào năng suất, khoa học công nghệ, đổi mới sáng tạo và chuyển đổi số. Năm 2024, NSO/GSO công bố GDP Việt Nam tăng 7,09%, trong đó công nghiệp - xây dựng và dịch vụ đóng góp lớn vào tăng trưởng, phản ánh xu hướng phục hồi và nâng cao năng lực sản xuất của nền kinh tế.
 
-Tuy nhiên, TFP được tính ngược từ hàm sản xuất với các hệ số giả định nên không nên diễn giải như bằng chứng nhân quả tuyệt đối.
+Tuy nhiên, cần lưu ý rằng TFP ở đây được tính ngược từ hàm sản xuất với hệ số giả định. Vì vậy, kết quả này nên được hiểu là chỉ báo định lượng hỗ trợ phân tích, không phải bằng chứng nhân quả tuyệt đối.
 
-### b) Trong các yếu tố D, AI, H, yếu tố nào đóng góp nhiều nhất?
+### b) Trong các yếu tố mới D, AI, H, yếu tố nào đóng góp nhiều nhất cho tăng trưởng giai đoạn vừa qua? Vì sao?
+Trong ba yếu tố mới, **D - mức độ số hóa** đóng góp lớn nhất, đạt **10,37%** tăng trưởng bình quân. Tiếp theo là **AI với 6,24%**, và **H - nhân lực số với 2,87%**.
 
-Trong ba yếu tố mới, **mức độ số hóa D** đóng góp lớn nhất, khoảng **10,37%** tăng trưởng bình quân; tiếp theo là **AI** với khoảng **6,24%** và **nhân lực số H** với khoảng **2,87%**.
+Kết quả này hợp lý vì trong giai đoạn 2020-2025, tỷ trọng kinh tế số/GDP trong dữ liệu tăng từ **12,0% năm 2020** lên **19,5% năm 2025**. Mức tăng của D rõ ràng hơn so với H, trong khi AI vẫn đang ở giai đoạn tích lũy nền tảng. Điều này phù hợp với định hướng của Quyết định 749/QĐ-TTg về Chương trình Chuyển đổi số quốc gia và Quyết định 411/QĐ-TTg về phát triển kinh tế số, xã hội số đến năm 2025, định hướng 2030.
 
-Điều này phù hợp với bối cảnh Việt Nam đang đẩy mạnh kinh tế số, dịch vụ công trực tuyến, thương mại điện tử, thanh toán số và chuyển đổi số doanh nghiệp.
+Hàm ý chính sách là Việt Nam không nên chỉ đầu tư vào công nghệ AI riêng lẻ, mà cần đầu tư đồng bộ vào số hóa nền kinh tế, dữ liệu, hạ tầng số và nhân lực số. Nếu nhân lực số tăng chậm, AI sẽ khó phát huy đầy đủ tác động năng suất.
 
-### c) Mục tiêu kinh tế số đạt 30% GDP vào 2030 có khả thi không?
+### c) Mục tiêu Việt Nam đạt 30% kinh tế số/GDP vào 2030 có khả thi không nếu dựa trên mô hình này? Cần ràng buộc gì?
 
-Kịch bản mô phỏng cho thấy nếu D đạt 30%, AI đạt 100 nghìn doanh nghiệp số, H đạt 35%, K tăng 6%/năm và TFP tăng 1,2%/năm, GDP năm 2030 được dự báo khoảng **16.362,93 nghìn tỷ VND**.
+Output mô phỏng cho thấy nếu đến năm 2030, D đạt **30%**, AI đạt **100 nghìn doanh nghiệp số**, H đạt **35%**, K tăng **6%/năm** và TFP tăng **1,2%/năm**, GDP dự báo năm 2030 đạt khoảng **16.362,93 nghìn tỷ VND**. So với mức GDP năm 2025 là **12.847,6 nghìn tỷ VND**, đây là kịch bản tăng trưởng tích cực.
 
-Vì vậy, mục tiêu kinh tế số đạt 30% GDP vào năm 2030 có thể xem là khả thi về mặt mô hình, nhưng cần đi kèm đầu tư hạ tầng số, nhân lực số, an ninh mạng và chính sách thu hẹp khoảng cách số giữa các vùng.
+Vì vậy, mục tiêu kinh tế số đạt 30% GDP vào năm 2030 có thể xem là khả thi về mặt mô hình. Tuy nhiên, để mục tiêu này không chỉ là con số kỹ thuật, cần các ràng buộc chính sách: đầu tư hạ tầng số, mở rộng dữ liệu mở, bảo đảm an ninh mạng, đào tạo nhân lực số, hỗ trợ doanh nghiệp nhỏ và vừa chuyển đổi số, đồng thời thu hẹp khoảng cách số giữa các vùng. Nghị quyết 57-NQ/TW cũng nhấn mạnh khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số là yếu tố quyết định phát triển, đồng thời chỉ ra các hạn chế hiện nay như hạ tầng số chưa đồng bộ, nhân lực chất lượng cao còn thiếu và an toàn dữ liệu còn nhiều thách thức.
 """)
 
 
@@ -221,33 +222,32 @@ elif page == "Bài 2 - LP ngân sách":
     with tab4:
         st.subheader("Thảo luận chính sách")
         st.markdown("""
-### a) Khi ngân sách tăng thêm 1 nghìn tỷ VND, GDP kỳ vọng tăng thêm bao nhiêu?
+### a) Khi ngân sách tổng tăng thêm 1 nghìn tỷ VND, GDP kỳ vọng tăng thêm bao nhiêu? Đây có phải là cận trên hợp lý của chi phí cơ hội vốn công?
 
-Kết quả mô hình cho thấy nghiệm tối ưu ban đầu phân bổ: hạ tầng số **25**, AI và dữ liệu **15**, nhân lực số **20**, R&D **40** nghìn tỷ VND. Giá trị mục tiêu đạt **Z* = 112,25**.
+Output mô hình cho thấy nghiệm tối ưu ban đầu là: hạ tầng số 25, AI và dữ liệu 15, nhân lực số 20, R&D 40 nghìn tỷ VND. Giá trị mục tiêu đạt Z = 112,25*.
 
-Shadow price của ràng buộc ngân sách tổng bằng **1,35**, nghĩa là trong vùng nghiệm hiện tại, nếu tăng thêm 1 nghìn tỷ VND ngân sách thì GDP kỳ vọng tăng thêm khoảng **1,35 nghìn tỷ VND**.
+Dẫn chứng quan trọng là shadow price của ràng buộc ngân sách tổng bằng 1,35. Nghĩa là trong vùng nghiệm tối ưu hiện tại, nếu tăng thêm 1 nghìn tỷ VND ngân sách, GDP kỳ vọng tăng thêm khoảng 1,35 nghìn tỷ VND. Phân tích độ nhạy xác nhận điều này: ngân sách tăng từ 100 lên 120 làm Z* tăng từ 112,25 lên 139,25; ngân sách tăng lên 140 làm Z* tăng lên 166,25. Mỗi 20 nghìn tỷ tăng thêm tạo thêm 27 nghìn tỷ GDP kỳ vọng, tương ứng hệ số 1,35.
 
-Tuy nhiên, trong thực tế, con số này chỉ là cận trên kỹ thuật của mô hình vì hiệu quả vốn công còn phụ thuộc vào giải ngân, chất lượng dự án và năng lực hấp thụ của nền kinh tế.
+Tuy nhiên, trong thực tiễn Việt Nam, đây chỉ là cận trên kỹ thuật của mô hình. Hiệu quả vốn công còn phụ thuộc vào năng lực giải ngân, chất lượng dự án, năng lực hấp thụ của địa phương và khả năng phối hợp giữa các cơ quan. Vì vậy, shadow price có giá trị tham khảo cho phân tích chi phí cơ hội, nhưng không nên hiểu là cứ tăng ngân sách thì GDP thực tế chắc chắn tăng tương ứng.
 
-### b) Vì sao R&D có hệ số tác động cao nhất nhưng sàn tối thiểu thấp?
+### b) Vì sao R&D có hệ số tác động cao nhất nhưng lại có ràng buộc tối thiểu thấp nhất?
 
-R&D nhận **40 nghìn tỷ VND**, cao hơn nhiều so với mức tối thiểu **10 nghìn tỷ**. Điều này xảy ra vì R&D có hệ số tác động cao nhất nên mô hình dồn phần ngân sách còn lại vào R&D.
+Trong nghiệm tối ưu, R&D nhận 40 nghìn tỷ VND, cao hơn nhiều so với mức tối thiểu 10 nghìn tỷ VND. Nguyên nhân là R&D có hệ số tác động cao nhất, 1,35, nên sau khi các ràng buộc tối thiểu của hạ tầng, AI và nhân lực số được đáp ứng, mô hình dồn phần ngân sách còn lại vào R&D để tối đa hóa GDP kỳ vọng.
 
-Tuy nhiên, R&D có độ trễ dài, rủi ro cao và phụ thuộc vào hệ sinh thái đổi mới sáng tạo. Vì vậy, việc đặt sàn thấp nhưng cho phép mô hình tăng đầu tư R&D là hợp lý.
+Việc đặt sàn R&D thấp vẫn hợp lý vì R&D có độ trễ dài, rủi ro cao và phụ thuộc mạnh vào năng lực hấp thụ công nghệ của doanh nghiệp, viện nghiên cứu, trường đại học và thị trường. Trong bối cảnh Nghị quyết 57-NQ/TW nhấn mạnh đột phá khoa học công nghệ, đổi mới sáng tạo và chuyển đổi số, R&D cần được ưu tiên nhưng phải đi kèm cơ chế thương mại hóa kết quả nghiên cứu và liên kết doanh nghiệp.
 
-### c) Trường hợp x_H ≥ 30 có còn khả thi không?
+### c) Giả sử Chính phủ muốn ưu tiên nhân lực số với x_H ≥ 30. Bài toán có còn khả thi không? Z* thay đổi như thế nào?
 
-Khi tăng ràng buộc nhân lực số từ **x_H ≥ 20** lên **x_H ≥ 30**, bài toán vẫn khả thi. Z* giảm từ **112,25** xuống **108,25**, tức giảm **4,00 nghìn tỷ GDP kỳ vọng**.
+Khi tăng ràng buộc nhân lực số từ x_H ≥ 20 lên x_H ≥ 30, output bổ sung cho thấy bài toán vẫn khả thi. Nghiệm mới là: hạ tầng số 25, AI và dữ liệu 15, nhân lực số 30, R&D 30. Giá trị mục tiêu giảm từ 112,25 xuống 108,25, tức giảm 4,00 nghìn tỷ GDP kỳ vọng.
 
-Điều này cho thấy ưu tiên nhân lực số có chi phí cơ hội ngắn hạn, nhưng có ý nghĩa dài hạn vì nhân lực là điều kiện để hấp thụ AI, vận hành hạ tầng số và triển khai R&D.
+Kết quả này cho thấy ưu tiên nhân lực số có chi phí cơ hội ngắn hạn, vì mô hình phải chuyển 10 nghìn tỷ từ R&D, nơi có hệ số tác động 1,35, sang nhân lực số, nơi có hệ số tác động 0,95. Tuy nhiên, về dài hạn, ưu tiên nhân lực số là hợp lý vì đây là điều kiện để hấp thụ AI, vận hành hạ tầng số và triển khai R&D. Điều này phù hợp với tinh thần của Quyết định 749/QĐ-TTg và Quyết định 411/QĐ-TTg, vì chuyển đổi số không chỉ là đầu tư công nghệ mà còn là phát triển năng lực con người, doanh nghiệp và xã hội số.
 
-### d) Tỷ lệ 35% AI + R&D có khả thi không?
+### d) Tỷ lệ 35% công nghệ chiến lược AI + R&D có khả thi không?
 
-Trong nghiệm tối ưu, AI + R&D đạt **55 nghìn tỷ VND**, chiếm **55% tổng ngân sách**. Vì vậy, ràng buộc 35% không phải là ràng buộc chặt trong mô hình.
+Trong nghiệm tối ưu ban đầu, AI nhận 15 và R&D nhận 40, tổng cộng 55 nghìn tỷ VND, chiếm 55% tổng ngân sách. Như vậy, ràng buộc tối thiểu 35% cho AI + R&D không phải ràng buộc chặt, vì mô hình tự chọn mức cao hơn 35%.
 
-Trong thực tế, tỷ lệ này nên được hiểu là định hướng chiến lược, vì ngân sách Việt Nam còn phải cân đối với hạ tầng giao thông, y tế, giáo dục, an sinh xã hội và chuyển đổi xanh.
+Tuy nhiên, trong thực tế, ngân sách Việt Nam còn phải cân đối với hạ tầng giao thông, y tế, giáo dục, an sinh xã hội, quốc phòng, phòng chống thiên tai và chuyển đổi xanh. Vì vậy, tỷ lệ 35% cho AI + R&D nên được hiểu là định hướng chiến lược, không phải tỷ lệ cứng áp dụng máy móc.
 """)
-
 
 elif page == "Bài 3 - Ưu tiên ngành":
     section_title(

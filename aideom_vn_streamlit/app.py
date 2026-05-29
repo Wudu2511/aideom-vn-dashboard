@@ -71,7 +71,7 @@ page = st.sidebar.radio(
         "Bài 3 - Ưu tiên ngành",
         "Bài 4 - Phân bổ vùng",
         "Bài 5 - Lựa chọn dự án",
-        "Bài 6 - TOPSIS vùng"
+        "Bài 6 - TOPSIS vùng",
         "Bài 7 - Pareto NSGA-II",
         "Bài 8 - Tối ưu động",
         "Bài 9 - Lao động và AI",

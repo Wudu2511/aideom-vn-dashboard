@@ -12,33 +12,224 @@ st.set_page_config(
     page_icon="😇",
     layout="wide"
 )
-
+# =========================
+# ACADEMIC BLUE THEME
+# =========================
 st.markdown(
     """
     <style>
-    html, body, [class*="css"], [class*="st-"], .stMarkdown, .stText, .stDataFrame {
+    /* ===== FONT & GLOBAL ===== */
+    html, body, [class*="css"], [class*="st-"] {
         font-family: "Times New Roman", Times, serif !important;
     }
-    h1, h2, h3, h4, h5, h6 {
-        font-family: "Times New Roman", Times, serif !important;
+
+    .stApp {
+        background: linear-gradient(135deg, #F7F9FC 0%, #EAF3FF 100%);
+        color: #1F2933;
+    }
+
+    .block-container {
+        padding-top: 2rem;
+        padding-bottom: 3rem;
+        max-width: 1400px;
+    }
+
+    /* ===== SIDEBAR ===== */
+    section[data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #102542 0%, #153B5C 100%);
+        border-right: 1px solid rgba(255,255,255,0.12);
+    }
+
+    section[data-testid="stSidebar"] * {
+        color: #FFFFFF !important;
+    }
+
+    section[data-testid="stSidebar"] label {
+        font-size: 17px !important;
+        font-weight: 700 !important;
+    }
+
+    div[data-testid="stSidebarNav"] {
+        background-color: transparent;
+    }
+
+    /* Radio options in sidebar */
+    div[role="radiogroup"] label {
+        padding: 8px 10px;
+        border-radius: 10px;
+        margin-bottom: 4px;
+    }
+
+    div[role="radiogroup"] label:hover {
+        background: rgba(255,255,255,0.12);
+    }
+
+    /* ===== HEADINGS ===== */
+    h1 {
+        color: #102542;
+        font-weight: 700;
+        letter-spacing: -0.3px;
+    }
+
+    h2, h3, h4 {
+        color: #153B5C;
         font-weight: 700;
     }
-    p, div, span, label, button {
-        font-family: "Times New Roman", Times, serif !important;
+
+    /* ===== MARKDOWN TEXT ===== */
+    .stMarkdown p {
+        font-size: 18px;
+        line-height: 1.75;
+        text-align: justify;
+        color: #1F2933;
     }
-    .stMarkdown p, .stMarkdown li {
+
+    .stMarkdown li {
         font-size: 18px;
         line-height: 1.7;
-        text-align: justify;
+        color: #1F2933;
     }
-    .stDataFrame {
+
+    .stMarkdown strong {
+        color: #102542;
+    }
+
+    /* ===== TITLE CARD ===== */
+    .title-card {
+        background: #FFFFFF;
+        padding: 26px 30px;
+        border-radius: 20px;
+        margin-bottom: 24px;
+        box-shadow: 0 8px 24px rgba(16, 37, 66, 0.10);
+        border: 1px solid #E5E7EB;
+        border-left: 7px solid #2F80ED;
+    }
+
+    .title-card h1 {
+        margin: 0 0 8px 0;
+        color: #102542;
+        font-size: 34px;
+    }
+
+    .title-card p {
+        margin: 0;
+        color: #64748B;
+        font-size: 18px;
+        line-height: 1.6;
+    }
+
+    /* ===== INSIGHT BOX ===== */
+    .insight-box {
+        background: #EAF3FF;
+        border-left: 6px solid #2F80ED;
+        padding: 16px 20px;
+        border-radius: 14px;
+        margin: 14px 0 22px 0;
+        color: #102542;
+        font-size: 18px;
+        line-height: 1.6;
+        box-shadow: 0 4px 12px rgba(16, 37, 66, 0.06);
+    }
+
+    /* ===== METRIC CARDS ===== */
+    div[data-testid="stMetric"] {
+        background: #FFFFFF;
+        padding: 18px 20px;
+        border-radius: 18px;
+        box-shadow: 0 6px 18px rgba(16, 37, 66, 0.08);
+        border: 1px solid #E5E7EB;
+    }
+
+    div[data-testid="stMetricLabel"] {
         font-size: 16px;
+        font-weight: 700;
+        color: #64748B;
+    }
+
+    div[data-testid="stMetricValue"] {
+        font-size: 30px;
+        font-weight: 700;
+        color: #102542;
+    }
+
+    /* ===== TABS ===== */
+    button[data-baseweb="tab"] {
+        font-size: 17px;
+        font-weight: 700;
+        background-color: #FFFFFF;
+        border-radius: 14px 14px 0 0;
+        padding: 10px 18px;
+        color: #153B5C;
+        border: 1px solid #E5E7EB;
+    }
+
+    button[data-baseweb="tab"][aria-selected="true"] {
+        color: #FFFFFF !important;
+        background-color: #2F80ED !important;
+        border-color: #2F80ED !important;
+    }
+
+    /* ===== DATAFRAME ===== */
+    div[data-testid="stDataFrame"] {
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 6px 18px rgba(16, 37, 66, 0.08);
+        border: 1px solid #E5E7EB;
+        background: white;
+    }
+
+    /* ===== PLOTLY CHART ===== */
+    div[data-testid="stPlotlyChart"] {
+        background: #FFFFFF;
+        padding: 14px;
+        border-radius: 18px;
+        box-shadow: 0 6px 18px rgba(16, 37, 66, 0.08);
+        border: 1px solid #E5E7EB;
+        margin-top: 14px;
+        margin-bottom: 22px;
+    }
+
+    /* ===== INFO / WARNING BOXES ===== */
+    div[data-testid="stAlert"] {
+        border-radius: 14px;
+        font-size: 17px;
+        line-height: 1.6;
+    }
+
+    /* ===== BUTTONS ===== */
+    .stButton > button {
+        background-color: #2F80ED;
+        color: #FFFFFF;
+        border-radius: 12px;
+        border: none;
+        padding: 9px 20px;
+        font-weight: 700;
+        box-shadow: 0 4px 12px rgba(47, 128, 237, 0.25);
+    }
+
+    .stButton > button:hover {
+        background-color: #1C64C7;
+        color: #FFFFFF;
+    }
+
+    /* ===== EXPANDERS ===== */
+    .streamlit-expanderHeader {
+        font-size: 18px;
+        font-weight: 700;
+        color: #102542;
+    }
+
+    /* ===== SMALL CAPTION ===== */
+    .caption-text {
+        color: #64748B;
+        font-size: 15px;
+        margin-top: -8px;
+        margin-bottom: 14px;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
-
 # =========================
 # DATA LOADING
 # =========================
@@ -71,11 +262,16 @@ adv = load_excel(ADV_FILE)
 # HELPERS
 # =========================
 def section_title(title, subtitle=None):
-    st.title(title)
-    if subtitle:
-        st.caption(subtitle)
-    st.divider()
-
+    subtitle_html = f"<p>{subtitle}</p>" if subtitle else ""
+    st.markdown(
+        f"""
+        <div class="title-card">
+            <h1>{title}</h1>
+            {subtitle_html}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 def show_df(df, title=None):
     if title:
@@ -454,8 +650,29 @@ Trong thực tế, hướng mở rộng quan trọng nhất là tích hợp dữ
 # =========================
 # SIDEBAR
 # =========================
-st.sidebar.title("AIDEOM-VN")
-st.sidebar.caption("Dashboard kết quả Bài 1-12")
+st.sidebar.markdown(
+    """
+    <div style="text-align: center; padding: 14px 4px 22px 4px;">
+        <div style="
+            background: rgba(255,255,255,0.12);
+            border-radius: 18px;
+            padding: 16px 12px;
+            border: 1px solid rgba(255,255,255,0.18);
+        ">
+            <h2 style="margin: 0; color: white;">AIDEOM-VN</h2>
+            <p style="
+                margin-top: 8px;
+                color: #CBD5E1;
+                font-size: 15px;
+                line-height: 1.45;
+            ">
+                Bài tập 1-12
+            </p>
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 page = st.sidebar.radio(
     "Chọn nội dung",

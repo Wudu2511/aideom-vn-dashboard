@@ -18,11 +18,11 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    /* ===== FONT & GLOBAL ===== */
- html, body, .stMarkdown, .stText, .stDataFrame {
+   /* ===== FONT & GLOBAL ===== */
+html, body, .stApp, .stMarkdown, .stText, .stDataFrame {
     font-family: "Times New Roman", Times, serif !important;
+    font-size: 16px;
 }
-
     .stApp {
         background: linear-gradient(135deg, #F7F9FC 0%, #EAF3FF 100%);
         color: #1F2933;
@@ -45,7 +45,7 @@ st.markdown(
     }
 
     section[data-testid="stSidebar"] label {
-        font-size: 17px !important;
+        font-size: 15px !important;
         font-weight: 700 !important;
     }
 
@@ -78,15 +78,15 @@ st.markdown(
 
     /* ===== MARKDOWN TEXT ===== */
     .stMarkdown p {
-        font-size: 18px;
-        line-height: 1.75;
+        font-size: 16px;
+        line-height: 1.65;
         text-align: justify;
         color: #1F2933;
     }
 
     .stMarkdown li {
-        font-size: 18px;
-        line-height: 1.7;
+        font-size: 16px;
+        line-height: 1.6;
         color: #1F2933;
     }
 
@@ -95,28 +95,29 @@ st.markdown(
     }
 
     /* ===== TITLE CARD ===== */
-    .title-card {
-        background: #FFFFFF;
-        padding: 26px 30px;
-        border-radius: 20px;
-        margin-bottom: 24px;
-        box-shadow: 0 8px 24px rgba(16, 37, 66, 0.10);
-        border: 1px solid #E5E7EB;
-        border-left: 7px solid #2F80ED;
-    }
+   .title-card {
+    background: #FFFFFF;
+    padding: 22px 26px;
+    border-radius: 18px;
+    margin-bottom: 22px;
+    box-shadow: 0 7px 20px rgba(16, 37, 66, 0.09);
+    border: 1px solid #E5E7EB;
+    border-left: 6px solid #2F80ED;
+}
 
-    .title-card h1 {
-        margin: 0 0 8px 0;
-        color: #102542;
-        font-size: 34px;
-    }
+.title-card h1 {
+    margin: 0 0 8px 0;
+    color: #102542;
+    font-size: 28px;
+    line-height: 1.25;
+}
 
-    .title-card p {
-        margin: 0;
-        color: #64748B;
-        font-size: 18px;
-        line-height: 1.6;
-    }
+.title-card p {
+    margin: 0;
+    color: #64748B;
+    font-size: 16px;
+    line-height: 1.55;
+}
 
     /* ===== INSIGHT BOX ===== */
     .insight-box {
@@ -132,25 +133,25 @@ st.markdown(
     }
 
     /* ===== METRIC CARDS ===== */
-    div[data-testid="stMetric"] {
-        background: #FFFFFF;
-        padding: 18px 20px;
-        border-radius: 18px;
-        box-shadow: 0 6px 18px rgba(16, 37, 66, 0.08);
-        border: 1px solid #E5E7EB;
-    }
+ div[data-testid="stMetric"] {
+    background: #FFFFFF;
+    padding: 15px 18px;
+    border-radius: 16px;
+    box-shadow: 0 5px 16px rgba(16, 37, 66, 0.08);
+    border: 1px solid #E5E7EB;
+}
 
-    div[data-testid="stMetricLabel"] {
-        font-size: 16px;
-        font-weight: 700;
-        color: #64748B;
-    }
+div[data-testid="stMetricLabel"] {
+    font-size: 14px;
+    font-weight: 700;
+    color: #64748B;
+}
 
-    div[data-testid="stMetricValue"] {
-        font-size: 30px;
-        font-weight: 700;
-        color: #102542;
-    }
+div[data-testid="stMetricValue"] {
+    font-size: 24px;
+    font-weight: 700;
+    color: #102542;
+}
 
     /* ===== TABS ===== */
     button[data-baseweb="tab"] {

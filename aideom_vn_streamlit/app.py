@@ -19,9 +19,9 @@ st.markdown(
     """
     <style>
     /* ===== FONT & GLOBAL ===== */
-    html, body, [class*="css"], [class*="st-"] {
-        font-family: "Times New Roman", Times, serif !important;
-    }
+ html, body, .stMarkdown, .stText, .stDataFrame {
+    font-family: "Times New Roman", Times, serif !important;
+}
 
     .stApp {
         background: linear-gradient(135deg, #F7F9FC 0%, #EAF3FF 100%);
@@ -219,14 +219,33 @@ st.markdown(
         color: #102542;
     }
 
-    /* ===== SMALL CAPTION ===== */
-    .caption-text {
-        color: #64748B;
-        font-size: 15px;
-        margin-top: -8px;
-        margin-bottom: 14px;
-    }
-    </style>
+   /* ===== SMALL CAPTION ===== */
+.caption-text {
+    color: #64748B;
+    font-size: 15px;
+    margin-top: -8px;
+    margin-bottom: 14px;
+}
+
+/* ===== FIX STREAMLIT ICONS ===== */
+.material-symbols-rounded,
+.material-symbols-outlined,
+.material-icons,
+span[class*="material"],
+i[class*="material"],
+button span[class*="material"],
+[data-testid="collapsedControl"] *,
+[data-testid="stToolbar"] * {
+    font-family: "Material Symbols Rounded", "Material Icons" !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    line-height: 1 !important;
+    -webkit-font-feature-settings: "liga" !important;
+    font-feature-settings: "liga" !important;
+}
+</style>
     """,
     unsafe_allow_html=True
 )

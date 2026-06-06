@@ -716,17 +716,17 @@ page = st.sidebar.radio(
     "Chọn nội dung",
     [
         "Tổng quan",
-        "Bài 1 - Cobb-Douglas",
-        "Bài 2 - LP ngân sách",
+        "Bài 1 - Hàm sản xuất mở rộng",
+        "Bài 2 - Phân bổ ngân sách",
         "Bài 3 - Ưu tiên ngành",
-        "Bài 4 - Phân bổ vùng",
+        "Bài 4 - Phân bổ theo vùng",
         "Bài 5 - Lựa chọn dự án",
-        "Bài 6 - TOPSIS vùng",
-        "Bài 7 - Pareto NSGA-II",
+        "Bài 6 - Xếp hạng vùng bằng TOPSIS",
+        "Bài 7 - Tối ưu đa mục tiêu",
         "Bài 8 - Tối ưu động",
         "Bài 9 - Lao động và AI",
-        "Bài 10 - Stochastic LP",
-        "Bài 11 - Q-learning",
+        "Bài 10 - Quy hoạch ngẫu nhiên",
+        "Bài 11 - Học tăng cường",
         "Bài 12 - Tổng hợp kịch bản",
     ],
 )
@@ -750,7 +750,7 @@ if page == "Tổng quan":
         """
     )
 
-elif page == "Bài 1 - Cobb-Douglas":
+elif page == "Bài 1 - Hàm sản xuất mở rộng":
     section_title("Bài 1. Hàm sản xuất Cobb-Douglas mở rộng", "Phân tích TFP, dự báo GDP và đóng góp tăng trưởng")
     df = main["Bai1_TFP"]
     decomp = main["Bai1_Growth_Decomp"]
@@ -772,7 +772,7 @@ elif page == "Bài 1 - Cobb-Douglas":
         st.subheader("Thảo luận chính sách")
         st.markdown(DISCUSSIONS["bai1"])
 
-elif page == "Bài 2 - LP ngân sách":
+elif page == "Bài 2 - Phân bổ ngân sách":
     section_title("Bài 2. Phân bổ ngân sách số bằng quy hoạch tuyến tính", "Tối ưu 4 hạng mục: hạ tầng số, AI, nhân lực số và R&D")
     base = main["Bai2_Base"]
     duals = main["Bai2_Duals"]
@@ -814,7 +814,7 @@ elif page == "Bài 3 - Ưu tiên ngành":
         st.subheader("Thảo luận chính sách")
         st.markdown(DISCUSSIONS["bai3"])
 
-elif page == "Bài 4 - Phân bổ vùng":
+elif page == "Bài 4 - Phân bổ theo vùng":
     section_title("Bài 4. Phân bổ ngân sách số theo vùng", "So sánh có và không có ràng buộc công bằng")
     fair = main["Bai4_With_Fairness"]
     nofair = main["Bai4_No_Fairness"]
@@ -854,7 +854,7 @@ elif page == "Bài 5 - Lựa chọn dự án":
         st.subheader("Thảo luận chính sách")
         st.markdown(DISCUSSIONS["bai5"])
 
-elif page == "Bài 6 - TOPSIS vùng":
+elif page == "Bài 6 - Xếp hạng vùng bằng TOPSIS":
     section_title("Bài 6. TOPSIS xếp hạng vùng ưu tiên AI", "So sánh trọng số chuyên gia, Entropy và độ nhạy AI")
     topsis = main["Bai6_TOPSIS"]
     sens = main["Bai6_AI_Sensitivity"]
@@ -871,7 +871,7 @@ elif page == "Bài 6 - TOPSIS vùng":
         st.subheader("Thảo luận chính sách")
         st.markdown(DISCUSSIONS["bai6"])
 
-elif page == "Bài 7 - Pareto NSGA-II":
+elif page == "Bài 7 - Tối ưu đa mục tiêu":
     section_title("Bài 7. Tối ưu đa mục tiêu Pareto với NSGA-II", "Đánh đổi giữa tăng trưởng, công bằng vùng, phát thải và rủi ro dữ liệu")
     pareto = adv["Bai7_Pareto"]
     compromise = adv["Bai7_Compromise"]
@@ -960,7 +960,7 @@ elif page == "Bài 9 - Lao động và AI":
         st.subheader("Thảo luận chính sách")
         st.markdown(DISCUSSIONS["bai9"])
 
-elif page == "Bài 10 - Stochastic LP":
+elif page == "Bài 10 - Quy hoạch ngẫu nhiên":
     section_title("Bài 10. Quy hoạch ngẫu nhiên hai giai đoạn", "First-stage, second-stage, wait-and-see, VSS và EVPI")
     first = adv["Bai10_First_Stage"]
     second = adv["Bai10_Second_Stage"]
@@ -990,7 +990,7 @@ elif page == "Bài 10 - Stochastic LP":
         st.subheader("Thảo luận chính sách")
         st.markdown(DISCUSSIONS["bai10"])
 
-elif page == "Bài 11 - Q-learning":
+elif page == "Bài 11 - Học tăng cường":
     section_title("Bài 11. Q-learning cho chính sách kinh tế thích nghi", "So sánh chính sách học tăng cường với chính sách cố định")
     policy = adv["Bai11_Q_Policy"]
     compare = adv["Bai11_Policy_Compare"]

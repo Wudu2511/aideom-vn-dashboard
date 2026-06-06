@@ -991,7 +991,11 @@ elif page == "Bài 11 - Q-learning":
     with tab4:
         st.subheader("Thảo luận chính sách")
         st.markdown(DISCUSSIONS["bai11"])
-
+elif page == "Bài 12 - Tổng hợp kịch bản":
+    section_title("Bài 12. Dashboard tích hợp AIDEOM-VN", "So sánh 5 kịch bản chính sách đến năm 2030")
+    path = adv["Bai12_Scenario_Path"]
+    kpi = adv["Bai12_KPI_2030"]
+    risk = adv["Bai12_Risk_Warning"]
     tab1, tab2, tab3, tab4, tab5 = st.tabs(["Đường kịch bản", "KPI năm 2030", "Cảnh báo rủi ro", "Thảo luận chính sách", "Khuyến nghị chính sách"]) 
     with tab1:
         show_df(path, "Đường phát triển theo kịch bản")

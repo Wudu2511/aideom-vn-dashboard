@@ -1013,14 +1013,63 @@ elif page == "Bài 9 - Lao động và AI":
     with tab3:
         show_df(feasibility, "Tính khả thi khi thêm ràng buộc an sinh")
     with tab4:
-        show_df(sankey, "Luồng dịch chuyển lao động nhóm dễ tổn thương")
-        labels = list(pd.unique(sankey[["source", "target"]].values.ravel()))
+        st.subheader("Luồng dịch chuyển lao động nhóm dễ tổn thương")
+
+        show_df(sankey, "Dữ liệu Sankey gốc")
+
+        sankey_plot = sankey.copy()
+        sankey_plot["value"] = pd.to_numeric(sankey_plot["value"], errors="coerce").fillna(0)
+
+        if sankey_plot["value"].sum() <= 0:
+            st.warning(
+                "Biểu đồ Sankey chưa hiển thị vì trong nghiệm tối ưu hiện tại, "
+                "DisplacedJob của các nhóm dễ tổn thương bằng 0. "
+                "Điều này xảy ra do mô hình ưu tiên đào tạo lại, chưa phát sinh luồng lao động bị dịch chuyển."
+            )
+
+            st.markdown(
+                """
+                Để vẫn minh họa được rủi ro lao động, dashboard hiển thị thêm 
+                **kịch bản nguy cơ tiềm năng** dựa trên quy mô lao động và tỷ lệ rủi ro tự động hóa.
+                """
+            )
+
+            potential_sankey = pd.DataFrame({
+                "source": ["Nguy cơ tự động hóa"] * 3,
+                "target": ["Nông-Lâm-Thủy sản", "Xây dựng", "Bán buôn-bán lẻ"],
+                "value": [
+                    13.20 * 18 / 100,
+                    4.80 * 25 / 100,
+                    7.80 * 38 / 100
+                ]
+            })
+
+            show_df(potential_sankey, "Kịch bản nguy cơ tiềm năng")
+
+            sankey_plot = potential_sankey
+
+        labels = list(pd.unique(sankey_plot[["source", "target"]].values.ravel()))
         label_to_id = {label: i for i, label in enumerate(labels)}
+
         fig = go.Figure(data=[go.Sankey(
-            node=dict(pad=15, thickness=20, label=labels),
-            link=dict(source=sankey["source"].map(label_to_id), target=sankey["target"].map(label_to_id), value=sankey["value"]),
+            node=dict(
+                pad=18,
+                thickness=22,
+                label=labels
+            ),
+            link=dict(
+                source=sankey_plot["source"].map(label_to_id),
+                target=sankey_plot["target"].map(label_to_id),
+                value=sankey_plot["value"]
+            )
         )])
-        fig.update_layout(title_text="Sankey: luồng dịch chuyển lao động", font_size=12)
+
+        fig.update_layout(
+            title_text="Sankey: luồng dịch chuyển lao động nhóm dễ tổn thương",
+            font_size=13,
+            height=520
+        )
+
         st.plotly_chart(fig, use_container_width=True)
     with tab5:
         st.subheader("Thảo luận chính sách")

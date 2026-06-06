@@ -9,7 +9,7 @@ from pathlib import Path
 # =========================
 st.set_page_config(
     page_title="AIDEOM-VN Dashboard",
-    page_icon="😇",
+    page_icon="🇻🇳 🗂",
     layout="wide"
 )
 # =========================
@@ -18,126 +18,142 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-   /* ===== FONT & GLOBAL ===== */
+/* ===== FONT & GLOBAL ===== */
 html, body, .stApp, .stMarkdown, .stText, .stDataFrame {
     font-family: "Times New Roman", Times, serif !important;
-    font-size: 16px;
+    font-size: 15px;
 }
-    .stApp {
-        background: linear-gradient(135deg, #F7F9FC 0%, #EAF3FF 100%);
-        color: #1F2933;
-    }
 
-    .block-container {
-        padding-top: 2rem;
-        padding-bottom: 3rem;
-        max-width: 1400px;
-    }
+.stApp {
+    background: linear-gradient(135deg, #F7F9FC 0%, #EAF3FF 100%);
+    color: #1F2933;
+}
 
-    /* ===== SIDEBAR ===== */
-    section[data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #102542 0%, #153B5C 100%);
-        border-right: 1px solid rgba(255,255,255,0.12);
-    }
+.block-container {
+    padding-top: 1.8rem;
+    padding-bottom: 2.6rem;
+    max-width: 1350px;
+}
 
-    section[data-testid="stSidebar"] * {
-        color: #FFFFFF !important;
-    }
+/* ===== SIDEBAR ===== */
+section[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #102542 0%, #153B5C 100%);
+    border-right: 1px solid rgba(255,255,255,0.12);
+}
 
-    section[data-testid="stSidebar"] label {
-        font-size: 15px !important;
-        font-weight: 700 !important;
-    }
+section[data-testid="stSidebar"] * {
+    color: #FFFFFF !important;
+}
 
-    div[data-testid="stSidebarNav"] {
-        background-color: transparent;
-    }
+section[data-testid="stSidebar"] label {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+}
 
-    /* Radio options in sidebar */
-    div[role="radiogroup"] label {
-        padding: 8px 10px;
-        border-radius: 10px;
-        margin-bottom: 4px;
-    }
+div[data-testid="stSidebarNav"] {
+    background-color: transparent;
+}
 
-    div[role="radiogroup"] label:hover {
-        background: rgba(255,255,255,0.12);
-    }
+/* Radio options in sidebar */
+div[role="radiogroup"] label {
+    padding: 7px 9px;
+    border-radius: 10px;
+    margin-bottom: 3px;
+    font-size: 14px !important;
+}
 
-    /* ===== HEADINGS ===== */
-    h1 {
-        color: #102542;
-        font-weight: 700;
-        letter-spacing: -0.3px;
-    }
+div[role="radiogroup"] label:hover {
+    background: rgba(255,255,255,0.12);
+}
 
-    h2, h3, h4 {
-        color: #153B5C;
-        font-weight: 700;
-    }
+/* ===== HEADINGS ===== */
+h1 {
+    color: #102542;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    font-size: 26px !important;
+}
 
-    /* ===== MARKDOWN TEXT ===== */
-    .stMarkdown p {
-        font-size: 16px;
-        line-height: 1.65;
-        text-align: justify;
-        color: #1F2933;
-    }
+h2 {
+    color: #153B5C;
+    font-weight: 700;
+    font-size: 22px !important;
+}
 
-    .stMarkdown li {
-        font-size: 16px;
-        line-height: 1.6;
-        color: #1F2933;
-    }
+h3 {
+    color: #153B5C;
+    font-weight: 700;
+    font-size: 19px !important;
+}
 
-    .stMarkdown strong {
-        color: #102542;
-    }
+h4 {
+    color: #153B5C;
+    font-weight: 700;
+    font-size: 17px !important;
+}
 
-    /* ===== TITLE CARD ===== */
-   .title-card {
+/* ===== MARKDOWN TEXT ===== */
+.stMarkdown p {
+    font-size: 15px;
+    line-height: 1.65;
+    text-align: justify;
+    color: #1F2933;
+}
+
+.stMarkdown li {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #1F2933;
+}
+
+.stMarkdown strong {
+    color: #102542;
+}
+
+/* ===== TITLE CARD ===== */
+.title-card {
     background: #FFFFFF;
-    padding: 22px 26px;
-    border-radius: 18px;
-    margin-bottom: 22px;
-    box-shadow: 0 7px 20px rgba(16, 37, 66, 0.09);
+    padding: 20px 24px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 18px rgba(16, 37, 66, 0.08);
     border: 1px solid #E5E7EB;
-    border-left: 6px solid #2F80ED;
+    border-left: 5px solid #2F80ED;
 }
 
 .title-card h1 {
     margin: 0 0 8px 0;
     color: #102542;
-    font-size: 28px;
+    font-size: 26px !important;
     line-height: 1.25;
 }
 
 .title-card p {
     margin: 0;
     color: #64748B;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.55;
 }
 
-    /* ===== INSIGHT BOX ===== */
-    .insight-box {
-        background: #EAF3FF;
-        border-left: 6px solid #2F80ED;
-        padding: 16px 20px;
-        border-radius: 14px;
-        margin: 14px 0 22px 0;
-        color: #102542;
-        font-size: 18px;
-        line-height: 1.6;
-        box-shadow: 0 4px 12px rgba(16, 37, 66, 0.06);
-    }
+/* ===== INSIGHT BOX ===== */
+.insight-box {
+    background: #EAF3FF;
+    border-left: 5px solid #2F80ED;
+    padding: 14px 18px;
+    border-radius: 13px;
+    margin: 12px 0 20px 0;
+    color: #102542;
+    font-size: 15px;
+    line-height: 1.6;
+    box-shadow: 0 4px 12px rgba(16, 37, 66, 0.06);
+}
 
-    /* ===== METRIC CARDS ===== */
- div[data-testid="stMetric"] {
+/* ===== METRIC CARDS ===== */
+div[data-testid="stMetric"] {
     background: #FFFFFF;
-    padding: 15px 18px;
-    border-radius: 16px;
-    box-shadow: 0 5px 16px rgba(16, 37, 66, 0.08);
+    padding: 14px 16px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(16, 37, 66, 0.08);
     border: 1px solid #E5E7EB;
 }
 
@@ -148,84 +164,86 @@ div[data-testid="stMetricLabel"] {
 }
 
 div[data-testid="stMetricValue"] {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 700;
     color: #102542;
 }
 
-    /* ===== TABS ===== */
-    button[data-baseweb="tab"] {
-        font-size: 17px;
-        font-weight: 700;
-        background-color: #FFFFFF;
-        border-radius: 14px 14px 0 0;
-        padding: 10px 18px;
-        color: #153B5C;
-        border: 1px solid #E5E7EB;
-    }
+/* ===== TABS ===== */
+button[data-baseweb="tab"] {
+    font-size: 14px;
+    font-weight: 700;
+    background-color: #FFFFFF;
+    border-radius: 12px 12px 0 0;
+    padding: 8px 14px;
+    color: #153B5C;
+    border: 1px solid #E5E7EB;
+}
 
-    button[data-baseweb="tab"][aria-selected="true"] {
-        color: #FFFFFF !important;
-        background-color: #2F80ED !important;
-        border-color: #2F80ED !important;
-    }
+button[data-baseweb="tab"][aria-selected="true"] {
+    color: #FFFFFF !important;
+    background-color: #2F80ED !important;
+    border-color: #2F80ED !important;
+}
 
-    /* ===== DATAFRAME ===== */
-    div[data-testid="stDataFrame"] {
-        border-radius: 16px;
-        overflow: hidden;
-        box-shadow: 0 6px 18px rgba(16, 37, 66, 0.08);
-        border: 1px solid #E5E7EB;
-        background: white;
-    }
+/* ===== DATAFRAME ===== */
+div[data-testid="stDataFrame"] {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 16px rgba(16, 37, 66, 0.08);
+    border: 1px solid #E5E7EB;
+    background: white;
+    font-size: 14px !important;
+}
 
-    /* ===== PLOTLY CHART ===== */
-    div[data-testid="stPlotlyChart"] {
-        background: #FFFFFF;
-        padding: 14px;
-        border-radius: 18px;
-        box-shadow: 0 6px 18px rgba(16, 37, 66, 0.08);
-        border: 1px solid #E5E7EB;
-        margin-top: 14px;
-        margin-bottom: 22px;
-    }
+/* ===== PLOTLY CHART ===== */
+div[data-testid="stPlotlyChart"] {
+    background: #FFFFFF;
+    padding: 12px;
+    border-radius: 16px;
+    box-shadow: 0 5px 16px rgba(16, 37, 66, 0.08);
+    border: 1px solid #E5E7EB;
+    margin-top: 12px;
+    margin-bottom: 20px;
+}
 
-    /* ===== INFO / WARNING BOXES ===== */
-    div[data-testid="stAlert"] {
-        border-radius: 14px;
-        font-size: 17px;
-        line-height: 1.6;
-    }
+/* ===== INFO / WARNING BOXES ===== */
+div[data-testid="stAlert"] {
+    border-radius: 13px;
+    font-size: 15px;
+    line-height: 1.6;
+}
 
-    /* ===== BUTTONS ===== */
-    .stButton > button {
-        background-color: #2F80ED;
-        color: #FFFFFF;
-        border-radius: 12px;
-        border: none;
-        padding: 9px 20px;
-        font-weight: 700;
-        box-shadow: 0 4px 12px rgba(47, 128, 237, 0.25);
-    }
+/* ===== BUTTONS ===== */
+.stButton > button {
+    background-color: #2F80ED;
+    color: #FFFFFF;
+    border-radius: 11px;
+    border: none;
+    padding: 8px 18px;
+    font-weight: 700;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(47, 128, 237, 0.25);
+}
 
-    .stButton > button:hover {
-        background-color: #1C64C7;
-        color: #FFFFFF;
-    }
+.stButton > button:hover {
+    background-color: #1C64C7;
+    color: #FFFFFF;
+}
 
-    /* ===== EXPANDERS ===== */
-    .streamlit-expanderHeader {
-        font-size: 18px;
-        font-weight: 700;
-        color: #102542;
-    }
+/* ===== EXPANDERS ===== */
+.streamlit-expanderHeader {
+    font-size: 15px;
+    font-weight: 700;
+    color: #102542;
+}
 
-   /* ===== SMALL CAPTION ===== */
+/* ===== SMALL CAPTION ===== */
 .caption-text {
     color: #64748B;
-    font-size: 15px;
-    margin-top: -8px;
-    margin-bottom: 14px;
+    font-size: 14px;
+    margin-top: -6px;
+    margin-bottom: 12px;
 }
 
 /* ===== FIX STREAMLIT ICONS ===== */

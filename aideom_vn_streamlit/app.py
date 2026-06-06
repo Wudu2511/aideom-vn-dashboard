@@ -992,12 +992,7 @@ elif page == "Bài 11 - Q-learning":
         st.subheader("Thảo luận chính sách")
         st.markdown(DISCUSSIONS["bai11"])
 
-elif page == "Bài 12 - Tổng hợp kịch bản":
-    section_title("Bài 12. Dashboard tích hợp AIDEOM-VN", "So sánh 5 kịch bản chính sách đến năm 2030")
-    path = adv["Bai12_Scenario_Path"]
-    kpi = adv["Bai12_KPI_2030"]
-    risk = adv["Bai12_Risk_Warning"]
-    tab1, tab2, tab3, tab4 = st.tabs(["Đường kịch bản", "KPI năm 2030", "Cảnh báo rủi ro", "Thảo luận chính sách"])
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(["Đường kịch bản", "KPI năm 2030", "Cảnh báo rủi ro", "Thảo luận chính sách", "Khuyến nghị chính sách"]) 
     with tab1:
         show_df(path, "Đường phát triển theo kịch bản")
         st.plotly_chart(px.line(path, x="year", y="GDP_index", color="scenario", markers=True, title="GDP index theo kịch bản"), use_container_width=True)
@@ -1017,3 +1012,26 @@ elif page == "Bài 12 - Tổng hợp kịch bản":
     with tab4:
         st.subheader("Thảo luận chính sách")
         st.markdown(DISCUSSIONS["bai12"])
+    with tab5:
+        st.subheader("Khuyến nghị chính sách tổng hợp")
+
+        st.success(
+            "Kịch bản S5 - Tối ưu cân bằng được khuyến nghị vì dung hòa giữa tăng trưởng GDP, "
+            "chuyển đổi số, phát triển AI, nhân lực số và kiểm soát rủi ro."
+        )
+
+        st.markdown(
+            """
+            Từ kết quả mô hình AIDEOM-VN, có thể rút ra một số khuyến nghị chính sách chính:
+
+            1. **Không nên chỉ ưu tiên tăng trưởng GDP**, mà cần kết hợp mục tiêu tăng trưởng với công bằng vùng miền, nhân lực số và an ninh dữ liệu.
+
+            2. **Đầu tư AI cần đi kèm đào tạo nhân lực số**, vì nếu thiếu nhân lực, AI khó tạo ra tác động lan tỏa bền vững.
+
+            3. **Chuyển đổi số nên là nền tảng trước khi mở rộng AI quy mô lớn**, đặc biệt ở các vùng có năng lực hấp thụ công nghệ còn thấp.
+
+            4. **Cần kiểm soát rủi ro an ninh mạng và khoảng cách số**, vì output cảnh báo các kịch bản đều có rủi ro liên quan đến dữ liệu, nhân lực và chênh lệch vùng.
+
+            5. **Dashboard AIDEOM-VN nên được dùng như công cụ hỗ trợ ra quyết định**, không thay thế quyết định chính sách của con người.
+            """
+        )

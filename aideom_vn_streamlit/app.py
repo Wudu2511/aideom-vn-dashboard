@@ -741,78 +741,78 @@ if page == "Tổng quan":
     )
    col1, col2, col3 = st.columns(3)
 
-with col1:
-    st.markdown(
-        """
-        <div style="
-            background: #FFFFFF;
-            padding: 16px 18px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(16, 37, 66, 0.08);
-            border: 1px solid #E5E7EB;
-            min-height: 105px;
-        ">
-            <div style="font-size: 14px; font-weight: 700; color: #64748B;">
-                Số bài đã hoàn thiện
+    with col1:
+        st.markdown(
+            """
+            <div style="
+                background: #FFFFFF;
+                padding: 16px 18px;
+                border-radius: 15px;
+                box-shadow: 0 5px 15px rgba(16, 37, 66, 0.08);
+                border: 1px solid #E5E7EB;
+                min-height: 105px;
+            ">
+                <div style="font-size: 14px; font-weight: 700; color: #64748B;">
+                    Số bài đã hoàn thiện
+                </div>
+                <div style="font-size: 26px; font-weight: 700; color: #102542; margin-top: 8px;">
+                    12/12
+                </div>
             </div>
-            <div style="font-size: 26px; font-weight: 700; color: #102542; margin-top: 8px;">
-                12/12
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+            """,
+            unsafe_allow_html=True
+        )
 
-with col2:
-    st.markdown(
-        """
-        <div style="
-            background: #FFFFFF;
-            padding: 16px 18px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(16, 37, 66, 0.08);
-            border: 1px solid #E5E7EB;
-            min-height: 105px;
-        ">
-            <div style="font-size: 14px; font-weight: 700; color: #64748B;">
-                Nhóm mô hình
+    with col2:
+        st.markdown(
+            """
+            <div style="
+                background: #FFFFFF;
+                padding: 16px 18px;
+                border-radius: 15px;
+                box-shadow: 0 5px 15px rgba(16, 37, 66, 0.08);
+                border: 1px solid #E5E7EB;
+                min-height: 105px;
+            ">
+                <div style="font-size: 14px; font-weight: 700; color: #64748B;">
+                    Nhóm mô hình
+                </div>
+                <div style="font-size: 22px; font-weight: 700; color: #102542; margin-top: 8px; line-height: 1.35;">
+                    LP, MIP, TOPSIS,<br>
+                    NSGA-II, RL
+                </div>
             </div>
-            <div style="font-size: 22px; font-weight: 700; color: #102542; margin-top: 8px; line-height: 1.35;">
-                LP, MIP, TOPSIS,<br>
-                NSGA-II, RL
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+            """,
+            unsafe_allow_html=True
+        )
 
-with col3:
-    st.markdown(
-        """
-        <div style="
-            background: #FFFFFF;
-            padding: 16px 18px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(16, 37, 66, 0.08);
-            border: 1px solid #E5E7EB;
-            min-height: 105px;
-        ">
-            <div style="font-size: 14px; font-weight: 700; color: #64748B;">
-                Dữ liệu
+    with col3:
+        st.markdown(
+            """
+            <div style="
+                background: #FFFFFF;
+                padding: 16px 18px;
+                border-radius: 15px;
+                box-shadow: 0 5px 15px rgba(16, 37, 66, 0.08);
+                border: 1px solid #E5E7EB;
+                min-height: 105px;
+            ">
+                <div style="font-size: 14px; font-weight: 700; color: #64748B;">
+                    Dữ liệu
+                </div>
+                <div style="font-size: 26px; font-weight: 700; color: #102542; margin-top: 8px;">
+                    Việt Nam 2020-2035
+                </div>
             </div>
-            <div style="font-size: 26px; font-weight: 700; color: #102542; margin-top: 8px;">
-                Việt Nam 2020-2035
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-    st.write(
-        """
-        Dashboard trình bày kết quả định lượng, bảng, biểu đồ và thảo luận chính sách cho 12 bài.
-        Các kết quả được đọc từ 3 file Excel trong thư mục `data`.
-        """
-    )
+            """,
+            unsafe_allow_html=True
+        )
+        st.write(
+            """
+            Dashboard trình bày kết quả định lượng, bảng, biểu đồ và thảo luận chính sách cho 12 bài.
+            Các kết quả được đọc từ 3 file Excel trong thư mục `data`.
+            """
+        )
 
 elif page == "Bài 1 - Hàm sản xuất mở rộng":
     section_title("Bài 1. Hàm sản xuất Cobb-Douglas mở rộng", "Phân tích TFP, dự báo GDP và đóng góp tăng trưởng")

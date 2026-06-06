@@ -277,7 +277,7 @@ DATA_DIR = BASE_DIR / "data"
 MAIN_FILE = DATA_DIR / "ket_qua_bai_1_den_6.xlsx"
 SUPP_FILE = DATA_DIR / "ket_qua_bo_sung_bai_2_5.xlsx"
 ADV_FILE = DATA_DIR / "ket_qua_bai_7_den_12.xlsx"
-
+BAI9_FILE = DATA_DIR / "ket_qua_bai9_chay_lai.xlsx"
 @st.cache_data
 def load_excel(file_path: Path):
     return pd.read_excel(file_path, sheet_name=None)
@@ -289,12 +289,13 @@ def require_file(path: Path):
         st.stop()
 
 
-for file in [MAIN_FILE, SUPP_FILE, ADV_FILE]:
+for file in [MAIN_FILE, SUPP_FILE, ADV_FILE, BAI9_FILE]:
     require_file(file)
 
 main = load_excel(MAIN_FILE)
 supp = load_excel(SUPP_FILE)
 adv = load_excel(ADV_FILE)
+bai9_new = load_excel(BAI9_FILE)
 
 # =========================
 # HELPERS
@@ -998,7 +999,7 @@ elif page == "Bài 9 - Lao động và AI":
     labor = adv["Bai9_Labor_Result"]
     threshold = adv["Bai9_Threshold"]
     feasibility = adv["Bai9_Feasibility"]
-    sankey = adv["Bai9_Sankey"]
+    sankey = bai9_new["Bai9_Sankey_Potential"]
     tab1, tab2, tab3, tab4, tab5 = st.tabs(["Kết quả lao động", "Ngưỡng đào tạo", "Tính khả thi", "Sankey lao động", "Thảo luận chính sách"])
     with tab1:
         show_df(labor, "NetJob theo ngành")
@@ -1013,64 +1014,46 @@ elif page == "Bài 9 - Lao động và AI":
     with tab3:
         show_df(feasibility, "Tính khả thi khi thêm ràng buộc an sinh")
     with tab4:
-        st.subheader("Luồng dịch chuyển lao động nhóm dễ tổn thương")
+        st.subheader("Nguy cơ lao động bị ảnh hưởng bởi tự động hóa")
 
-        show_df(sankey, "Dữ liệu Sankey gốc")
+        sankey = bai9_new["Bai9_Sankey_Potential"].copy()
+        sankey["value"] = pd.to_numeric(sankey["value"], errors="coerce").fillna(0)
 
-        sankey_plot = sankey.copy()
-        sankey_plot["value"] = pd.to_numeric(sankey_plot["value"], errors="coerce").fillna(0)
+        show_df(sankey, "Dữ liệu nguy cơ tiềm năng")
 
-        if sankey_plot["value"].sum() <= 0:
-            st.warning(
-                "Biểu đồ Sankey chưa hiển thị vì trong nghiệm tối ưu hiện tại, "
-                "DisplacedJob của các nhóm dễ tổn thương bằng 0. "
-                "Điều này xảy ra do mô hình ưu tiên đào tạo lại, chưa phát sinh luồng lao động bị dịch chuyển."
+        fig = px.bar(
+            sankey,
+            x="value",
+            y="target",
+            orientation="h",
+            text="value",
+            title="Nguy cơ lao động bị ảnh hưởng bởi tự động hóa theo nhóm dễ tổn thương")
+
+        fig.update_traces(
+            texttemplate="%{text:.3f} triệu lao động",
+            textposition="outside"
             )
-
-            st.markdown(
-                """
-                Để vẫn minh họa được rủi ro lao động, dashboard hiển thị thêm 
-                **kịch bản nguy cơ tiềm năng** dựa trên quy mô lao động và tỷ lệ rủi ro tự động hóa.
-                """
-            )
-
-            potential_sankey = pd.DataFrame({
-                "source": ["Nguy cơ tự động hóa"] * 3,
-                "target": ["Nông-Lâm-Thủy sản", "Xây dựng", "Bán buôn-bán lẻ"],
-                "value": [
-                    13.20 * 18 / 100,
-                    4.80 * 25 / 100,
-                    7.80 * 38 / 100
-                ]
-            })
-
-            show_df(potential_sankey, "Kịch bản nguy cơ tiềm năng")
-
-            sankey_plot = potential_sankey
-
-        labels = list(pd.unique(sankey_plot[["source", "target"]].values.ravel()))
-        label_to_id = {label: i for i, label in enumerate(labels)}
-
-        fig = go.Figure(data=[go.Sankey(
-            node=dict(
-                pad=18,
-                thickness=22,
-                label=labels
-            ),
-            link=dict(
-                source=sankey_plot["source"].map(label_to_id),
-                target=sankey_plot["target"].map(label_to_id),
-                value=sankey_plot["value"]
-            )
-        )])
 
         fig.update_layout(
-            title_text="Sankey: luồng dịch chuyển lao động nhóm dễ tổn thương",
-            font_size=13,
-            height=520
-        )
+            xaxis_title="Số lao động có nguy cơ bị ảnh hưởng, triệu người",
+            yaxis_title="Nhóm ngành",
+            height=420,
+            showlegend=False,
+            margin=dict(l=20, r=100, t=70, b=40)
+            )
 
         st.plotly_chart(fig, use_container_width=True)
+
+        st.markdown(
+            """
+            <div class="insight-box">
+            Biểu đồ trên không phải là nghiệm tối ưu trực tiếp của mô hình, mà là kịch bản nguy cơ tiềm năng.
+            Trong nghiệm tối ưu, mô hình ưu tiên đào tạo lại nên DisplacedJob bằng 0, khiến Sankey gốc không có luồng để hiển thị.
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
     with tab5:
         st.subheader("Thảo luận chính sách")
         st.markdown(DISCUSSIONS["bai9"])

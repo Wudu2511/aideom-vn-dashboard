@@ -3,323 +3,150 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from pathlib import Path
+from io import BytesIO
 
-# =========================
-# PAGE CONFIG + STYLE
-# =========================
+# ============================================================
+# AIDEOM-VN STREAMLIT APP - HIỂN THỊ THEO TỪNG BÀI 1-12
+# ============================================================
+
 st.set_page_config(
-    page_title="AIDEOM-VN Dashboard",
-    page_icon="🇻🇳 🗂",
-    layout="wide"
+    page_title="AIDEOM-VN | Mô hình ra quyết định",
+    page_icon="🇻🇳",
+    layout="wide",
+    initial_sidebar_state="expanded",
 )
-# =========================
-# ACADEMIC BLUE THEME
-# =========================
-st.markdown(
-    """
-    <style>
-/* ===== FONT & GLOBAL ===== */
+
+# ============================================================
+# STYLE
+# ============================================================
+st.markdown("""
+<style>
 html, body, .stApp, .stMarkdown, .stText, .stDataFrame {
     font-family: "Times New Roman", Times, serif !important;
     font-size: 15px;
 }
-
 .stApp {
-    background: linear-gradient(135deg, #F7F9FC 0%, #EAF3FF 100%);
+    background: linear-gradient(135deg, #F8FBFF 0%, #EAF3FF 100%);
     color: #1F2933;
 }
-
-.block-container {
-    padding-top: 1.8rem;
-    padding-bottom: 2.6rem;
-    max-width: 1350px;
-}
-
-/* ===== SIDEBAR ===== */
+.block-container {padding-top: 1.4rem; padding-bottom: 2.5rem; max-width: 1380px;}
 section[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #102542 0%, #153B5C 100%);
-    border-right: 1px solid rgba(255,255,255,0.12);
+    background: linear-gradient(180deg, #0B1F3A 0%, #123B62 100%);
+    border-right: 1px solid rgba(255,255,255,0.14);
 }
-
-section[data-testid="stSidebar"] * {
-    color: #FFFFFF !important;
-}
-
-section[data-testid="stSidebar"] label {
-    font-size: 14px !important;
-    font-weight: 700 !important;
-}
-
-div[data-testid="stSidebarNav"] {
-    background-color: transparent;
-}
-
-/* Radio options in sidebar */
+section[data-testid="stSidebar"] * {color: #FFFFFF !important;}
+section[data-testid="stSidebar"] label {font-size: 14px !important; font-weight: 700 !important;}
 div[role="radiogroup"] label {
-    padding: 7px 9px;
-    border-radius: 10px;
-    margin-bottom: 3px;
-    font-size: 14px !important;
+    padding: 8px 10px; border-radius: 11px; margin-bottom: 4px; font-size: 14px !important;
 }
-
-div[role="radiogroup"] label:hover {
-    background: rgba(255,255,255,0.12);
-}
-
-/* ===== HEADINGS ===== */
-h1 {
-    color: #102542;
-    font-weight: 700;
-    letter-spacing: -0.2px;
-    font-size: 26px !important;
-}
-
-h2 {
-    color: #153B5C;
-    font-weight: 700;
-    font-size: 22px !important;
-}
-
-h3 {
-    color: #153B5C;
-    font-weight: 700;
-    font-size: 19px !important;
-}
-
-h4 {
-    color: #153B5C;
-    font-weight: 700;
-    font-size: 17px !important;
-}
-
-/* ===== MARKDOWN TEXT ===== */
-.stMarkdown p {
-    font-size: 15px;
-    line-height: 1.65;
-    text-align: justify;
-    color: #1F2933;
-}
-
-.stMarkdown li {
-    font-size: 15px;
-    line-height: 1.6;
-    color: #1F2933;
-}
-
-.stMarkdown strong {
-    color: #102542;
-}
-
-/* ===== TITLE CARD ===== */
+div[role="radiogroup"] label:hover {background: rgba(255,255,255,0.12);}
+h1 {color:#0B1F3A; font-weight:800; font-size:27px !important; letter-spacing:-0.2px;}
+h2 {color:#123B62; font-weight:800; font-size:22px !important;}
+h3 {color:#123B62; font-weight:800; font-size:19px !important;}
+h4 {color:#123B62; font-weight:800; font-size:17px !important;}
+.stMarkdown p, .stMarkdown li {font-size:15px; line-height:1.62; color:#1F2933;}
 .title-card {
-    background: #FFFFFF;
-    padding: 20px 24px;
-    border-radius: 16px;
-    margin-bottom: 20px;
-    box-shadow: 0 6px 18px rgba(16, 37, 66, 0.08);
-    border: 1px solid #E5E7EB;
-    border-left: 5px solid #2F80ED;
+    background:#FFFFFF; padding:20px 24px; border-radius:18px; margin-bottom:18px;
+    box-shadow:0 8px 24px rgba(16,37,66,.08); border:1px solid #E5E7EB; border-left:6px solid #2F80ED;
 }
-
-.title-card h1 {
-    margin: 0 0 8px 0;
-    color: #102542;
-    font-size: 26px !important;
-    line-height: 1.25;
+.title-card h1 {margin:0 0 8px 0; color:#0B1F3A; font-size:27px !important; line-height:1.25;}
+.title-card p {margin:0; color:#5B6B82; font-size:15px; line-height:1.55; text-align:left;}
+.info-card, .metric-card, .mini-card {
+    background:#FFFFFF; padding:16px 18px; border-radius:16px; border:1px solid #E5E7EB;
+    box-shadow:0 6px 18px rgba(16,37,66,.07); margin-bottom:14px;
 }
-
-.title-card p {
-    margin: 0;
-    color: #64748B;
-    font-size: 15px;
-    line-height: 1.55;
+.info-card {border-left:5px solid #2F80ED;}
+.info-card h4, .mini-card h4 {margin:0 0 8px 0; color:#123B62;}
+.info-card p, .mini-card p {margin:0; color:#334155; text-align:left;}
+.badge {
+    display:inline-block; padding:5px 10px; border-radius:999px; background:#EAF3FF; color:#123B62;
+    font-weight:700; font-size:13px; margin:3px 4px 3px 0; border:1px solid #CFE4FF;
 }
-
-/* ===== INSIGHT BOX ===== */
-.insight-box {
-    background: #EAF3FF;
-    border-left: 5px solid #2F80ED;
-    padding: 14px 18px;
-    border-radius: 13px;
-    margin: 12px 0 20px 0;
-    color: #102542;
-    font-size: 15px;
-    line-height: 1.6;
-    box-shadow: 0 4px 12px rgba(16, 37, 66, 0.06);
-}
-
-/* ===== METRIC CARDS ===== */
+.caption-text {color:#64748B; font-size:14px; margin-top:-4px; margin-bottom:12px;}
 div[data-testid="stMetric"] {
-    background: #FFFFFF;
-    padding: 14px 16px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(16, 37, 66, 0.08);
-    border: 1px solid #E5E7EB;
+    background:#FFFFFF; padding:14px 16px; border-radius:16px; box-shadow:0 6px 18px rgba(16,37,66,.07);
+    border:1px solid #E5E7EB;
 }
-
-div[data-testid="stMetricLabel"] {
-    font-size: 14px;
-    font-weight: 700;
-    color: #64748B;
-}
-
-div[data-testid="stMetricValue"] {
-    font-size: 22px;
-    font-weight: 700;
-    color: #102542;
-}
-
-/* ===== TABS ===== */
+div[data-testid="stMetricLabel"] {font-size:14px; font-weight:700; color:#64748B;}
+div[data-testid="stMetricValue"] {font-size:23px; font-weight:800; color:#0B1F3A;}
 button[data-baseweb="tab"] {
-    font-size: 14px;
-    font-weight: 700;
-    background-color: #FFFFFF;
-    border-radius: 12px 12px 0 0;
-    padding: 8px 14px;
-    color: #153B5C;
-    border: 1px solid #E5E7EB;
+    font-size:14px; font-weight:700; background-color:#FFFFFF; border-radius:12px 12px 0 0;
+    padding:8px 14px; color:#123B62; border:1px solid #E5E7EB;
 }
-
-button[data-baseweb="tab"][aria-selected="true"] {
-    color: #FFFFFF !important;
-    background-color: #2F80ED !important;
-    border-color: #2F80ED !important;
-}
-
-/* ===== DATAFRAME ===== */
+button[data-baseweb="tab"][aria-selected="true"] {color:#FFFFFF !important; background-color:#2F80ED !important; border-color:#2F80ED !important;}
 div[data-testid="stDataFrame"] {
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 5px 16px rgba(16, 37, 66, 0.08);
-    border: 1px solid #E5E7EB;
-    background: white;
-    font-size: 14px !important;
+    border-radius:15px; overflow:hidden; box-shadow:0 5px 16px rgba(16,37,66,.08);
+    border:1px solid #E5E7EB; background:white; font-size:14px !important;
 }
-
-/* ===== PLOTLY CHART ===== */
 div[data-testid="stPlotlyChart"] {
-    background: #FFFFFF;
-    padding: 12px;
-    border-radius: 16px;
-    box-shadow: 0 5px 16px rgba(16, 37, 66, 0.08);
-    border: 1px solid #E5E7EB;
-    margin-top: 12px;
-    margin-bottom: 20px;
+    background:#FFFFFF; padding:12px; border-radius:16px; box-shadow:0 5px 16px rgba(16,37,66,.08);
+    border:1px solid #E5E7EB; margin-top:10px; margin-bottom:18px;
 }
-
-/* ===== INFO / WARNING BOXES ===== */
-div[data-testid="stAlert"] {
-    border-radius: 13px;
-    font-size: 15px;
-    line-height: 1.6;
+div[data-testid="stAlert"] {border-radius:13px; font-size:15px; line-height:1.6;}
+.stDownloadButton > button, .stButton > button {
+    background-color:#2F80ED; color:#FFFFFF; border-radius:11px; border:none; padding:8px 18px;
+    font-weight:700; font-size:14px; box-shadow:0 4px 12px rgba(47,128,237,.25);
 }
-
-/* ===== BUTTONS ===== */
-.stButton > button {
-    background-color: #2F80ED;
-    color: #FFFFFF;
-    border-radius: 11px;
-    border: none;
-    padding: 8px 18px;
-    font-weight: 700;
-    font-size: 14px;
-    box-shadow: 0 4px 12px rgba(47, 128, 237, 0.25);
-}
-
-.stButton > button:hover {
-    background-color: #1C64C7;
-    color: #FFFFFF;
-}
-
-/* ===== EXPANDERS ===== */
-.streamlit-expanderHeader {
-    font-size: 15px;
-    font-weight: 700;
-    color: #102542;
-}
-
-/* ===== SMALL CAPTION ===== */
-.caption-text {
-    color: #64748B;
-    font-size: 14px;
-    margin-top: -6px;
-    margin-bottom: 12px;
-}
-
-/* ===== FIX STREAMLIT ICONS ===== */
-.material-symbols-rounded,
-.material-symbols-outlined,
-.material-icons,
-span[class*="material"],
-i[class*="material"],
-button span[class*="material"],
-[data-testid="collapsedControl"] *,
-[data-testid="stToolbar"] * {
-    font-family: "Material Symbols Rounded", "Material Icons" !important;
-    font-weight: normal !important;
-    font-style: normal !important;
-    text-transform: none !important;
-    letter-spacing: normal !important;
-    line-height: 1 !important;
-    -webkit-font-feature-settings: "liga" !important;
-    font-feature-settings: "liga" !important;
+.stDownloadButton > button:hover, .stButton > button:hover {background-color:#1C64C7; color:#FFFFFF;}
+.streamlit-expanderHeader {font-size:15px; font-weight:700; color:#102542;}
+.material-symbols-rounded,.material-symbols-outlined,.material-icons,span[class*="material"],i[class*="material"],button span[class*="material"],[data-testid="collapsedControl"] *,[data-testid="stToolbar"] * {
+    font-family:"Material Symbols Rounded", "Material Icons" !important; font-weight:normal !important; font-style:normal !important;
+    text-transform:none !important; letter-spacing:normal !important; line-height:1 !important;
+    -webkit-font-feature-settings:"liga" !important; font-feature-settings:"liga" !important;
 }
 </style>
-    """,
-    unsafe_allow_html=True
-)
-# =========================
+""", unsafe_allow_html=True)
+
+# ============================================================
 # DATA LOADING
-# =========================
-BASE_DIR = Path(__file__).parent
+# ============================================================
+BASE_DIR = Path(__file__).parent if "__file__" in globals() else Path.cwd()
 DATA_DIR = BASE_DIR / "data"
 
-MAIN_FILE = DATA_DIR / "ket_qua_bai_1_den_6.xlsx"
-SUPP_FILE = DATA_DIR / "ket_qua_bo_sung_bai_2_5.xlsx"
-ADV_FILE = DATA_DIR / "ket_qua_bai_7_den_12.xlsx"
+FILE_CANDIDATES = {
+    "main": [
+        DATA_DIR / "ket_qua_bai_1_den_6.xlsx",
+        DATA_DIR / "ket_qua_bai_1_den_6 (1).xlsx",
+        BASE_DIR / "ket_qua_bai_1_den_6.xlsx",
+        BASE_DIR / "ket_qua_bai_1_den_6 (1).xlsx",
+    ],
+    "supp": [
+        DATA_DIR / "ket_qua_bo_sung_bai_2_5.xlsx",
+        BASE_DIR / "ket_qua_bo_sung_bai_2_5.xlsx",
+    ],
+    "adv": [
+        DATA_DIR / "ket_qua_bai_7_den_12.xlsx",
+        BASE_DIR / "ket_qua_bai_7_den_12.xlsx",
+    ],
+}
 
-@st.cache_data
-def load_excel(file_path: Path):
-    return pd.read_excel(file_path, sheet_name=None)
+def find_file(key: str) -> Path | None:
+    for p in FILE_CANDIDATES[key]:
+        if p.exists():
+            return p
+    return None
 
+@st.cache_data(show_spinner=False)
+def load_excel(path_str: str) -> dict[str, pd.DataFrame]:
+    return pd.read_excel(path_str, sheet_name=None)
 
-def require_file(path: Path):
-    if not path.exists():
-        st.error(f"Không tìm thấy file: {path}. Hãy upload file này vào thư mục data trên GitHub.")
+def load_all_data():
+    paths = {k: find_file(k) for k in FILE_CANDIDATES}
+    missing = [k for k, v in paths.items() if v is None]
+    if missing:
+        st.error("Thiếu file dữ liệu. Hãy đặt 3 file Excel vào thư mục `data/` rồi chạy lại app.")
+        st.code("""data/
+  ket_qua_bai_1_den_6.xlsx
+  ket_qua_bo_sung_bai_2_5.xlsx
+  ket_qua_bai_7_den_12.xlsx""")
         st.stop()
+    return load_excel(str(paths["main"])), load_excel(str(paths["supp"])), load_excel(str(paths["adv"])), paths
 
+main, supp, adv, DATA_PATHS = load_all_data()
 
-for file in [MAIN_FILE, SUPP_FILE, ADV_FILE]:
-    require_file(file)
-
-main = load_excel(MAIN_FILE)
-supp = load_excel(SUPP_FILE)
-adv = load_excel(ADV_FILE)
-
-# =========================
-# HELPERS
-# =========================
-def section_title(title, subtitle=None):
-    subtitle_html = f"<p>{subtitle}</p>" if subtitle else ""
-    st.markdown(
-        f"""
-        <div class="title-card">
-            <h1>{title}</h1>
-            {subtitle_html}
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-def show_df(df, title=None):
-    if title:
-        st.subheader(title)
-    st.dataframe(df, use_container_width=True)
-
-
-# =========================
+# ============================================================
 # DISCUSSIONS
-# =========================
+# ============================================================
 DISCUSSIONS = {
     "bai1": r"""# Bài 1. Hàm sản xuất Cobb-Douglas mở rộng với AI và số hóa
 
@@ -685,441 +512,440 @@ Trong thực tế, hướng mở rộng quan trọng nhất là tích hợp dữ
 
 }
 
-# =========================
-# SIDEBAR
-# =========================
-st.sidebar.markdown(
-    """
-    <div style="text-align: center; padding: 14px 4px 22px 4px;">
-        <div style="
-            background: rgba(255,255,255,0.12);
-            border-radius: 18px;
-            padding: 16px 12px;
-            border: 1px solid rgba(255,255,255,0.18);
-        ">
-            <h2 style="margin: 0; color: white;">AIDEOM-VN</h2>
-            <p style="
-                margin-top: 8px;
-                color: #CBD5E1;
-                font-size: 15px;
-                line-height: 1.45;
-            ">
-                Bài tập 1-12
-            </p>
-        </div>
+# ============================================================
+# METADATA THEO TỪNG BÀI
+# ============================================================
+LESSON_META = {
+    1: {"title": "Bài 1. Hàm sản xuất Cobb-Douglas mở rộng", "level": "Dễ", "skills": ["Growth accounting", "TFP", "Forecast 2030"], "objective": "Tính TFP, so sánh GDP thực tế - dự báo và phân rã đóng góp tăng trưởng của K, L, D, AI, H."},
+    2: {"title": "Bài 2. Phân bổ ngân sách số", "level": "Dễ", "skills": ["LP", "Shadow price", "Sensitivity"], "objective": "Giải bài toán quy hoạch tuyến tính 4 hạng mục đầu tư số và phân tích giá đối ngẫu."},
+    3: {"title": "Bài 3. Chỉ số ưu tiên ngành", "level": "Dễ", "skills": ["Min-max", "MCDM", "Sensitivity"], "objective": "Xếp hạng 10 ngành theo chỉ số ưu tiên chuyển đổi số và AI."},
+    4: {"title": "Bài 4. Phân bổ ngân sách theo vùng", "level": "Trung bình", "skills": ["LP", "Fairness constraint", "Heatmap"], "objective": "Phân bổ ngân sách cho 6 vùng và 4 hạng mục, so sánh có/không có ràng buộc công bằng."},
+    5: {"title": "Bài 5. MIP lựa chọn dự án chuyển đổi số", "level": "Trung bình", "skills": ["MIP", "Binary variables", "Project portfolio"], "objective": "Chọn danh mục dự án tối ưu trong ngân sách và các ràng buộc đặc thù."},
+    6: {"title": "Bài 6. TOPSIS xếp hạng vùng ưu tiên AI", "level": "Trung bình", "skills": ["TOPSIS", "Entropy", "Regional ranking"], "objective": "Xếp hạng 6 vùng kinh tế theo mức độ ưu tiên đầu tư AI."},
+    7: {"title": "Bài 7. Tối ưu đa mục tiêu Pareto", "level": "Khá khó", "skills": ["NSGA-II", "Pareto", "TOPSIS compromise"], "objective": "Phân tích đánh đổi giữa tăng trưởng, công bằng, phát thải và rủi ro dữ liệu."},
+    8: {"title": "Bài 8. Tối ưu động liên thời gian", "level": "Khá khó", "skills": ["Dynamic optimization", "Welfare", "Shock scenario"], "objective": "Mô phỏng quỹ đạo tối ưu 2026-2035 và so sánh chiến lược đầu tư."},
+    9: {"title": "Bài 9. Tác động AI tới lao động", "level": "Khá khó", "skills": ["Labor simulation", "Retraining", "Net jobs"], "objective": "Đánh giá việc làm mới, việc làm bị thay thế và năng lực đào tạo lại theo ngành."},
+    10: {"title": "Bài 10. Quy hoạch ngẫu nhiên hai giai đoạn", "level": "Khó", "skills": ["Stochastic LP", "VSS", "EVPI"], "objective": "So sánh quyết định first-stage, second-stage và giá trị của thông tin dưới bất định."},
+    11: {"title": "Bài 11. Q-learning cho chính sách thích nghi", "level": "Khó", "skills": ["Q-learning", "Policy comparison", "Learning curve"], "objective": "Học chính sách thích nghi theo trạng thái kinh tế và so sánh với chính sách cố định."},
+    12: {"title": "Bài 12. Đồ án tích hợp AIDEOM-VN", "level": "Khó", "skills": ["Dashboard", "Scenario comparison", "Risk warning"], "objective": "Tích hợp các mô hình thành dashboard phân tích kịch bản, KPI và cảnh báo rủi ro."},
+}
+
+# ============================================================
+# HELPERS
+# ============================================================
+def section_title(title: str, subtitle: str | None = None):
+    subtitle_html = f"<p>{subtitle}</p>" if subtitle else ""
+    st.markdown(f"""
+    <div class="title-card">
+        <h1>{title}</h1>
+        {subtitle_html}
     </div>
-    """,
-    unsafe_allow_html=True
-)
+    """, unsafe_allow_html=True)
 
-page = st.sidebar.radio(
-    "Chọn nội dung",
-    [
-        "Tổng quan",
-        "Bài 1 - Hàm sản xuất mở rộng",
-        "Bài 2 - Phân bổ ngân sách",
-        "Bài 3 - Ưu tiên ngành",
-        "Bài 4 - Phân bổ theo vùng",
-        "Bài 5 - Lựa chọn dự án",
-        "Bài 6 - Xếp hạng vùng bằng TOPSIS",
-        "Bài 7 - Tối ưu đa mục tiêu",
-        "Bài 8 - Tối ưu động",
-        "Bài 9 - Lao động và AI",
-        "Bài 10 - Quy hoạch ngẫu nhiên",
-        "Bài 11 - Học tăng cường",
-        "Bài 12 - Tổng hợp kịch bản",
-    ],
-)
+def badges(items):
+    return "".join([f'<span class="badge">{x}</span>' for x in items])
 
-# =========================
-# PAGES
-# =========================
+def intro_box(n: int):
+    m = LESSON_META[n]
+    st.markdown(f"""
+    <div class="info-card">
+        <h4>Mục tiêu & kỹ năng chính</h4>
+        <p><b>Cấp độ:</b> {m['level']}</p>
+        <p><b>Mục tiêu:</b> {m['objective']}</p>
+        <div style="margin-top:8px;">{badges(m['skills'])}</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+def show_df(df: pd.DataFrame, title: str | None = None, height: int | None = None):
+    if title:
+        st.subheader(title)
+    st.dataframe(df, use_container_width=True, height=height)
+
+def to_csv_bytes(df: pd.DataFrame) -> bytes:
+    return df.to_csv(index=False).encode("utf-8-sig")
+
+def download_df(df: pd.DataFrame, file_name: str, label: str = "Tải bảng CSV"):
+    st.download_button(label, data=to_csv_bytes(df), file_name=file_name, mime="text/csv")
+
+def numeric_cols(df: pd.DataFrame):
+    return [c for c in df.columns if pd.api.types.is_numeric_dtype(df[c])]
+
+def first_existing(data: dict[str, pd.DataFrame], names: list[str]):
+    for n in names:
+        if n in data:
+            return data[n]
+    return pd.DataFrame()
+
+def format_number(x):
+    try:
+        return f"{float(x):,.2f}"
+    except Exception:
+        return str(x)
+
+def quick_metrics(df: pd.DataFrame, items: list[tuple[str, str]]):
+    cols = st.columns(len(items))
+    for col, (label, value) in zip(cols, items):
+        col.metric(label, value)
+
+def safe_plot_line(df, x, y, title, color=None, markers=True):
+    if all(c in df.columns for c in ([x, y] + ([color] if color else []))):
+        st.plotly_chart(px.line(df, x=x, y=y, color=color, markers=markers, title=title), use_container_width=True)
+
+def safe_plot_bar(df, x, y, title, color=None, text=None, barmode=None):
+    if isinstance(y, list):
+        needed = [x] + y
+    else:
+        needed = [x, y]
+    if all(c in df.columns for c in needed):
+        fig = px.bar(df, x=x, y=y, color=color, text=text, barmode=barmode, title=title)
+        fig.update_layout(xaxis_tickangle=-35)
+        st.plotly_chart(fig, use_container_width=True)
+
+def discussion(key: str):
+    st.markdown(DISCUSSIONS.get(key, "Chưa có nội dung thảo luận cho bài này."))
+
+def model_summary(text: str):
+    st.markdown(f"""
+    <div class="mini-card">
+        <h4>Mô hình / logic chính</h4>
+        <p>{text}</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+def generic_data_tab(sheets: dict[str, pd.DataFrame], sheet_names: list[str], prefix: str):
+    selected = st.selectbox("Chọn bảng dữ liệu", sheet_names, key=f"select_{prefix}")
+    df = sheets[selected]
+    show_df(df, selected)
+    download_df(df, f"{selected}.csv")
+
+# ============================================================
+# SIDEBAR
+# ============================================================
+st.sidebar.markdown("""
+<div style="text-align:center; padding:12px 4px 20px 4px;">
+    <div style="background:rgba(255,255,255,.12); border-radius:18px; padding:16px 12px; border:1px solid rgba(255,255,255,.18);">
+        <h2 style="margin:0; color:white;">AIDEOM-VN</h2>
+        <p style="margin-top:8px; color:#CBD5E1; font-size:15px; line-height:1.45;">Dashboard theo từng bài 1-12</p>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+page_options = ["Tổng quan"] + [LESSON_META[i]["title"] for i in range(1, 13)]
+page = st.sidebar.radio("Chọn nội dung", page_options)
+
+with st.sidebar.expander("Dữ liệu đang dùng", expanded=False):
+    st.write(f"Main: `{DATA_PATHS['main'].name}`")
+    st.write(f"Supplement: `{DATA_PATHS['supp'].name}`")
+    st.write(f"Advanced: `{DATA_PATHS['adv'].name}`")
+
+# ============================================================
+# PAGE: OVERVIEW
+# ============================================================
 if page == "Tổng quan":
     section_title(
         "AIDEOM-VN Dashboard",
-        "Dashboard tổng hợp kết quả mô hình ra quyết định phát triển kinh tế Việt Nam trong kỷ nguyên AI",
+        "Hiển thị kết quả theo từng bài trong bộ bài tập Mô hình ra quyết định phát triển kinh tế Việt Nam trong kỷ nguyên AI.",
     )
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("Số bài", "12/12")
+    col2.metric("Nhóm dữ liệu", "3 Excel")
+    col3.metric("Mốc thời gian", "2020-2035")
+    col4.metric("Công cụ", "Streamlit")
 
-    col1, col2, col3 = st.columns(3)
+    st.markdown("""
+    <div class="info-card">
+        <h4>Cách sử dụng</h4>
+        <p>Chọn từng bài ở thanh bên trái. Mỗi bài được chia thành các tab: mục tiêu - mô hình, dữ liệu, kết quả, biểu đồ, thảo luận chính sách và tải dữ liệu.</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-    with col1:
-        st.markdown(
-            """
-            <div style="
-                background: #FFFFFF;
-                padding: 16px 18px;
-                border-radius: 15px;
-                box-shadow: 0 5px 15px rgba(16, 37, 66, 0.08);
-                border: 1px solid #E5E7EB;
-                min-height: 105px;
-            ">
-                <div style="font-size: 14px; font-weight: 700; color: #64748B;">
-                    Số bài đã hoàn thiện
-                </div>
-                <div style="font-size: 26px; font-weight: 700; color: #102542; margin-top: 8px;">
-                    12/12
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+    overview = pd.DataFrame([
+        {"Bài": i, "Tên bài": LESSON_META[i]["title"].replace(f"Bài {i}. ", ""), "Cấp độ": LESSON_META[i]["level"], "Kỹ năng": ", ".join(LESSON_META[i]["skills"])}
+        for i in range(1, 13)
+    ])
+    show_df(overview, "Bản đồ 12 bài")
+    fig = px.histogram(overview, x="Cấp độ", color="Cấp độ", title="Phân bố cấp độ bài tập")
+    st.plotly_chart(fig, use_container_width=True)
 
-    with col2:
-        st.markdown(
-            """
-            <div style="
-                background: #FFFFFF;
-                padding: 16px 18px;
-                border-radius: 15px;
-                box-shadow: 0 5px 15px rgba(16, 37, 66, 0.08);
-                border: 1px solid #E5E7EB;
-                min-height: 105px;
-            ">
-                <div style="font-size: 14px; font-weight: 700; color: #64748B;">
-                    Nhóm mô hình
-                </div>
-                <div style="font-size: 22px; font-weight: 700; color: #102542; margin-top: 8px; line-height: 1.35;">
-                    LP, MIP, TOPSIS,<br>
-                    NSGA-II, RL
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-
-    with col3:
-        st.markdown(
-            """
-            <div style="
-                background: #FFFFFF;
-                padding: 16px 18px;
-                border-radius: 15px;
-                box-shadow: 0 5px 15px rgba(16, 37, 66, 0.08);
-                border: 1px solid #E5E7EB;
-                min-height: 105px;
-            ">
-                <div style="font-size: 14px; font-weight: 700; color: #64748B;">
-                    Dữ liệu
-                </div>
-                <div style="font-size: 26px; font-weight: 700; color: #102542; margin-top: 8px;">
-                    Việt Nam 2020-2035
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-
-    st.write(
-        """
-        Dashboard trình bày kết quả định lượng, bảng, biểu đồ và thảo luận chính sách cho 12 bài.
-        Các kết quả được đọc từ 3 file Excel trong thư mục `data`.
-        """
-    )
-
-elif page == "Bài 1 - Hàm sản xuất mở rộng":
-    section_title("Bài 1. Hàm sản xuất Cobb-Douglas mở rộng", "Phân tích TFP, dự báo GDP và đóng góp tăng trưởng")
-    df = main["Bai1_TFP"]
-    decomp = main["Bai1_Growth_Decomp"]
-    forecast = main["Bai1_Forecast2030"]
-    tab1, tab2, tab3, tab4 = st.tabs(["Kết quả TFP", "Phân rã tăng trưởng", "Dự báo 2030", "Thảo luận chính sách"])
-    with tab1:
-        show_df(df, "TFP và GDP dự báo")
-        st.plotly_chart(px.line(df, x="year", y="TFP_A", markers=True, title="Xu hướng TFP A_t"), use_container_width=True)
+# ============================================================
+# BÀI 1
+# ============================================================
+elif page == LESSON_META[1]["title"]:
+    section_title(LESSON_META[1]["title"], "TFP, phân rã tăng trưởng và dự báo GDP 2030")
+    intro_box(1)
+    df, decomp, forecast = main["Bai1_TFP"], main["Bai1_Growth_Decomp"], main["Bai1_Forecast2030"]
+    t1, t2, t3, t4, t5, t6 = st.tabs(["Mục tiêu & mô hình", "Dữ liệu", "TFP", "Phân rã", "Dự báo 2030", "Thảo luận"])
+    with t1:
+        model_summary("Hàm sản xuất Cobb-Douglas mở rộng đưa thêm D - số hóa, AI - năng lực AI và H - nhân lực số vào bên cạnh K và L. TFP được tính ngược từ GDP thực tế.")
+    with t2:
+        show_df(df, "Dữ liệu và kết quả tính TFP")
+        download_df(df, "bai1_tfp.csv")
+    with t3:
+        quick_metrics(df, [("TFP 2020", format_number(df.iloc[0]["TFP_A"])), ("TFP 2025", format_number(df.iloc[-1]["TFP_A"])), ("MAPE TB", format_number(df["APE_pct"].mean()) + "%")])
+        safe_plot_line(df, "year", "TFP_A", "Xu hướng TFP A_t")
         compare = df[["year", "GDP_trillion_VND", "Y_hat"]].melt(id_vars="year", var_name="Chỉ tiêu", value_name="GDP")
-        st.plotly_chart(px.line(compare, x="year", y="GDP", color="Chỉ tiêu", markers=True, title="GDP thực tế và dự báo"), use_container_width=True)
-    with tab2:
+        safe_plot_line(compare, "year", "GDP", "GDP thực tế và GDP dự báo", color="Chỉ tiêu")
+    with t4:
         show_df(decomp, "Phân rã tăng trưởng")
-        fig = px.bar(decomp, x="factor", y="share_of_growth_pct", text="share_of_growth_pct", title="Tỷ trọng đóng góp tăng trưởng")
-        fig.update_traces(texttemplate="%{text:.1f}%", textposition="outside")
-        st.plotly_chart(fig, use_container_width=True)
-    with tab3:
-        show_df(forecast, "Dự báo GDP 2030")
-    with tab4:
-        st.subheader("Thảo luận chính sách")
-        st.markdown(DISCUSSIONS["bai1"])
+        safe_plot_bar(decomp, "factor", "share_of_growth_pct", "Tỷ trọng đóng góp vào tăng trưởng", text="share_of_growth_pct")
+    with t5:
+        show_df(forecast, "Dự báo 2030")
+        download_df(forecast, "bai1_forecast2030.csv")
+    with t6:
+        discussion("bai1")
 
-elif page == "Bài 2 - Phân bổ ngân sách":
-    section_title("Bài 2. Phân bổ ngân sách số bằng quy hoạch tuyến tính", "Tối ưu 4 hạng mục: hạ tầng số, AI, nhân lực số và R&D")
-    base = main["Bai2_Base"]
-    duals = main["Bai2_Duals"]
-    sens = main["Bai2_Sensitivity"]
-    h30 = supp["Bai2_H30"]
-    tab1, tab2, tab3, tab4 = st.tabs(["Nghiệm tối ưu", "Shadow price", "Độ nhạy ngân sách", "Thảo luận chính sách"])
-    with tab1:
-        show_df(base, "Nghiệm tối ưu")
+# ============================================================
+# BÀI 2
+# ============================================================
+elif page == LESSON_META[2]["title"]:
+    section_title(LESSON_META[2]["title"], "LP ngân sách số, shadow price và độ nhạy ngân sách")
+    intro_box(2)
+    base, duals, sens, h30 = main["Bai2_Base"], main["Bai2_Duals"], main["Bai2_Sensitivity"], supp["Bai2_H30"]
+    t1, t2, t3, t4, t5 = st.tabs(["Mục tiêu & mô hình", "Nghiệm tối ưu", "Shadow price", "Độ nhạy", "Thảo luận"])
+    with t1:
+        model_summary("Tối đa hóa GDP kỳ vọng từ 4 hạng mục đầu tư: hạ tầng số, AI, nhân lực số và R&D trong ràng buộc ngân sách, mức sàn và tỷ trọng công nghệ chiến lược.")
+    with t2:
+        show_df(base, "Nghiệm cơ sở")
         alloc = base[["x_I", "x_AI", "x_H", "x_RD"]].T.reset_index()
         alloc.columns = ["Hạng mục", "Ngân sách"]
-        st.plotly_chart(px.bar(alloc, x="Hạng mục", y="Ngân sách", text="Ngân sách", title="Phân bổ ngân sách tối ưu"), use_container_width=True)
+        safe_plot_bar(alloc, "Hạng mục", "Ngân sách", "Phân bổ ngân sách tối ưu", text="Ngân sách")
         show_df(h30, "Trường hợp ưu tiên nhân lực số x_H ≥ 30")
-    with tab2:
-        show_df(duals, "Shadow price")
-    with tab3:
+    with t3:
+        show_df(duals, "Giá đối ngẫu và slack")
+        safe_plot_bar(duals, "constraint", "shadow_price", "Shadow price của các ràng buộc", text="shadow_price")
+    with t4:
         show_df(sens, "Độ nhạy ngân sách")
-        st.plotly_chart(px.line(sens, x="B", y="Z", markers=True, title="Đường cong Z*(B)"), use_container_width=True)
-    with tab4:
-        st.subheader("Thảo luận chính sách")
-        st.markdown(DISCUSSIONS["bai2"])
+        safe_plot_line(sens, "B", "Z", "Đường cong Z*(B)")
+    with t5:
+        discussion("bai2")
 
-elif page == "Bài 3 - Ưu tiên ngành":
-    section_title("Bài 3. Chỉ số ưu tiên ngành", "Xếp hạng 10 ngành theo Priority Index")
-    ranking = main["Bai3_Ranking"]
-    sens = main["Bai3_AI_Sensitivity"]
-    policy = main["Bai3_Policy_Weights"]
-    tab1, tab2, tab3, tab4 = st.tabs(["Xếp hạng ngành", "Độ nhạy AI", "So sánh trọng số", "Thảo luận chính sách"])
-    with tab1:
-        show_df(ranking)
-        fig = px.bar(ranking, x="sector_name_vi", y="Priority", text="Priority", title="Xếp hạng chỉ số ưu tiên ngành")
-        fig.update_layout(xaxis_tickangle=-45)
-        fig.update_traces(texttemplate="%{text:.3f}", textposition="outside")
+# ============================================================
+# BÀI 3
+# ============================================================
+elif page == LESSON_META[3]["title"]:
+    section_title(LESSON_META[3]["title"], "Xếp hạng ngành bằng chỉ số Priority")
+    intro_box(3)
+    ranking, sens, policy = main["Bai3_Ranking"], main["Bai3_AI_Sensitivity"], main["Bai3_Policy_Weights"]
+    t1, t2, t3, t4 = st.tabs(["Xếp hạng", "Độ nhạy AI", "So sánh trọng số", "Thảo luận"])
+    with t1:
+        show_df(ranking, "Bảng xếp hạng ngành")
+        safe_plot_bar(ranking, "sector_name_vi", "Priority", "Priority Index theo ngành", text="Priority")
+    with t2:
+        show_df(sens, "Top 3 khi thay đổi trọng số AI")
+    with t3:
+        show_df(policy, "So sánh định hướng tăng trưởng và bao trùm")
+        if {"sector_name_vi", "Priority_growth_oriented", "Priority_inclusive_oriented"}.issubset(policy.columns):
+            plot_df = policy[["sector_name_vi", "Priority_growth_oriented", "Priority_inclusive_oriented"]].melt("sector_name_vi", var_name="Bộ trọng số", value_name="Priority")
+            safe_plot_bar(plot_df, "sector_name_vi", "Priority", "So sánh Priority theo 2 bộ trọng số", color="Bộ trọng số", barmode="group")
+    with t4:
+        discussion("bai3")
+
+# ============================================================
+# BÀI 4
+# ============================================================
+elif page == LESSON_META[4]["title"]:
+    section_title(LESSON_META[4]["title"], "Phân bổ ngân sách số theo 6 vùng")
+    intro_box(4)
+    fair, nofair = main["Bai4_With_Fairness"], main["Bai4_No_Fairness"]
+    t1, t2, t3, t4 = st.tabs(["Có công bằng", "Không công bằng", "So sánh", "Thảo luận"])
+    with t1:
+        show_df(fair, "Nghiệm có ràng buộc công bằng")
+        st.plotly_chart(px.imshow(fair.set_index("region_name")[["I", "D", "AI", "H"]], text_auto=True, aspect="auto", title="Heatmap phân bổ có công bằng"), use_container_width=True)
+    with t2:
+        show_df(nofair, "Nghiệm không có ràng buộc công bằng")
+        st.plotly_chart(px.imshow(nofair.set_index("region_name")[["I", "D", "AI", "H"]], text_auto=True, aspect="auto", title="Heatmap phân bổ không công bằng"), use_container_width=True)
+    with t3:
+        comp = fair[["region_name", "Total"]].merge(nofair[["region_name", "Total"]], on="region_name", suffixes=("_fair", "_no_fair"))
+        comp["diff_no_fair_minus_fair"] = comp["Total_no_fair"] - comp["Total_fair"]
+        show_df(comp, "So sánh tổng ngân sách theo vùng")
+        st.plotly_chart(px.bar(comp, x="region_name", y=["Total_fair", "Total_no_fair"], barmode="group", title="Có công bằng vs không công bằng"), use_container_width=True)
+    with t4:
+        discussion("bai4")
+
+# ============================================================
+# BÀI 5
+# ============================================================
+elif page == LESSON_META[5]["title"]:
+    section_title(LESSON_META[5]["title"], "Danh mục dự án tối ưu theo ngân sách và rủi ro")
+    intro_box(5)
+    base80, base100, risk = main["Bai5_Selected_80k"], main["Bai5_Selected_100k"], main["Bai5_Risk_Adjusted"]
+    force, no_p14 = supp["Bai5_Force_P1_P2"], supp["Bai5_No_P14_Required"]
+    t1, t2, t3, t4, t5, t6 = st.tabs(["80k", "100k", "Bắt buộc P1-P2", "Điều chỉnh rủi ro", "Không bắt buộc P14", "Thảo luận"])
+    for tab, df, title in [(t1, base80, "Ngân sách 80.000 tỷ"), (t2, base100, "Ngân sách 100.000 tỷ"), (t3, force, "Bắt buộc P1 & P2"), (t4, risk, "Tính theo lợi ích điều chỉnh rủi ro"), (t5, no_p14, "Không bắt buộc P14")]:
+        with tab:
+            show_df(df, title)
+            quick_metrics(df, [("Số dự án", str(len(df))), ("Tổng chi phí", format_number(df["cost"].sum())), ("Tổng lợi ích", format_number(df["benefit"].sum()))])
+            safe_plot_bar(df, "P", ["cost", "benefit"], f"Chi phí và lợi ích - {title}", barmode="group")
+    with t6:
+        discussion("bai5")
+
+# ============================================================
+# BÀI 6
+# ============================================================
+elif page == LESSON_META[6]["title"]:
+    section_title(LESSON_META[6]["title"], "TOPSIS trọng số chuyên gia và Entropy")
+    intro_box(6)
+    topsis, sens = main["Bai6_TOPSIS"], main["Bai6_AI_Sensitivity"]
+    t1, t2, t3, t4 = st.tabs(["Kết quả TOPSIS", "Biểu đồ", "Độ nhạy AI", "Thảo luận"])
+    with t1:
+        show_df(topsis, "Bảng TOPSIS")
+    with t2:
+        plot_df = topsis[["region_name_vi", "TOPSIS_expert", "TOPSIS_entropy"]].melt("region_name_vi", var_name="Phương pháp", value_name="Điểm")
+        safe_plot_bar(plot_df, "region_name_vi", "Điểm", "So sánh điểm TOPSIS", color="Phương pháp", barmode="group")
+    with t3:
+        show_df(sens, "Top 3 khi thay đổi trọng số AI")
+    with t4:
+        discussion("bai6")
+
+# ============================================================
+# BÀI 7
+# ============================================================
+elif page == LESSON_META[7]["title"]:
+    section_title(LESSON_META[7]["title"], "Biên Pareto và nghiệm thỏa hiệp")
+    intro_box(7)
+    pareto, compromise, alloc = adv["Bai7_Pareto"], adv["Bai7_Compromise"], adv["Bai7_Allocation"]
+    t1, t2, t3, t4 = st.tabs(["Biên Pareto", "Nghiệm thỏa hiệp", "Phân bổ", "Thảo luận"])
+    with t1:
+        show_df(pareto, "Tập nghiệm Pareto", height=360)
+        fig = px.scatter_3d(pareto, x="GDP_gain", y="Inequality_MAD", z="Emission", color="TOPSIS_compromise_score", title="Pareto 3D")
         st.plotly_chart(fig, use_container_width=True)
-    with tab2:
-        show_df(sens)
-    with tab3:
-        show_df(policy)
-    with tab4:
-        st.subheader("Thảo luận chính sách")
-        st.markdown(DISCUSSIONS["bai3"])
-
-elif page == "Bài 4 - Phân bổ theo vùng":
-    section_title("Bài 4. Phân bổ ngân sách số theo vùng", "So sánh có và không có ràng buộc công bằng")
-    fair = main["Bai4_With_Fairness"]
-    nofair = main["Bai4_No_Fairness"]
-    tab1, tab2, tab3 = st.tabs(["Có công bằng", "Không công bằng", "Thảo luận chính sách"])
-    with tab1:
-        show_df(fair)
-        st.plotly_chart(px.imshow(fair.set_index("region_name")[["I", "D", "AI", "H"]], text_auto=True, aspect="auto", title="Có ràng buộc công bằng"), use_container_width=True)
-    with tab2:
-        show_df(nofair)
-        st.plotly_chart(px.imshow(nofair.set_index("region_name")[["I", "D", "AI", "H"]], text_auto=True, aspect="auto", title="Không có ràng buộc công bằng"), use_container_width=True)
-    with tab3:
-        st.subheader("Thảo luận chính sách")
-        st.markdown(DISCUSSIONS["bai4"])
-
-elif page == "Bài 5 - Lựa chọn dự án":
-    section_title("Bài 5. MIP lựa chọn dự án chuyển đổi số", "Tối ưu danh mục dự án trong điều kiện ràng buộc")
-    base = main["Bai5_Selected_80k"]
-    budget100 = main["Bai5_Selected_100k"]
-    risk = main["Bai5_Risk_Adjusted"]
-    force = supp["Bai5_Force_P1_P2"]
-    no_p14 = supp["Bai5_No_P14_Required"]
-    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Ngân sách 80k", "Ngân sách 100k", "Bắt buộc P1 & P2", "Rủi ro dự án", "Không bắt buộc P14", "Thảo luận chính sách"])
-    with tab1:
-        show_df(base)
-        fig = px.bar(base, x="name", y=["cost", "benefit"], barmode="group", title="Chi phí và lợi ích các dự án được chọn")
-        fig.update_layout(xaxis_tickangle=-45)
-        st.plotly_chart(fig, use_container_width=True)
-    with tab2:
-        show_df(budget100)
-    with tab3:
-        show_df(force)
-    with tab4:
-        show_df(risk)
-    with tab5:
-        show_df(no_p14)
-    with tab6:
-        st.subheader("Thảo luận chính sách")
-        st.markdown(DISCUSSIONS["bai5"])
-
-elif page == "Bài 6 - Xếp hạng vùng bằng TOPSIS":
-    section_title("Bài 6. TOPSIS xếp hạng vùng ưu tiên AI", "So sánh trọng số chuyên gia, Entropy và độ nhạy AI")
-    topsis = main["Bai6_TOPSIS"]
-    sens = main["Bai6_AI_Sensitivity"]
-    tab1, tab2, tab3 = st.tabs(["Kết quả TOPSIS", "Độ nhạy AI", "Thảo luận chính sách"])
-    with tab1:
-        show_df(topsis)
-        plot_df = topsis[["region_name_vi", "TOPSIS_expert", "TOPSIS_entropy"]].melt(id_vars="region_name_vi", var_name="Phương pháp", value_name="Điểm TOPSIS")
-        fig = px.bar(plot_df, x="region_name_vi", y="Điểm TOPSIS", color="Phương pháp", barmode="group", title="So sánh TOPSIS")
-        fig.update_layout(xaxis_tickangle=-45)
-        st.plotly_chart(fig, use_container_width=True)
-    with tab2:
-        show_df(sens)
-    with tab3:
-        st.subheader("Thảo luận chính sách")
-        st.markdown(DISCUSSIONS["bai6"])
-
-elif page == "Bài 7 - Tối ưu đa mục tiêu":
-    section_title("Bài 7. Tối ưu đa mục tiêu Pareto với NSGA-II", "Đánh đổi giữa tăng trưởng, công bằng vùng, phát thải và rủi ro dữ liệu")
-    pareto = adv["Bai7_Pareto"]
-    compromise = adv["Bai7_Compromise"]
-    allocation = adv["Bai7_Allocation"]
-    tab1, tab2, tab3, tab4 = st.tabs(["Biên Pareto", "Nghiệm thỏa hiệp", "Phân bổ ngân sách", "Thảo luận chính sách"])
-    with tab1:
-        show_df(pareto, "Tập nghiệm Pareto")
-        fig = px.scatter_3d(pareto, x="GDP_gain", y="Inequality_MAD", z="Emission", color="TOPSIS_compromise_score", title="Biên Pareto 3D")
-        st.plotly_chart(fig, use_container_width=True)
-    with tab2:
-        show_df(compromise, "Nghiệm thỏa hiệp theo TOPSIS")
+    with t2:
+        show_df(compromise, "Nghiệm thỏa hiệp TOPSIS")
         row = compromise.iloc[0]
-        col1, col2, col3, col4 = st.columns(4)
-        col1.metric("GDP gain", f"{row['GDP_gain']:,.2f}")
-        col2.metric("Inequality MAD", f"{row['Inequality_MAD']:,.2f}")
-        col3.metric("Emission", f"{row['Emission']:,.2f}")
-        col4.metric("TOPSIS score", f"{row['TOPSIS_compromise_score']:.3f}")
-    with tab3:
-        show_df(allocation, "Phân bổ ngân sách tại nghiệm thỏa hiệp")
-        st.plotly_chart(px.imshow(allocation.set_index("region")[["I", "D", "AI", "H"]], text_auto=True, aspect="auto", title="Heatmap phân bổ"), use_container_width=True)
-        st.plotly_chart(px.bar(allocation, x="region", y=["I", "D", "AI", "H"], barmode="stack", title="Cơ cấu phân bổ ngân sách"), use_container_width=True)
-    with tab4:
-        st.subheader("Thảo luận chính sách")
-        st.markdown(DISCUSSIONS["bai7"])
+        quick_metrics(compromise, [("GDP gain", format_number(row["GDP_gain"])), ("Inequality", format_number(row["Inequality_MAD"])), ("Emission", format_number(row["Emission"])), ("TOPSIS", format_number(row["TOPSIS_compromise_score"]))])
+    with t3:
+        show_df(alloc, "Phân bổ tại nghiệm thỏa hiệp")
+        safe_plot_bar(alloc, "region", ["I", "D", "AI", "H"], "Cơ cấu phân bổ theo vùng", barmode="stack")
+    with t4:
+        discussion("bai7")
 
-elif page == "Bài 8 - Tối ưu động":
-    section_title("Bài 8. Tối ưu động phân bổ vốn 2026-2035", "Quỹ đạo K, D, AI, H, GDP và tiêu dùng")
-    opt = adv["Bai8_Optimal_Path"]
-    shock = adv["Bai8_Shock_2028"]
-    compare = adv["Bai8_Strategy_Compare"]
-    tab1, tab2, tab3, tab4 = st.tabs(["Quỹ đạo tối ưu", "Cú sốc 2028", "So sánh chiến lược", "Thảo luận chính sách"])
-    with tab1:
-        show_df(opt, "Quỹ đạo tối ưu 2026-2035")
-        st.plotly_chart(px.line(opt, x="year", y=["K", "D", "AI", "H"], markers=True, title="Quỹ đạo K, D, AI, H"), use_container_width=True)
-        st.plotly_chart(px.line(opt, x="year", y=["Y", "C"], markers=True, title="Sản lượng Y và tiêu dùng C"), use_container_width=True)
-        st.plotly_chart(px.line(opt, x="year", y=["share_K", "share_D", "share_AI", "share_H"], markers=True, title="Tỷ trọng đầu tư tối ưu"), use_container_width=True)
-    with tab2:
-        show_df(shock, "Kịch bản có cú sốc năm 2028")
-        shock_compare = opt[["year", "Y", "C"]].rename(columns={"Y": "Y_no_shock", "C": "C_no_shock"}).copy()
-        shock_compare["Y_shock"] = shock["Y"]
-        shock_compare["C_shock"] = shock["C"]
-        st.plotly_chart(px.line(shock_compare, x="year", y=["Y_no_shock", "Y_shock"], markers=True, title="Sản lượng: không sốc và có sốc"), use_container_width=True)
-        st.plotly_chart(px.line(shock_compare, x="year", y=["C_no_shock", "C_shock"], markers=True, title="Tiêu dùng: không sốc và có sốc"), use_container_width=True)
-    with tab3:
+# ============================================================
+# BÀI 8
+# ============================================================
+elif page == LESSON_META[8]["title"]:
+    section_title(LESSON_META[8]["title"], "Quỹ đạo tối ưu 2026-2035")
+    intro_box(8)
+    opt, shock, compare = adv["Bai8_Optimal_Path"], adv["Bai8_Shock_2028"], adv["Bai8_Strategy_Compare"]
+    t1, t2, t3, t4, t5 = st.tabs(["Quỹ đạo tối ưu", "Cơ cấu đầu tư", "Cú sốc 2028", "So sánh chiến lược", "Thảo luận"])
+    with t1:
+        show_df(opt, "Optimal path")
+        safe_plot_line(opt, "year", "Y", "GDP/Y theo quỹ đạo tối ưu")
+    with t2:
+        share_cols = ["share_K", "share_D", "share_AI", "share_H"]
+        st.plotly_chart(px.area(opt, x="year", y=share_cols, title="Tỷ trọng đầu tư theo thời gian"), use_container_width=True)
+    with t3:
+        show_df(shock, "Kịch bản shock 2028")
+        safe_plot_line(shock, "year", "Y", "GDP/Y khi có cú sốc 2028")
+    with t4:
         show_df(compare, "So sánh chiến lược")
-        fig = px.bar(compare, x="strategy", y="welfare", text="welfare", title="Welfare theo chiến lược")
-        fig.update_traces(texttemplate="%{text:.3f}", textposition="outside")
-        st.plotly_chart(fig, use_container_width=True)
-        fig2 = px.bar(compare, x="strategy", y="GDP_2035", text="GDP_2035", title="GDP 2035 theo chiến lược")
-        fig2.update_traces(texttemplate="%{text:.2f}", textposition="outside")
-        st.plotly_chart(fig2, use_container_width=True)
-    with tab4:
-        st.subheader("Thảo luận chính sách")
-        st.markdown(DISCUSSIONS["bai8"])
+        safe_plot_bar(compare, "strategy", "welfare", "Welfare theo chiến lược", text="welfare")
+    with t5:
+        discussion("bai8")
 
-elif page == "Bài 9 - Lao động và AI":
-    section_title("Bài 9. Tác động AI tới thị trường lao động Việt Nam", "Tối ưu đầu tư AI và đào tạo lại để bảo đảm NetJob")
-    labor = adv["Bai9_Labor_Result"]
-    threshold = adv["Bai9_Threshold"]
-    feasibility = adv["Bai9_Feasibility"]
-    sankey = adv["Bai9_Sankey"]
-    tab1, tab2, tab3, tab4, tab5 = st.tabs(["Kết quả lao động", "Ngưỡng đào tạo", "Tính khả thi", "Sankey lao động", "Thảo luận chính sách"])
-    with tab1:
-        show_df(labor, "NetJob theo ngành")
-        fig = px.bar(labor, x="sector", y=["NewJob", "UpgradeJob", "DisplacedJob", "NetJob"], barmode="group", title="Việc làm mới, nâng cấp, dịch chuyển và NetJob")
-        fig.update_layout(xaxis_tickangle=-45)
-        st.plotly_chart(fig, use_container_width=True)
-        fig2 = px.bar(labor, x="sector", y=["x_AI", "x_H"], barmode="group", title="Đầu tư AI và đào tạo lại")
-        fig2.update_layout(xaxis_tickangle=-45)
-        st.plotly_chart(fig2, use_container_width=True)
-    with tab2:
-        show_df(threshold, "Ngưỡng đào tạo")
-    with tab3:
-        show_df(feasibility, "Tính khả thi khi thêm ràng buộc an sinh")
-    with tab4:
-        show_df(sankey, "Luồng dịch chuyển lao động nhóm dễ tổn thương")
-        labels = list(pd.unique(sankey[["source", "target"]].values.ravel()))
-        label_to_id = {label: i for i, label in enumerate(labels)}
-        fig = go.Figure(data=[go.Sankey(
-            node=dict(pad=15, thickness=20, label=labels),
-            link=dict(source=sankey["source"].map(label_to_id), target=sankey["target"].map(label_to_id), value=sankey["value"]),
-        )])
-        fig.update_layout(title_text="Sankey: luồng dịch chuyển lao động", font_size=12)
-        st.plotly_chart(fig, use_container_width=True)
-    with tab5:
-        st.subheader("Thảo luận chính sách")
-        st.markdown(DISCUSSIONS["bai9"])
+# ============================================================
+# BÀI 9
+# ============================================================
+elif page == LESSON_META[9]["title"]:
+    section_title(LESSON_META[9]["title"], "AI, việc làm và đào tạo lại")
+    intro_box(9)
+    labor, threshold, feas, sankey = adv["Bai9_Labor_Result"], adv["Bai9_Threshold"], adv["Bai9_Feasibility"], adv["Bai9_Sankey"]
+    t1, t2, t3, t4, t5 = st.tabs(["Kết quả lao động", "Biểu đồ", "Ngưỡng đào tạo", "Tính khả thi", "Thảo luận"])
+    with t1:
+        show_df(labor, "Kết quả theo ngành")
+        quick_metrics(labor, [("NewJob", format_number(labor["NewJob"].sum())), ("UpgradeJob", format_number(labor["UpgradeJob"].sum())), ("DisplacedJob", format_number(labor["DisplacedJob"].sum())), ("NetJob", format_number(labor["NetJob"].sum()))])
+    with t2:
+        safe_plot_bar(labor, "sector", ["NewJob", "UpgradeJob", "DisplacedJob", "NetJob"], "Tác động việc làm theo ngành", barmode="group")
+    with t3:
+        show_df(threshold, "Ngưỡng đào tạo lại")
+    with t4:
+        show_df(feas, "Kiểm tra tính khả thi")
+        show_df(sankey, "Dữ liệu Sankey")
+    with t5:
+        discussion("bai9")
 
-elif page == "Bài 10 - Quy hoạch ngẫu nhiên":
-    section_title("Bài 10. Quy hoạch ngẫu nhiên hai giai đoạn", "First-stage, second-stage, wait-and-see, VSS và EVPI")
-    first = adv["Bai10_First_Stage"]
-    second = adv["Bai10_Second_Stage"]
-    waitsee = adv["Bai10_Wait_See"]
-    summary = adv["Bai10_VSS_EVPI"]
-    tab1, tab2, tab3, tab4, tab5 = st.tabs(["First-stage", "Second-stage", "Wait-and-see", "VSS và EVPI", "Thảo luận chính sách"])
-    with tab1:
-        show_df(first, "Quyết định first-stage")
-        fig = px.bar(first, x="item", y="first_stage_x", text="first_stage_x", title="Phân bổ first-stage")
-        fig.update_traces(texttemplate="%{text:.2f}", textposition="outside")
-        st.plotly_chart(fig, use_container_width=True)
-    with tab2:
-        show_df(second, "Second-stage theo kịch bản")
-        second_melt = second.melt(id_vars="scenario", var_name="item", value_name="second_stage_value")
-        st.plotly_chart(px.bar(second_melt, x="scenario", y="second_stage_value", color="item", barmode="group", title="Second-stage theo kịch bản"), use_container_width=True)
-    with tab3:
+# ============================================================
+# BÀI 10
+# ============================================================
+elif page == LESSON_META[10]["title"]:
+    section_title(LESSON_META[10]["title"], "Stochastic LP dưới bất định")
+    intro_box(10)
+    first, second, waitsee, vss = adv["Bai10_First_Stage"], adv["Bai10_Second_Stage"], adv["Bai10_Wait_See"], adv["Bai10_VSS_EVPI"]
+    t1, t2, t3, t4, t5 = st.tabs(["First-stage", "Second-stage", "Wait-and-see", "VSS/EVPI", "Thảo luận"])
+    with t1:
+        show_df(first, "Quyết định giai đoạn 1")
+        safe_plot_bar(first, "item", "first_stage_x", "First-stage allocation", text="first_stage_x")
+    with t2:
+        show_df(second, "Quyết định giai đoạn 2 theo kịch bản")
+        safe_plot_bar(second, "scenario", ["I", "D", "AI", "H"], "Second-stage theo kịch bản", barmode="stack")
+    with t3:
         show_df(waitsee, "Wait-and-see")
-        fig = px.bar(waitsee, x="scenario", y="scenario_value", text="scenario_value", title="Giá trị từng kịch bản")
-        fig.update_traces(texttemplate="%{text:.2f}", textposition="outside")
-        st.plotly_chart(fig, use_container_width=True)
-    with tab4:
-        show_df(summary, "VSS và EVPI")
-        fig = px.bar(summary, x="metric", y="value", text="value", title="SP, EEV, Wait-and-see, VSS, EVPI")
-        fig.update_traces(texttemplate="%{text:.2f}", textposition="outside")
-        st.plotly_chart(fig, use_container_width=True)
-    with tab5:
-        st.subheader("Thảo luận chính sách")
-        st.markdown(DISCUSSIONS["bai10"])
+        safe_plot_bar(waitsee, "scenario", "scenario_value", "Giá trị theo kịch bản", text="scenario_value")
+    with t4:
+        show_df(vss, "VSS và EVPI")
+    with t5:
+        discussion("bai10")
 
-elif page == "Bài 11 - Học tăng cường":
-    section_title("Bài 11. Q-learning cho chính sách kinh tế thích nghi", "So sánh chính sách học tăng cường với chính sách cố định")
-    policy = adv["Bai11_Q_Policy"]
-    compare = adv["Bai11_Policy_Compare"]
-    curve = adv["Bai11_Learning_Curve"]
-    tab1, tab2, tab3, tab4 = st.tabs(["Chính sách học được", "So sánh chính sách", "Learning curve", "Thảo luận chính sách"])
-    with tab1:
-        show_df(policy, "Chính sách tối ưu theo trạng thái")
-    with tab2:
-        show_df(compare, "So sánh phần thưởng")
-        fig = px.bar(compare, x="policy", y="avg_total_reward", error_y="std_total_reward", text="avg_total_reward", title="So sánh avg_total_reward")
-        fig.update_traces(texttemplate="%{text:.3f}", textposition="outside")
-        st.plotly_chart(fig, use_container_width=True)
-    with tab3:
-        show_df(curve.tail(500), "Learning curve, 500 dòng cuối")
-        st.plotly_chart(px.line(curve, x="episode", y="rolling_reward_200", title="Rolling reward 200 episodes"), use_container_width=True)
-    with tab4:
-        st.subheader("Thảo luận chính sách")
-        st.markdown(DISCUSSIONS["bai11"])
-elif page == "Bài 12 - Tổng hợp kịch bản":
-    section_title("Bài 12. Dashboard tích hợp AIDEOM-VN", "So sánh 5 kịch bản chính sách đến năm 2030")
-    path = adv["Bai12_Scenario_Path"]
-    kpi = adv["Bai12_KPI_2030"]
-    risk = adv["Bai12_Risk_Warning"]
-    tab1, tab2, tab3, tab4, tab5 = st.tabs(["Đường kịch bản", "KPI năm 2030", "Cảnh báo rủi ro", "Thảo luận chính sách", "Khuyến nghị chính sách"]) 
-    with tab1:
-        show_df(path, "Đường phát triển theo kịch bản")
-        st.plotly_chart(px.line(path, x="year", y="GDP_index", color="scenario", markers=True, title="GDP index theo kịch bản"), use_container_width=True)
-        st.plotly_chart(px.line(path, x="year", y="D", color="scenario", markers=True, title="Mức độ số hóa D"), use_container_width=True)
-        st.plotly_chart(px.line(path, x="year", y="AI", color="scenario", markers=True, title="Năng lực AI"), use_container_width=True)
-    with tab2:
+# ============================================================
+# BÀI 11
+# ============================================================
+elif page == LESSON_META[11]["title"]:
+    section_title(LESSON_META[11]["title"], "Q-learning cho chính sách thích nghi")
+    intro_box(11)
+    qpol, pcomp, curve = adv["Bai11_Q_Policy"], adv["Bai11_Policy_Compare"], adv["Bai11_Learning_Curve"]
+    t1, t2, t3, t4 = st.tabs(["Chính sách Q-learning", "So sánh chính sách", "Learning curve", "Thảo luận"])
+    with t1:
+        show_df(qpol, "Chính sách học được theo trạng thái")
+        safe_plot_bar(qpol, "state_name", "Q_value", "Q-value theo trạng thái", color="best_action", text="Q_value")
+    with t2:
+        show_df(pcomp, "So sánh chính sách")
+        safe_plot_bar(pcomp, "policy", "avg_total_reward", "Average total reward", text="avg_total_reward")
+    with t3:
+        show_df(curve.head(300), "300 episode đầu tiên", height=280)
+        safe_plot_line(curve, "episode", "rolling_reward_200", "Đường học rolling reward 200 episode")
+    with t4:
+        discussion("bai11")
+
+# ============================================================
+# BÀI 12
+# ============================================================
+elif page == LESSON_META[12]["title"]:
+    section_title(LESSON_META[12]["title"], "Dashboard tích hợp kịch bản, KPI và cảnh báo rủi ro")
+    intro_box(12)
+    path, kpi, risk = adv["Bai12_Scenario_Path"], adv["Bai12_KPI_2030"], adv["Bai12_Risk_Warning"]
+    t1, t2, t3, t4, t5 = st.tabs(["Tổng quan hệ thống", "Đường kịch bản", "KPI 2030", "Cảnh báo rủi ro", "Thảo luận"])
+    with t1:
+        model_summary("Bài 12 tích hợp kết quả từ các mô hình trước thành dashboard AIDEOM-VN. Người xem có thể so sánh các kịch bản phát triển và nhận diện rủi ro về an ninh mạng, khoảng cách số và thiếu nhân lực.")
+        quick_metrics(kpi, [("Số kịch bản", str(kpi["scenario"].nunique())), ("GDP_index cao nhất", format_number(kpi["GDP_index"].max())), ("D cao nhất", format_number(kpi["D"].max())), ("AI cao nhất", format_number(kpi["AI"].max()))])
+    with t2:
+        show_df(path, "Đường phát triển kịch bản")
+        safe_plot_line(path, "year", "GDP_index", "GDP_index theo kịch bản", color="scenario")
+    with t3:
         show_df(kpi, "KPI năm 2030")
-        fig = px.bar(kpi, x="scenario", y="GDP_index", text="GDP_index", title="GDP index 2030")
-        fig.update_layout(xaxis_tickangle=-45)
-        fig.update_traces(texttemplate="%{text:.2f}", textposition="outside")
+        safe_plot_bar(kpi, "scenario", "GDP_index", "GDP_index năm 2030", color="scenario", text="GDP_index")
+        radar_cols = ["GDP_index", "D", "AI", "H", "A"]
+        radar_df = kpi.copy()
+        for c in radar_cols:
+            maxv = radar_df[c].max()
+            radar_df[c] = radar_df[c] / maxv if maxv else radar_df[c]
+        fig = go.Figure()
+        for _, row in radar_df.iterrows():
+            fig.add_trace(go.Scatterpolar(r=[row[c] for c in radar_cols], theta=radar_cols, fill='toself', name=row['scenario']))
+        fig.update_layout(title="Radar chuẩn hóa KPI 2030", polar=dict(radialaxis=dict(visible=True, range=[0,1])), showlegend=True)
         st.plotly_chart(fig, use_container_width=True)
-        fig2 = px.bar(kpi, x="scenario", y=["D", "AI", "H", "A"], barmode="group", title="D, AI, H, A năm 2030")
-        fig2.update_layout(xaxis_tickangle=-45)
-        st.plotly_chart(fig2, use_container_width=True)
-    with tab3:
-        show_df(risk, "Cảnh báo rủi ro theo kịch bản")
-    with tab4:
-        st.subheader("Thảo luận chính sách")
-        st.markdown(DISCUSSIONS["bai12"])
-    with tab5:
-        st.subheader("Khuyến nghị chính sách tổng hợp")
+    with t4:
+        show_df(risk, "Cảnh báo rủi ro")
+        for _, row in risk.iterrows():
+            st.markdown(f"""
+            <div class="mini-card">
+                <h4>{row['scenario']}</h4>
+                <p><b>Cyber risk:</b> {row['cyber_risk']} | <b>Digital gap:</b> {row['digital_gap_risk']} | <b>Nhân lực:</b> {row['human_capital_status']}</p>
+            </div>
+            """, unsafe_allow_html=True)
+    with t5:
+        discussion("bai12")
 
-        st.success(
-            "Kịch bản S5 - Tối ưu cân bằng được khuyến nghị vì dung hòa giữa tăng trưởng GDP, "
-            "chuyển đổi số, phát triển AI, nhân lực số và kiểm soát rủi ro."
-        )
-
-        st.markdown(
-            """
-            Từ kết quả mô hình AIDEOM-VN, có thể rút ra một số khuyến nghị chính sách chính:
-
-            1. **Không nên chỉ ưu tiên tăng trưởng GDP**, mà cần kết hợp mục tiêu tăng trưởng với công bằng vùng miền, nhân lực số và an ninh dữ liệu.
-
-            2. **Đầu tư AI cần đi kèm đào tạo nhân lực số**, vì nếu thiếu nhân lực, AI khó tạo ra tác động lan tỏa bền vững.
-
-            3. **Chuyển đổi số nên là nền tảng trước khi mở rộng AI quy mô lớn**, đặc biệt ở các vùng có năng lực hấp thụ công nghệ còn thấp.
-
-            4. **Cần kiểm soát rủi ro an ninh mạng và khoảng cách số**, vì output cảnh báo các kịch bản đều có rủi ro liên quan đến dữ liệu, nhân lực và chênh lệch vùng.
-
-            5. **Dashboard AIDEOM-VN nên được dùng như công cụ hỗ trợ ra quyết định**, không thay thế quyết định chính sách của con người.
-            """
-        )
+# ============================================================
+# FOOTER
+# ============================================================
+st.markdown("---")
+st.caption("AIDEOM-VN Dashboard | Streamlit | Hiển thị theo từng bài 1-12")

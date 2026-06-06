@@ -739,7 +739,8 @@ if page == "Tổng quan":
         "AIDEOM-VN Dashboard",
         "Dashboard tổng hợp kết quả mô hình ra quyết định phát triển kinh tế Việt Nam trong kỷ nguyên AI",
     )
-   col1, col2, col3 = st.columns(3)
+
+    col1, col2, col3 = st.columns(3)
 
     with col1:
         st.markdown(
@@ -807,12 +808,13 @@ if page == "Tổng quan":
             """,
             unsafe_allow_html=True
         )
-        st.write(
-            """
-            Dashboard trình bày kết quả định lượng, bảng, biểu đồ và thảo luận chính sách cho 12 bài.
-            Các kết quả được đọc từ 3 file Excel trong thư mục `data`.
-            """
-        )
+
+    st.write(
+        """
+        Dashboard trình bày kết quả định lượng, bảng, biểu đồ và thảo luận chính sách cho 12 bài.
+        Các kết quả được đọc từ 3 file Excel trong thư mục `data`.
+        """
+    )
 
 elif page == "Bài 1 - Hàm sản xuất mở rộng":
     section_title("Bài 1. Hàm sản xuất Cobb-Douglas mở rộng", "Phân tích TFP, dự báo GDP và đóng góp tăng trưởng")

@@ -739,10 +739,74 @@ if page == "Tổng quan":
         "AIDEOM-VN Dashboard",
         "Dashboard tổng hợp kết quả mô hình ra quyết định phát triển kinh tế Việt Nam trong kỷ nguyên AI",
     )
-    col1, col2, col3 = st.columns(3)
-    col1.metric("Số bài đã hoàn thiện", "12/12")
-    col2.metric("Nhóm mô hình", "LP, MIP, TOPSIS, NSGA-II, RL")
-    col3.metric("Dữ liệu", "Việt Nam 2020-2035")
+   col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.markdown(
+        """
+        <div style="
+            background: #FFFFFF;
+            padding: 16px 18px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(16, 37, 66, 0.08);
+            border: 1px solid #E5E7EB;
+            min-height: 105px;
+        ">
+            <div style="font-size: 14px; font-weight: 700; color: #64748B;">
+                Số bài đã hoàn thiện
+            </div>
+            <div style="font-size: 26px; font-weight: 700; color: #102542; margin-top: 8px;">
+                12/12
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+with col2:
+    st.markdown(
+        """
+        <div style="
+            background: #FFFFFF;
+            padding: 16px 18px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(16, 37, 66, 0.08);
+            border: 1px solid #E5E7EB;
+            min-height: 105px;
+        ">
+            <div style="font-size: 14px; font-weight: 700; color: #64748B;">
+                Nhóm mô hình
+            </div>
+            <div style="font-size: 22px; font-weight: 700; color: #102542; margin-top: 8px; line-height: 1.35;">
+                LP, MIP, TOPSIS,<br>
+                NSGA-II, RL
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+with col3:
+    st.markdown(
+        """
+        <div style="
+            background: #FFFFFF;
+            padding: 16px 18px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(16, 37, 66, 0.08);
+            border: 1px solid #E5E7EB;
+            min-height: 105px;
+        ">
+            <div style="font-size: 14px; font-weight: 700; color: #64748B;">
+                Dữ liệu
+            </div>
+            <div style="font-size: 26px; font-weight: 700; color: #102542; margin-top: 8px;">
+                Việt Nam 2020-2035
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
     st.write(
         """
         Dashboard trình bày kết quả định lượng, bảng, biểu đồ và thảo luận chính sách cho 12 bài.

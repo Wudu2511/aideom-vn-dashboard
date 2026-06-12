@@ -3,16 +3,184 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from pathlib import Path
-import sys
 
-BASE_DIR = Path(__file__).resolve().parent
-SRC_DIR = BASE_DIR / "src"
+# =========================
+# AI POLICY ANALYST - OFFLINE AGENT
+# =========================
 
-if str(SRC_DIR) not in sys.path:
-    sys.path.append(str(SRC_DIR))
+def _fmt_number(x):
+    try:
+        if abs(x) >= 1000:
+            return f"{x:,.2f}"
+        return f"{x:.4f}"
+    except Exception:
+        return str(x)
 
-from ai_policy_analyst import render_ai_policy_agent
 
+def _find_label_col(df):
+    preferred_cols = [
+        "sector_name_vi", "region_name_vi", "region_name",
+        "scenario", "name", "project", "item", "policy",
+        "factor", "metric", "year", "sector", "region"
+    ]
+
+    for col in preferred_cols:
+        if col in df.columns:
+            return col
+
+    object_cols = df.select_dtypes(include=["object"]).columns.tolist()
+    if object_cols:
+        return object_cols[0]
+
+    return None
+
+
+def _important_numeric_cols(df):
+    keywords = [
+        "GDP", "TFP", "Priority", "TOPSIS", "score", "Z", "benefit",
+        "cost", "welfare", "NetJob", "Displaced", "Emission",
+        "Risk", "AI", "H", "D", "value", "reward"
+    ]
+
+    numeric_cols = df.select_dtypes(include=["number"]).columns.tolist()
+
+    selected = []
+    for col in numeric_cols:
+        col_lower = str(col).lower()
+        if any(k.lower() in col_lower for k in keywords):
+            selected.append(col)
+
+    if not selected:
+        selected = numeric_cols[:3]
+
+    return selected[:4]
+
+
+def _summarize_table(table_name, df):
+    if df is None or df.empty:
+        return f"- Bảng **{table_name}** không có dữ liệu để phân tích."
+
+    label_col = _find_label_col(df)
+    numeric_cols = _important_numeric_cols(df)
+
+    lines = []
+    lines.append(f"- Bảng **{table_name}** có **{len(df)} dòng** và **{len(df.columns)} cột**.")
+
+    for col in numeric_cols:
+        try:
+            clean_df = df[[col] + ([label_col] if label_col else [])].dropna()
+            if clean_df.empty:
+                continue
+
+            max_idx = clean_df[col].idxmax()
+            min_idx = clean_df[col].idxmin()
+
+            max_label = clean_df.loc[max_idx, label_col] if label_col else f"dòng {max_idx}"
+            min_label = clean_df.loc[min_idx, label_col] if label_col else f"dòng {min_idx}"
+
+            max_val = clean_df.loc[max_idx, col]
+            min_val = clean_df.loc[min_idx, col]
+
+            lines.append(
+                f"  - Chỉ tiêu **{col}** cao nhất ở **{max_label}** "
+                f"({_fmt_number(max_val)}), thấp nhất ở **{min_label}** "
+                f"({_fmt_number(min_val)})."
+            )
+        except Exception:
+            continue
+
+    return "\n".join(lines)
+
+
+def _policy_recommendation(exercise_id):
+    recommendations = {
+        "bai1": "Kết quả Bài 1 nên được dùng để đánh giá vai trò của TFP, số hóa, AI và nhân lực số trong tăng trưởng. Cần thận trọng vì hệ số Cobb-Douglas là giả định.",
+        "bai2": "Kết quả phân bổ ngân sách là gợi ý định lượng. Nếu mô hình dồn vốn quá nhiều vào một hạng mục, cần kiểm tra khả năng hấp thụ và năng lực triển khai.",
+        "bai3": "Chỉ số ưu tiên ngành phụ thuộc mạnh vào bộ trọng số. Trọng số nên được quyết định qua tham vấn chuyên gia và nhà quản lý.",
+        "bai4": "Nếu bỏ ràng buộc công bằng, vốn thường chảy về vùng có hiệu quả biên cao. Cần cân bằng giữa tăng trưởng và thu hẹp khoảng cách số.",
+        "bai5": "Danh mục dự án tối ưu không chỉ nên xét NPV, mà còn phải xét dữ liệu mở, an ninh mạng và đào tạo nhân lực.",
+        "bai6": "TOPSIS hỗ trợ xếp hạng vùng, nhưng quyết định đặt trung tâm AI cần bổ sung tiêu chí địa chính trị, an ninh dữ liệu và cân bằng vùng.",
+        "bai7": "Tập nghiệm Pareto cho thấy không có phương án tối ưu tuyệt đối. Cần lựa chọn đánh đổi giữa tăng trưởng, bao trùm, môi trường và an ninh.",
+        "bai8": "Tối ưu động cho thấy đầu tư sớm vào số hóa, AI và nhân lực có thể tạo lợi ích dài hạn, nhưng cần tránh diễn giải máy móc.",
+        "bai9": "Mô hình lao động cần được đọc cùng yếu tố an sinh xã hội. Không nên chỉ tối đa hóa NetJob tổng mà bỏ qua nhóm lao động dễ tổn thương.",
+        "bai10": "Quy hoạch ngẫu nhiên giúp chính sách chuẩn bị tốt hơn trước bất định. Cần xem lại kịch bản nếu VSS hoặc EVPI quá thấp.",
+        "bai11": "Q-learning chỉ nên đóng vai trò khuyến nghị chính sách thích nghi. AI không thay thế trách nhiệm ra quyết định của con người.",
+        "bai12": "Kịch bản tối ưu cân bằng thường phù hợp hơn kịch bản cực đoan vì AI cần hạ tầng số, nhân lực số, an ninh dữ liệu và kiểm soát khoảng cách vùng."
+    }
+
+    return recommendations.get(
+        exercise_id,
+        "Kết quả mô hình nên được xem là công cụ hỗ trợ ra quyết định, không phải quyết định cuối cùng."
+    )
+
+
+def generate_policy_analysis(exercise_id, exercise_name, tables):
+    lines = []
+
+    lines.append("### 🤖 AI Policy Analyst")
+    lines.append("")
+    lines.append(
+        "Tác nhân này tự đọc bảng kết quả đầu ra, phát hiện điểm nổi bật và đưa ra nhận xét chính sách. "
+        "Kết quả phân tích mang tính hỗ trợ, không thay thế quyết định của nhà quản lý."
+    )
+
+    lines.append("")
+    lines.append("#### 1. Tóm tắt dữ liệu đầu vào")
+
+    for table_name, df in tables.items():
+        if isinstance(df, pd.DataFrame):
+            lines.append(_summarize_table(table_name, df))
+
+    lines.append("")
+    lines.append("#### 2. Nhận xét chính")
+    lines.append(
+        f"Kết quả của **{exercise_name}** cung cấp các chỉ báo định lượng để so sánh phương án, "
+        "nhận diện phương án nổi bật và phát hiện các đánh đổi chính sách."
+    )
+
+    lines.append("")
+    lines.append("#### 3. Cảnh báo khi diễn giải")
+    lines.append(
+        "Các kết quả phụ thuộc vào giả định mô hình, trọng số, ràng buộc và chất lượng dữ liệu đầu vào. "
+        "Vì vậy, không nên diễn giải kết quả như một kết luận tuyệt đối."
+    )
+
+    lines.append("")
+    lines.append("#### 4. Khuyến nghị")
+    lines.append(_policy_recommendation(exercise_id))
+
+    return "\n".join(lines)
+
+
+def render_ai_policy_agent(exercise_id, exercise_name, tables):
+    st.markdown(
+        """
+        <div style="
+            background: #F8FBFF;
+            border: 1px solid #D7E7FF;
+            border-left: 6px solid #2F80ED;
+            border-radius: 14px;
+            padding: 16px 18px;
+            margin: 18px 0 18px 0;
+        ">
+            <h3 style="margin-top:0; color:#102542;">🤖 AI Policy Analyst</h3>
+            <p style="margin-bottom:0; color:#334155;">
+                Tác nhân phân tích kết quả mô hình và gợi ý diễn giải chính sách.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    if st.button("Chạy tác nhân phân tích", key=f"agent_{exercise_id}"):
+        analysis = generate_policy_analysis(exercise_id, exercise_name, tables)
+        st.markdown(analysis)
+
+    with st.expander("Dữ liệu mà tác nhân sử dụng"):
+        for name, df in tables.items():
+            if isinstance(df, pd.DataFrame):
+                st.write(f"**{name}**")
+                st.dataframe(df.head(10), use_container_width=True)
 # =========================
 # PAGE CONFIG + STYLE
 # =========================

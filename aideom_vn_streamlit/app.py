@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from pathlib import Path
+from src.ai_policy_analyst import render_ai_policy_agent
 
 # =========================
 # PAGE CONFIG + STYLE
@@ -1155,3 +1156,167 @@ elif page == "Bài 12 - Tổng hợp kịch bản":
             5. **Dashboard AIDEOM-VN nên được dùng như công cụ hỗ trợ ra quyết định**, không thay thế quyết định chính sách của con người.
             """
         )
+# =========================
+# GLOBAL AI POLICY ANALYST
+# Gắn tác nhân tự động theo page hiện tại
+# =========================
+
+DATA_SOURCES = {
+    "main": main,
+    "supp": supp,
+    "adv": adv,
+    "bai9_new": bai9_new
+}
+
+PAGE_AGENT_CONFIG = {
+    "Bài 1 - Hàm sản xuất mở rộng": {
+        "id": "bai1",
+        "name": "Bài 1 - Cobb-Douglas và TFP",
+        "tables": {
+            "TFP": ("main", "Bai1_TFP"),
+            "Phân rã tăng trưởng": ("main", "Bai1_Growth_Decomp"),
+            "Dự báo 2030": ("main", "Bai1_Forecast2030")
+        }
+    },
+
+    "Bài 2 - Phân bổ ngân sách": {
+        "id": "bai2",
+        "name": "Bài 2 - Phân bổ ngân sách số",
+        "tables": {
+            "Nghiệm tối ưu": ("main", "Bai2_Base"),
+            "Shadow price": ("main", "Bai2_Duals"),
+            "Độ nhạy ngân sách": ("main", "Bai2_Sensitivity"),
+            "Ưu tiên nhân lực số": ("supp", "Bai2_H30")
+        }
+    },
+
+    "Bài 3 - Ưu tiên ngành": {
+        "id": "bai3",
+        "name": "Bài 3 - Chỉ số ưu tiên ngành",
+        "tables": {
+            "Xếp hạng ngành": ("main", "Bai3_Ranking"),
+            "Độ nhạy AI": ("main", "Bai3_AI_Sensitivity"),
+            "So sánh trọng số": ("main", "Bai3_Policy_Weights")
+        }
+    },
+
+    "Bài 4 - Phân bổ theo vùng": {
+        "id": "bai4",
+        "name": "Bài 4 - Phân bổ ngân sách theo vùng",
+        "tables": {
+            "Có công bằng": ("main", "Bai4_With_Fairness"),
+            "Không công bằng": ("main", "Bai4_No_Fairness")
+        }
+    },
+
+    "Bài 5 - Lựa chọn dự án": {
+        "id": "bai5",
+        "name": "Bài 5 - MIP lựa chọn dự án",
+        "tables": {
+            "Ngân sách 80k": ("main", "Bai5_Selected_80k"),
+            "Ngân sách 100k": ("main", "Bai5_Selected_100k"),
+            "Rủi ro dự án": ("main", "Bai5_Risk_Adjusted"),
+            "Bắt buộc P1 và P2": ("supp", "Bai5_Force_P1_P2"),
+            "Không bắt buộc P14": ("supp", "Bai5_No_P14_Required")
+        }
+    },
+
+    "Bài 6 - Xếp hạng vùng bằng TOPSIS": {
+        "id": "bai6",
+        "name": "Bài 6 - TOPSIS xếp hạng vùng ưu tiên AI",
+        "tables": {
+            "Kết quả TOPSIS": ("main", "Bai6_TOPSIS"),
+            "Độ nhạy AI": ("main", "Bai6_AI_Sensitivity")
+        }
+    },
+
+    "Bài 7 - Tối ưu đa mục tiêu": {
+        "id": "bai7",
+        "name": "Bài 7 - Tối ưu đa mục tiêu Pareto",
+        "tables": {
+            "Tập nghiệm Pareto": ("adv", "Bai7_Pareto"),
+            "Nghiệm thỏa hiệp": ("adv", "Bai7_Compromise"),
+            "Phân bổ ngân sách": ("adv", "Bai7_Allocation")
+        }
+    },
+
+    "Bài 8 - Tối ưu động": {
+        "id": "bai8",
+        "name": "Bài 8 - Tối ưu động 2026-2035",
+        "tables": {
+            "Quỹ đạo tối ưu": ("adv", "Bai8_Optimal_Path"),
+            "Cú sốc 2028": ("adv", "Bai8_Shock_2028"),
+            "So sánh chiến lược": ("adv", "Bai8_Strategy_Compare")
+        }
+    },
+
+    "Bài 9 - Lao động và AI": {
+        "id": "bai9",
+        "name": "Bài 9 - Lao động và AI",
+        "tables": {
+            "Kết quả lao động": ("adv", "Bai9_Labor_Result"),
+            "Ngưỡng đào tạo": ("adv", "Bai9_Threshold"),
+            "Tính khả thi": ("adv", "Bai9_Feasibility"),
+            "Sankey lao động": ("bai9_new", "Bai9_Sankey_Potential")
+        }
+    },
+
+    "Bài 10 - Quy hoạch ngẫu nhiên": {
+        "id": "bai10",
+        "name": "Bài 10 - Quy hoạch ngẫu nhiên hai giai đoạn",
+        "tables": {
+            "First-stage": ("adv", "Bai10_First_Stage"),
+            "Second-stage": ("adv", "Bai10_Second_Stage"),
+            "Wait-and-see": ("adv", "Bai10_Wait_See"),
+            "VSS và EVPI": ("adv", "Bai10_VSS_EVPI")
+        }
+    },
+
+    "Bài 11 - Học tăng cường": {
+        "id": "bai11",
+        "name": "Bài 11 - Q-learning chính sách thích nghi",
+        "tables": {
+            "Chính sách học được": ("adv", "Bai11_Q_Policy"),
+            "So sánh chính sách": ("adv", "Bai11_Policy_Compare"),
+            "Learning curve": ("adv", "Bai11_Learning_Curve")
+        }
+    },
+
+    "Bài 12 - Tổng hợp kịch bản": {
+        "id": "bai12",
+        "name": "Bài 12 - Dashboard tích hợp AIDEOM-VN",
+        "tables": {
+            "Đường kịch bản": ("adv", "Bai12_Scenario_Path"),
+            "KPI năm 2030": ("adv", "Bai12_KPI_2030"),
+            "Cảnh báo rủi ro": ("adv", "Bai12_Risk_Warning")
+        }
+    }
+}
+
+
+def get_agent_tables(config):
+    tables = {}
+
+    for display_name, (source_name, sheet_name) in config["tables"].items():
+        source = DATA_SOURCES.get(source_name)
+
+        if source is None:
+            continue
+
+        if sheet_name in source:
+            tables[display_name] = source[sheet_name]
+
+    return tables
+
+
+if page in PAGE_AGENT_CONFIG:
+    st.markdown("---")
+
+    config = PAGE_AGENT_CONFIG[page]
+    agent_tables = get_agent_tables(config)
+
+    render_ai_policy_agent(
+        exercise_id=config["id"],
+        exercise_name=config["name"],
+        tables=agent_tables
+    )

@@ -35,27 +35,4 @@ Dashboard tổng hợp các nhóm mô hình sau:
 - Bài 11: Q-learning cho chính sách kinh tế thích nghi.
 - Bài 12: Đồ án tích hợp AIDEOM-VN và so sánh kịch bản chính sách.
 
----
 
-## 3. Cấu trúc thư mục
-
-```text
-aideom-vn-dashboard/
-├── aideom_vn_streamlit/
-│   ├── app.py
-│   ├── requirements.txt
-│   └── data/
-│       ├── ket_qua_bai_1_den_6.xlsx
-│       ├── ket_qua_bai_7_den_12.xlsx
-│       └── ket_qua_bo_sung_bai_2_5.xlsx
-├── src/
-│   ├── m1_forecast.py
-│   ├── m2_readiness.py
-│   ├── m3_allocation.py
-│   ├── m4_labor.py
-│   ├── m5_risk.py
-│   └── scenario_runner.py
-├── tests/
-│   └── test_basic.py
-├── devcontainer.json
-└── README.md

@@ -3,7 +3,15 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from pathlib import Path
-from src.ai_policy_analyst import render_ai_policy_agent
+import sys
+
+BASE_DIR = Path(__file__).resolve().parent
+SRC_DIR = BASE_DIR / "src"
+
+if str(SRC_DIR) not in sys.path:
+    sys.path.append(str(SRC_DIR))
+
+from ai_policy_analyst import render_ai_policy_agent
 
 # =========================
 # PAGE CONFIG + STYLE
